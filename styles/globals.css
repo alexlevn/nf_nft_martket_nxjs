@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('../css/panchang.css');
+
+.debug * {
+  outline: 1px solid gold;
+}
+
+.panchang {
+  font-family: 'Panchang-Variable';
+}
+
+.bg-dark {
+  background-color: #080a0c;
+}
+
+.text-content {
+  @apply text-gray-400 font-medium text-sm;
+}
+
+/* From LandingPage */
+.text-title {
+  @apply text-5xl font-semibold;
+}
+
+.text-title-4 {
+  @apply text-4xl font-semibold;
+}
+
+.hero {
+  background: linear-gradient(
+    155.95deg,
+    rgba(217, 217, 217, 0) 28.67%,
+    #d9d9d9 47.91%,
+    #d9d9d9 61.87%,
+    rgba(217, 217, 217, 0) 83.07%
+  );
+}
+
+.border-05 {
+  border-width: 0.5px;
+}
+
+.border-btn-gradient {
+  border-radius: 8px;
+
+  padding: 2px;
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+}
+.btn-main-inside {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  background: #0e1114;
+  border-radius: 8px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
