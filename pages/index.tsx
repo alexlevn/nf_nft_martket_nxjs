@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +10,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>Content</main>
+      <div className="text-xl font-light text-red-400 p-20">
+        WCFI NFT Market
+      </div>
     </div>
   )
 }
