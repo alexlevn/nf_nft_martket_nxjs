@@ -15,13 +15,15 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           <div onClick={() => setIsShowMenu(!isShowMenu)}>
             {isShowMenu ? (
               <Image
-                src="images/icon_close.svg"
+                layout="fill"
+                src="/images/icon_close.svg"
                 alt=""
                 className="block lg:hidden w-9 mr-4 cursor-pointer"
               />
             ) : (
               <Image
-                src="images/icon_menu.svg"
+                layout="fill"
+                src="/images/icon_menu.svg"
                 alt=""
                 className="block lg:hidden w-9 mr-4 cursor-pointer"
               />
