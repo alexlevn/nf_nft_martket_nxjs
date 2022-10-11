@@ -61,7 +61,9 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
       <div>Top Menu</div>
       <Layout className="flex justify-between mt-20  px-0 lg:px40 ">
-        <Layout.Content className="w-9/12 p-5 hidden lg:block">
+        <div className="w-1/12 p-5 hidden lg:block" />
+        {/* <Layout.Content className="w-8/12 p-5 hidden lg:block"> */}
+        <Layout.Content className="w-8/12 p-5 lg:block">
           {children}
         </Layout.Content>
         <div className="w-3/12 p-5 hidden lg:block">

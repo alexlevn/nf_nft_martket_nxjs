@@ -16,6 +16,8 @@
   background-color: #080a0c;
 }
 
+
+
 .text-content {
   @apply text-gray-400 font-medium text-sm;
 }
