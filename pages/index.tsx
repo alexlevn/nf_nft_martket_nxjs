@@ -12,7 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/WCFI-logo.svg" />
       </Head>
 
-      <div className="text-xl font-light  bg-dark min-h-screen p-0 lg:p-5 flex flex-col gap-5">
+      <div className="text-xl font-light  bg-dark min-h-screen p-0 flex flex-col gap-5">
         {/* REWARD */}
 
         <div className="bg-pcgray rounded-xl flex flex-col lg:flex-row justify-around p-10 lg:gap-40 gap-2 ">
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         </div>
 
         {/* HERO IMAGES */}
-        <div className="flex flex-col lg:flex-row  justify-between">
+        <div className="flex flex-col lg:flex-row  justify-between bg-pcgray rounded-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/hero_football_2022.png"
