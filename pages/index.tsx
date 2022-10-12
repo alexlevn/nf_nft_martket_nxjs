@@ -9,7 +9,7 @@ const Home: NextPage = () => {
       <Head>
         <title>WCFI NFT MARKET</title>
         <meta name="description" content="WCFI NFT Market" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/WCFI-logo.svg" />
       </Head>
 
       <div className="text-xl font-light  bg-dark min-h-screen p-0 lg:p-5 flex flex-col gap-5">

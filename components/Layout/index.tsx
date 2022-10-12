@@ -13,7 +13,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
       <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
         <div className="flex items-center relative">
           <div onClick={() => setIsShowMenu(!isShowMenu)}>
-            {isShowMenu ? (
+            {/* {isShowMenu ? (
               <Image
                 layout="fill"
                 src="/images/icon_close.svg"
@@ -27,7 +27,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
                 alt=""
                 className="block lg:hidden w-9 mr-4 cursor-pointer"
               />
-            )}
+            )} */}
           </div>
 
           <div className="text-white font-bold text-2xl cursor-pointer">
