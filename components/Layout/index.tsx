@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Layout } from 'antd'
 import Image from 'next/image'
 import { FC, FunctionComponent, useState } from 'react'
@@ -69,16 +70,45 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         <div className="w-full lg:w-3/12 p-5  gap-5 flex flex-col">
           {/* MATCH SCHEDULE */}
           <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between  bg-pcgray rounded-md">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
               <p className="text-white font-semibold">Match Schedule</p>
               <p className="text-content">Match day 1 of 3</p>
-              <p className="text-content">Group A</p>
+              <p className="text-content my-3">Group A</p>
               <div>
                 {/* row */}
-                <div className="flex gap-2 items-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/flags/brazil.png" alt="" />
-                  <span className="text-white font-semibold">BRZ</span>
+                <div className="flex gap-2 items-center  justify-between">
+                  {/* LEFT */}
+                  <div className="flex flex-col gap-2">
+                    {/* team 1 */}
+                    <div className="flex gap-3">
+                      <img
+                        src="/images/flags/qatar.png"
+                        alt=""
+                        className="w-5"
+                      />
+                      <span className="text-white font-semibold text-sm">
+                        QAT
+                      </span>
+                    </div>
+                    {/* team 2 */}
+                    <div className="flex gap-3">
+                      <img
+                        src="/images/flags/ecuador.png"
+                        alt=""
+                        className="w-5"
+                      />
+                      <span className="text-white font-semibold text-sm">
+                        ECU
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* RIGHT */}
+
+                  <div className="text-sm  px-5 border-l border-gray-700">
+                    {' '}
+                    20/11 <br /> 23:00
+                  </div>
                 </div>
               </div>
             </div>
