@@ -9,7 +9,7 @@ const Home: NextPage = () => {
       <Head>
         <title>WCFI NFT MARKET</title>
         <meta name="description" content="WCFI NFT Market" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/WCFI-logo.svg" />
       </Head>
 
       <div className="text-xl font-light  bg-dark min-h-screen p-0 lg:p-5 flex flex-col gap-5">
@@ -41,6 +41,7 @@ const Home: NextPage = () => {
             alt=""
             className="rounded-md"
           />
+          {/* MINT COMPONENT */}
           <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between">
             <div className="flex flex-col gap-5">
               <p className="text-white font-semibold">Mint Your NFT</p>
@@ -62,6 +63,7 @@ const Home: NextPage = () => {
               <span className="text-base">Connect Wallet</span>
             </ButtonBorderGradient>
           </div>
+
         </div>
       </div>
     </div>
