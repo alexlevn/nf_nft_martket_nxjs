@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
 import Image from 'next/image'
-import { useState } from 'react'
+import { FC, FunctionComponent, useState } from 'react'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
@@ -50,11 +50,9 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           </div>
         </div>
 
-        <div className="border-btn-gradient px-10">
-          <div className="btn-main-inside cursor-pointer hover:opacity-95 h-10 px-5 text-xs">
-            0xBBB6...e96e
-          </div>
-        </div>
+        <ButtonBorderGradient>
+          <span className="text-xs">0xBBB6...e96e</span>
+        </ButtonBorderGradient>
       </div>
 
       {/* END - TopNavigationHeader */}
@@ -62,8 +60,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
       <div>Top Menu</div>
       <Layout className="flex justify-between mt-20  px-0 lg:px40 ">
         <div className="w-1/12 p-5 hidden lg:block" />
-        {/* <Layout.Content className="w-8/12 p-5 hidden lg:block"> */}
-        <Layout.Content className="w-8/12 p-5 lg:block">
+        <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
           {children}
         </Layout.Content>
         <div className="w-3/12 p-5 hidden lg:block">
@@ -78,3 +75,13 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 }
 
 export default AppLayout
+
+export const ButtonBorderGradient: React.FC<{ children: any }> = ({
+  children,
+}) => (
+  <div className="border-btn-gradient px-10">
+    <div className="btn-main-inside cursor-pointer hover:opacity-95 py-2 px-5 text-white font-semibold">
+      {children}
+    </div>
+  </div>
+)
