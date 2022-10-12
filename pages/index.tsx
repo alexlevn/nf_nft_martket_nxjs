@@ -41,6 +41,7 @@ const Home: NextPage = () => {
             alt=""
             className="rounded-md"
           />
+          {/* MINT COMPONENT */}
           <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between">
             <div className="flex flex-col gap-5">
               <p className="text-white font-semibold">Mint Your NFT</p>
@@ -62,6 +63,7 @@ const Home: NextPage = () => {
               <span className="text-base">Connect Wallet</span>
             </ButtonBorderGradient>
           </div>
+
         </div>
       </div>
     </div>
