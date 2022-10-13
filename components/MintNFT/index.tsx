@@ -1,7 +1,7 @@
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 
 const MintNFT = () => (
-  <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between">
+  <div className="w-full lg:w-5/12 flex flex-col gap-5 p-2 lg:p-3  justify-between">
     <div className="flex flex-col gap-5">
       <p className="text-white font-semibold">Mint Your NFT</p>
       <p className="text-content">

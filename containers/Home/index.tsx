@@ -29,7 +29,7 @@ const Home: FC = () => {
 
       {/* HERO IMAGES */}
       <div className="flex flex-col lg:flex-row  justify-between bg-pcgray rounded-md">
-        <div>
+        <div className='w-full lg:w-7/12 flex items-center'>
           <img
             src="/images/hero_football_2022.png"
             alt=""
