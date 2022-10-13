@@ -1,8 +1,8 @@
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 
 const MintNFT = () => (
-  <div className="w-full lg:w-5/12 flex flex-col gap-5 p-2 lg:p-3  justify-between">
-    <div className="flex flex-col gap-5">
+  <div className="w-full lg:w-5/12 flex flex-col gap-5 px-5 py-3  justify-between">
+    <div className="flex flex-col gap-3">
       <p className="text-white font-semibold">Mint Your NFT</p>
       <p className="text-content">
         Mint randomly releases NFT shoes to represent the national team
