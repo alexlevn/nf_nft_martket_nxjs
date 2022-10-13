@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import { Layout } from 'antd'
+import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import MatchSchedule from 'components/MatchSchedule'
-import Image from 'next/image'
-import { FC, FunctionComponent, useState } from 'react'
+import { useState } from 'react'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
@@ -52,7 +51,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           </div>
         </div>
 
-        <ButtonBorderGradient>
+        <ButtonBorderGradient className="px-5 py-3">
           <span className="text-xs">0xBBB6...e96e</span>
         </ButtonBorderGradient>
       </div>
@@ -83,7 +82,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
                 Learn more
               </div>
             </div>
-            <ButtonBorderGradient>
+            <ButtonBorderGradient className="px-4 py-3 text-center">
               <span className="text-base">Invite Friends</span>
             </ButtonBorderGradient>
           </div>
@@ -96,13 +95,3 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 }
 
 export default AppLayout
-
-export const ButtonBorderGradient: React.FC<{ children: any }> = ({
-  children,
-}) => (
-  <div className="border-btn-gradient">
-    <div className="btn-main-inside cursor-pointer hover:opacity-95 py-2 px-5 text-white font-semibold">
-      {children}
-    </div>
-  </div>
-)

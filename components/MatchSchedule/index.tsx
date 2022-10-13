@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { ButtonBorderGradient } from 'components/Layout'
+import { ButtonBorderGradient } from "components/ButtonBorderGradient";
+
 
 const TeamIcon = ({
   imageName,
@@ -132,11 +133,13 @@ const MatchSchedule = () => {
         </div>
       </div>
       {/* table-footer */}
-      <div className="flex flex-row">
-        <ButtonBorderGradient>{'<'}</ButtonBorderGradient>
-      </div>
-      <div className="flex">
-        <ButtonBorderGradient>{'>'}</ButtonBorderGradient>
+      <div className="flex flex-row gap-2">
+        <ButtonBorderGradient className="px-4 py-2 text-center">
+          {'<'}
+        </ButtonBorderGradient>
+        <ButtonBorderGradient className="px-4 py-2 text-center">
+          {'>'}
+        </ButtonBorderGradient>
       </div>
     </div>
   )
