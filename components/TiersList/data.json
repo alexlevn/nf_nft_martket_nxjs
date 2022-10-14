@@ -24,8 +24,7 @@
       },
       {
         "teamName": "Spain",
-        "imageName_not_exit": "spain.png",
-        "imageName": "england.png",
+        "imageName": "spain.png",
         "minted": 0,
         "percent": "0.19%",
         "price": 39681
