@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { FC } from 'react'
 import MintNFT from 'components/MintNFT'
-import Tier from 'components/Tier'
+import TiersList from 'components/TiersList'
 
 const Home: FC = () => {
   return (
@@ -44,14 +44,7 @@ const Home: FC = () => {
       </div>
 
       {/* TIERS */}
-      <div className="flex flex-row   gap-5">
-        <Tier />
-        <Tier />
-      </div>
-      <div className="flex flex-row   gap-5">
-        <Tier />
-        <Tier />
-      </div>
+      <TiersList/>
     </div>
   )
 }
