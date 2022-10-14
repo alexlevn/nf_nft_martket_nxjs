@@ -1,7 +1,7 @@
 import { Layout } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import MatchSchedule from 'components/MatchSchedule'
-import Tier from 'components/Tier'
+import Tier from 'components/TiersList'
 import { useState } from 'react'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {

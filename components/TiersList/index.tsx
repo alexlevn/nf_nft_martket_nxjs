@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-interface TeamRarityInfo {
+
+import arrTiers from './data.json'
+export interface TeamRarityInfo {
   teamName: string
   imageName: string
   minted: number
@@ -37,26 +39,35 @@ const TeamRarity: React.FC<{ info: TeamRarityInfo }> = ({ info }) => (
   </div>
 )
 
-const Tier = () => (
-  <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
-    <div className="w-full flex justify-between">
-      <span className="font-semibold text-pcyellow">Tier 1</span>
-      <span className="text-content">Rarity</span>
+const TierDetail: React.FC<{ dataSource: TeamRarityInfo[] }> = ({
+  dataSource,
+}) => {
+  return (
+    <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
+      <div className="w-full flex justify-between">
+        <span className="font-semibold text-pcyellow">Tier 1</span>
+        <span className="text-content">Rarity</span>
+      </div>
+      <div className="flex flex-col gap-3 mt-5">
+        {dataSource.map((item, index) => (
+          <TeamRarity key={index} info={item} />
+        ))}
+      </div>
     </div>
-    <div className="flex flex-col gap-3 mt-5">
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
+  )
+}
 
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
-      <TeamRarity info={teamA} />
-
-      
+const TiersList = () => (
+  <>
+    <div className="flex flex-row   gap-5">
+      <TierDetail dataSource={arrTiers[0].list} />
+      <TierDetail dataSource={arrTiers[0].list} />
     </div>
-  </div>
+    <div className="flex flex-row   gap-5">
+      <TierDetail dataSource={arrTiers[0].list} />
+      <TierDetail dataSource={arrTiers[0].list} />
+    </div>
+  </>
 )
 
-export default Tier
+export default TiersList
