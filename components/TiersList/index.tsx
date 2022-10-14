@@ -59,11 +59,11 @@ const TierDetail: React.FC<{ dataSource: TeamRarityInfo[] }> = ({
 
 const TiersList = () => (
   <>
-    <div className="flex flex-row   gap-5">
+    <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
       <TierDetail dataSource={arrTiers[0].list} />
       <TierDetail dataSource={arrTiers[0].list} />
     </div>
-    <div className="flex flex-row   gap-5">
+    <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
       <TierDetail dataSource={arrTiers[0].list} />
       <TierDetail dataSource={arrTiers[0].list} />
     </div>
