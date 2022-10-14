@@ -37,22 +37,22 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </div>
 
         <div className="hidden lg:flex gap-10">
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Home
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Marketplace
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Assets
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Referral Program
           </div>
         </div>
 
         <ButtonBorderGradient className="px-5 py-3">
-          <span className="text-xs">0xBBB6...e96e</span>
+          <span className="text-sm">0xBBB6...e96e</span>
         </ButtonBorderGradient>
       </div>
 
@@ -60,7 +60,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
       <div>Top Menu</div>
 
-      <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row">
+      <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row ">
         <div className="w-1/12 p-5 hidden lg:block" />
         <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
           {children}
