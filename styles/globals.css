@@ -45,8 +45,7 @@
 
 .border-btn-gradient {
   border-radius: 8px;
-
-  padding: 2px;
+  padding: 1.5px;
   background: linear-gradient(
     102.88deg,
     #80e8dd 10.19%,
@@ -55,18 +54,8 @@
     #d855a6 93.18%
   );
 }
-.btn-main-inside {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
 
+.btn-main-inside {
   background: #0e1114;
   border-radius: 8px;
-
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }

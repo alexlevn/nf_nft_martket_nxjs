@@ -1,7 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import { Layout } from 'antd'
-import Image from 'next/image'
-import { FC, FunctionComponent, useState } from 'react'
+import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import MatchSchedule from 'components/MatchSchedule'
+import { useState } from 'react'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
@@ -37,22 +37,22 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </div>
 
         <div className="hidden lg:flex gap-10">
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Home
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Marketplace
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Assets
           </div>
-          <div className="cursor-pointer text-xs font-semibold hover:text-pcblue">
+          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
             Referral Program
           </div>
         </div>
 
-        <ButtonBorderGradient>
-          <span className="text-xs">0xBBB6...e96e</span>
+        <ButtonBorderGradient className="px-5 py-3">
+          <span className="text-sm">0xBBB6...e96e</span>
         </ButtonBorderGradient>
       </div>
 
@@ -60,7 +60,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
       <div>Top Menu</div>
 
-      <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row">
+      <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row ">
         <div className="w-1/12 p-5 hidden lg:block" />
         <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
           {children}
@@ -69,50 +69,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         {/* SIDE BAR */}
         <div className="w-full lg:w-3/12 p-5  gap-5 flex flex-col">
           {/* MATCH SCHEDULE */}
-          <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between  bg-pcgray rounded-md">
-            <div className="flex flex-col gap-2">
-              <p className="text-white font-semibold">Match Schedule</p>
-              <p className="text-content">Match day 1 of 3</p>
-              <p className="text-content my-3">Group A</p>
-              <div>
-                {/* row */}
-                <div className="flex gap-2 items-center  justify-between">
-                  {/* LEFT */}
-                  <div className="flex flex-col gap-2">
-                    {/* team 1 */}
-                    <div className="flex gap-3">
-                      <img
-                        src="/images/flags/qatar.png"
-                        alt=""
-                        className="w-5"
-                      />
-                      <span className="text-white font-semibold text-sm">
-                        QAT
-                      </span>
-                    </div>
-                    {/* team 2 */}
-                    <div className="flex gap-3">
-                      <img
-                        src="/images/flags/ecuador.png"
-                        alt=""
-                        className="w-5"
-                      />
-                      <span className="text-white font-semibold text-sm">
-                        ECU
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* RIGHT */}
-
-                  <div className="text-sm  px-5 border-l border-gray-700">
-                    {' '}
-                    20/11 <br /> 23:00
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MatchSchedule />
 
           {/* REFERRAL COMPONENT */}
           <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between  bg-pcgray rounded-md">
@@ -125,7 +82,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
                 Learn more
               </div>
             </div>
-            <ButtonBorderGradient>
+            <ButtonBorderGradient className="px-4 py-3 text-center">
               <span className="text-base">Invite Friends</span>
             </ButtonBorderGradient>
           </div>
@@ -138,13 +95,3 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 }
 
 export default AppLayout
-
-export const ButtonBorderGradient: React.FC<{ children: any }> = ({
-  children,
-}) => (
-  <div className="border-btn-gradient px-10">
-    <div className="btn-main-inside cursor-pointer hover:opacity-95 py-2 px-5 text-white font-semibold">
-      {children}
-    </div>
-  </div>
-)
