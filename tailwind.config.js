@@ -10,6 +10,7 @@ module.exports = {
       colors: ({ colors }) => ({
         pcgray: '#0E1114',
         pcdark: '#080A0c',
+        pcyellow: '#FFC71F',
       }),
     },
   },
