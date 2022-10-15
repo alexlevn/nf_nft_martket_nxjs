@@ -6,13 +6,11 @@ import TiersList from 'components/TiersList'
 
 const Home: FC = () => {
   return (
-    // min-h-screen
     <div
       className="text-xl font-light  bg-dark  p-0
         flex flex-col gap-5"
     >
       {/* REWARD */}
-
       <div className="bg-pcgray rounded-xl flex flex-col lg:flex-row justify-around p-10 lg:gap-40 gap-2 ">
         <div className="flex flex-col gap-1 justify-center items-start text-left">
           <div className="text-content">Total Reward</div>
@@ -44,7 +42,7 @@ const Home: FC = () => {
       </div>
 
       {/* TIERS */}
-      <TiersList/>
+      <TiersList />
     </div>
   )
 }

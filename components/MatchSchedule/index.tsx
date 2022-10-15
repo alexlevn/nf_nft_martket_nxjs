@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 
 const MATCH_1 = {

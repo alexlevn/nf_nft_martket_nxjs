@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-
 import arrTiers from './data.json'
-export interface TeamRarityInfo {
+interface TeamRarityInfo {
   teamName: string
   imageName: string
   minted: number
