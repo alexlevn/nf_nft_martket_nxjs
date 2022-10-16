@@ -7,10 +7,8 @@
 
 ::-webkit-scrollbar {
   display: none;
-  /* height: 2px;
-  width: 2px;
-  background: #080a0c; */
 }
+
 ::-webkit-scrollbar-thumb:horizontal {
   display: none;
   background: #000;
@@ -76,13 +74,16 @@
   @apply text-gray-500  text-sm font-normal;
 }
 
-/* From LandingPage */
 .text-title {
   @apply text-5xl font-semibold;
 }
 
 .text-title-4 {
   @apply text-4xl font-semibold;
+}
+
+.box-wallet {
+  @apply w-36 lg:w-40 h-36 flex flex-col items-center justify-center gap-3 bg-pcgray rounded-md  cursor-pointer;
 }
 
 .hero {

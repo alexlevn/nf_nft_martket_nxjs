@@ -1,7 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import { Layout, Modal } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
-import MatchSchedule from 'components/MatchSchedule'
 import { useState } from 'react'
+import Sidebar from './Sidebar'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
@@ -52,11 +53,12 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </ButtonBorderGradient>
       </div>
 
-      <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row ">
+      <Layout className="flex justify-between mt-20  px-0  lg:px-14   flex-col lg:flex-row ">
         <Modal
           title={
             <div className="text-white panchang text-sm">Connect Metamask</div>
           }
+          width={600}
           open={isModalOpen}
           className="p-0 text-white"
           onCancel={() => setIsModalOpen(false)}
@@ -65,20 +67,35 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           }
           footer={null}
         >
-          <div className="bg-pcdark text-white">
-            hha
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+          <div className="bg-pcdark text-white font-semibold flex flex-wrap gap-5 justify-center py-3 lg:py-5 panchang text-xs">
+            <div className="box-wallet">
+              <img src="/images/icon_metamask.png" alt="" className="w-14" />
+              <span>Metamask</span>
+            </div>
+            <div className="box-wallet">
+              <img src="/images/icon_bitkepp.png" alt="" className="w-14" />
+              <span>BitKepp</span>
+            </div>
+            <div className="box-wallet">
+              <img src="/images/icon_c98.png" alt="" className="w-14" />
+              <span>C97</span>
+            </div>
+            <div className="box-wallet">
+              <img src="/images/icon_trust.png" alt="" className="w-14" />
+              <span>Trust Wallet</span>
+            </div>
+            <div className="box-wallet">
+              <img src="/images/icon_safepal.png" alt="" className="w-14" />
+              <span>SafePal</span>
+            </div>
+            <div className="box-wallet">
+              <img
+                src="/images/icon_walletconnect.png"
+                alt=""
+                className="w-14"
+              />
+              <span>Wallet Connect</span>
+            </div>
           </div>
         </Modal>
         <div className="w-1/12 p-5 hidden lg:block" />
@@ -86,29 +103,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           {children}
         </Layout.Content>
 
-        {/* SIDE BAR */}
-        <div className="w-full lg:w-3/12 p-5  gap-5 flex flex-col">
-          {/* MATCH SCHEDULE */}
-          <MatchSchedule />
-
-          {/* REFERRAL COMPONENT */}
-          <div className="flex flex-col gap-5 p-5 lg:p-8  justify-between  bg-pcgray rounded-md">
-            <div className="flex flex-col gap-5">
-              <p className="text-white font-semibold">My Referral Link</p>
-              <p className="text-content">
-                Invite friends to join and get up to 25% referral commission.
-              </p>
-              <div className="flex justify-between text-blue-300">
-                Learn more
-              </div>
-            </div>
-            <ButtonBorderGradient className="px-4 py-3 text-center">
-              <span className="text-base">Invite Friends</span>
-            </ButtonBorderGradient>
-          </div>
-          {/* END - REFERRAL COMPONENT */}
-        </div>
-        {/* END- SIDE BAR */}
+        <Sidebar />
       </Layout>
     </Layout>
   )
