@@ -11,9 +11,6 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/WCFI-logo.svg" />
       </Head>
 
-      <div className="flex">
-        <span className="menu_item_gradient">Test font</span>
-      </div>
       <Home />
     </>
   )

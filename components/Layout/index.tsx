@@ -37,18 +37,10 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </div>
 
         <div className="hidden lg:flex gap-10">
-          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
-            Home
-          </div>
-          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
-            Marketplace
-          </div>
-          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
-            Assets
-          </div>
-          <div className="cursor-pointer text-sm font-semibold hover:text-pcblue">
-            Referral Program
-          </div>
+          <div className="text-sm menu_item_gradient">Home</div>
+          <div className="text-sm menu_item_gradient">Marketplace</div>
+          <div className="text-sm menu_item_gradient">Assets</div>
+          <div className="text-sm menu_item_gradient">Referral Program</div>
         </div>
 
         <ButtonBorderGradient className="px-5 py-3">
