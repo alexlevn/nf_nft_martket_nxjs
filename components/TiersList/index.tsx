@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-
 import arrTiers from './data.json'
-export interface TeamRarityInfo {
+interface TeamRarityInfo {
   teamName: string
   imageName: string
   minted: number
@@ -9,14 +8,7 @@ export interface TeamRarityInfo {
   price: number
 }
 
-const teamA: TeamRarityInfo = {
-  teamName: 'Quatar',
-  imageName: 'qatar.png',
-  minted: 33,
-  percent: '0.08%',
-  price: 96000,
-}
-
+//
 const TeamRarity: React.FC<{ info: TeamRarityInfo }> = ({ info }) => (
   <div className="w-full flex justify-between items-center">
     {/* TEAM */}
@@ -39,13 +31,14 @@ const TeamRarity: React.FC<{ info: TeamRarityInfo }> = ({ info }) => (
   </div>
 )
 
-const TierDetail: React.FC<{ dataSource: TeamRarityInfo[] }> = ({
-  dataSource,
-}) => {
+const TierDetail: React.FC<{
+  dataSource: TeamRarityInfo[]
+  title?: string
+}> = ({ dataSource, title }) => {
   return (
     <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
       <div className="w-full flex justify-between">
-        <span className="font-semibold text-pcyellow">Tier 1</span>
+        <span className="font-semibold text-pcyellow">{title || "Tier"}</span>
         <span className="text-content">Rarity</span>
       </div>
       <div className="flex flex-col gap-3 mt-5">
@@ -60,12 +53,12 @@ const TierDetail: React.FC<{ dataSource: TeamRarityInfo[] }> = ({
 const TiersList = () => (
   <>
     <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
-      <TierDetail dataSource={arrTiers[0].list} />
-      <TierDetail dataSource={arrTiers[0].list} />
+      <TierDetail title = "Tier 1" dataSource={arrTiers[0]?.list || []} />
+      <TierDetail title = "Tier 2" dataSource={arrTiers[1]?.list || []} />
     </div>
     <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
-      <TierDetail dataSource={arrTiers[0].list} />
-      <TierDetail dataSource={arrTiers[0].list} />
+      <TierDetail title = "Tier 3" dataSource={arrTiers[2]?.list || []} />
+      <TierDetail title = "Tier 4" dataSource={arrTiers[3]?.list || []} />
     </div>
   </>
 )
