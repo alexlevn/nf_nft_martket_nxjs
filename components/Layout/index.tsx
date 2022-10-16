@@ -52,27 +52,35 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </ButtonBorderGradient>
       </div>
 
-      <Modal
-        title={
-          <div className="text-white panchang text-sm">Connect Metamask</div>
-        }
-        open={isModalOpen}
-        className="p-0 text-white"
-        onCancel={() => setIsModalOpen(false)}
-        closeIcon={
-          <div className="text-white font-sans text-xl font-thin">x</div>
-        }
-        footer={null}
-      >
-        <div className="bg-pcdark text-white">
-          hha
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </div>
-      </Modal>
-
       <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row ">
+        <Modal
+          title={
+            <div className="text-white panchang text-sm">Connect Metamask</div>
+          }
+          open={isModalOpen}
+          className="p-0 text-white"
+          onCancel={() => setIsModalOpen(false)}
+          closeIcon={
+            <div className="text-white font-sans text-xl font-thin">x</div>
+          }
+          footer={null}
+        >
+          <div className="bg-pcdark text-white">
+            hha
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </div>
+        </Modal>
         <div className="w-1/12 p-5 hidden lg:block" />
         <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
           {children}

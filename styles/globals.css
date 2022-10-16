@@ -5,6 +5,18 @@
 @import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
 
+::-webkit-scrollbar {
+  display: none;
+  /* height: 2px;
+  width: 2px;
+  background: #080a0c; */
+}
+::-webkit-scrollbar-thumb:horizontal {
+  display: none;
+  background: #000;
+  border-radius: 10px;
+}
+
 .debug * {
   outline: 1px solid gold;
 }
