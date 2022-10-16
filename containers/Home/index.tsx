@@ -35,7 +35,7 @@ const Home: FC = () => {
           <img
             src="/images/hero_football_2022.png"
             alt=""
-            className="rounded-md"
+            className="rounded-md w-full"
           />
         </div>
         <MintNFT />

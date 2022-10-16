@@ -2,10 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
+
+::-webkit-scrollbar {
+  display: none;
+  /* height: 2px;
+  width: 2px;
+  background: #080a0c; */
+}
+::-webkit-scrollbar-thumb:horizontal {
+  display: none;
+  background: #000;
+  border-radius: 10px;
+}
 
 .debug * {
   outline: 1px solid gold;
+}
+
+.ant-layout {
+  background: #080a0c;
+}
+
+.ant-modal-content {
+  @apply bg-pcdark rounded-md;
+}
+
+.ant-modal-header {
+  @apply border-0 bg-pcdark;
 }
 
 .text_gradient {
