@@ -1,13 +1,43 @@
-import { Layout } from 'antd'
+import { Layout, Modal } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import MatchSchedule from 'components/MatchSchedule'
 import { useState } from 'react'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const closeMenu = () => setIsShowMenu(false)
 
+  // return (
+  //   <>
+  //     <ButtonBorderGradient
+  //       className="px-5 py-3"
+  //       onClick={() => {
+  //         // console.log('Hello')
+  //         setIsModalOpen(!isModalOpen)
+  //       }}
+  //     >
+  //       <span className="text-sm">0xBBB6...e96e</span>
+  //     </ButtonBorderGradient>
+
+  //     <Modal
+  //       title={<div className="text-white panchang text-sm">Connect Metamask</div>}
+  //       open={isModalOpen}
+  //       className="p-0 text-white"
+  //       footer={null}
+  //     >
+  //       <div className="bg-pcdark text-white">
+  //         hha
+  //         <p>Some contents...</p>
+  //         <p>Some contents...</p>
+  //         <p>Some contents...</p>
+  //       </div>
+  //     </Modal>
+
+  //     <Layout className=" bg-dark text-white panchang  ">Hello</Layout>
+  //   </>
+  // )
   return (
     <Layout className="min-h-screen bg-dark text-white panchang  ">
       {/* TopNavigationHeader */}
@@ -43,7 +73,13 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           <div className="text-sm menu_item_gradient">Referral Program</div>
         </div>
 
-        <ButtonBorderGradient className="px-5 py-3">
+        <ButtonBorderGradient
+          className="px-5 py-3"
+          onClick={() => {
+            // console.log('Hello')
+            setIsModalOpen(!isModalOpen)
+          }}
+        >
           <span className="text-sm">0xBBB6...e96e</span>
         </ButtonBorderGradient>
       </div>
