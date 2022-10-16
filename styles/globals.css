@@ -5,19 +5,11 @@
 @import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
 
-
-
 .debug * {
   outline: 1px solid gold;
 }
 
 .ant-layout {
-  /* display: flex;
-  flex: auto;
-  flex-direction: column;
-  min-height: 0;
-  background: #f0f2f5; */
-  
   background: #080a0c;
 }
 

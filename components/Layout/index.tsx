@@ -9,35 +9,6 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
   const closeMenu = () => setIsShowMenu(false)
 
-  // return (
-  //   <>
-  //     <ButtonBorderGradient
-  //       className="px-5 py-3"
-  //       onClick={() => {
-  //         // console.log('Hello')
-  //         setIsModalOpen(!isModalOpen)
-  //       }}
-  //     >
-  //       <span className="text-sm">0xBBB6...e96e</span>
-  //     </ButtonBorderGradient>
-
-  //     <Modal
-  //       title={<div className="text-white panchang text-sm">Connect Metamask</div>}
-  //       open={isModalOpen}
-  //       className="p-0 text-white"
-  //       footer={null}
-  //     >
-  //       <div className="bg-pcdark text-white">
-  //         hha
-  //         <p>Some contents...</p>
-  //         <p>Some contents...</p>
-  //         <p>Some contents...</p>
-  //       </div>
-  //     </Modal>
-
-  //     <Layout className=" bg-dark text-white panchang  ">Hello</Layout>
-  //   </>
-  // )
   return (
     <Layout className="min-h-screen bg-dark text-white panchang  ">
       {/* TopNavigationHeader */}
@@ -75,18 +46,11 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
         <ButtonBorderGradient
           className="px-5 py-3"
-          onClick={() => {
-            // console.log('Hello')
-            setIsModalOpen(!isModalOpen)
-          }}
+          onClick={() => setIsModalOpen(!isModalOpen)}
         >
           <span className="text-sm">0xBBB6...e96e</span>
         </ButtonBorderGradient>
       </div>
-
-      {/* END - TopNavigationHeader */}
-
-      {/* <div>Top Menu</div> */}
 
       <Modal
         title={
@@ -94,7 +58,10 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         }
         open={isModalOpen}
         className="p-0 text-white"
-        closeIcon={<div className="text-white font-sans text-xl font-thin">x</div>}
+        onCancel={() => setIsModalOpen(false)}
+        closeIcon={
+          <div className="text-white font-sans text-xl font-thin">x</div>
+        }
         footer={null}
       >
         <div className="bg-pcdark text-white">
