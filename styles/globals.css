@@ -8,6 +8,37 @@
   outline: 1px solid gold;
 }
 
+.text_gradient {
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.hover\:text_gradient:hover {
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.menu_item_gradient {
+  @apply text-white hover:text_gradient font-semibold cursor-pointer;
+}
+
 .panchang {
   font-family: 'Panchang-Variable';
 }
