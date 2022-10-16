@@ -86,7 +86,24 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
 
       {/* END - TopNavigationHeader */}
 
-      <div>Top Menu</div>
+      {/* <div>Top Menu</div> */}
+
+      <Modal
+        title={
+          <div className="text-white panchang text-sm">Connect Metamask</div>
+        }
+        open={isModalOpen}
+        className="p-0 text-white"
+        closeIcon={<div className="text-white font-sans text-xl font-thin">x</div>}
+        footer={null}
+      >
+        <div className="bg-pcdark text-white">
+          hha
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </div>
+      </Modal>
 
       <Layout className="flex justify-between mt-20  px-0 lg:px40  flex-col lg:flex-row ">
         <div className="w-1/12 p-5 hidden lg:block" />

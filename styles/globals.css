@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import '~antd/dist/antd.css'; */
+@import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
+
+
 
 .debug * {
   outline: 1px solid gold;
