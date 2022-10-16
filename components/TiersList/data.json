@@ -58,5 +58,185 @@
         "price": 39681
       }
     ]
+  },
+  {
+    "list": [
+      {
+        "teamName": "Netherlands",
+        "imageName": "netherlands.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Denmark",
+        "imageName": "denmark.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Croatia",
+        "imageName": "croatia.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Uruguay",
+        "imageName": "uruguay.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Poland",
+        "imageName": "poland.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Senegal",
+        "imageName": "senegal.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "United States",
+        "imageName": "united_states.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Serbia",
+        "imageName": "serbia.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      }
+    ]
+  },
+  {
+    "list": [
+      {
+        "teamName": "Switzerland",
+        "imageName": "switzerland.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Mexico",
+        "imageName": "mexico.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Wales",
+        "imageName": "wales.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Ghana",
+        "imageName": "ghana.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Ecuador",
+        "imageName": "ecuador.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Moroco",
+        "imageName": "moroco.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Cameroon",
+        "imageName": "cameroon.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Canada",
+        "imageName": "canada.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      }
+    ]
+  },
+  {
+    "list": [
+      {
+        "teamName": "Japan",
+        "imageName": "japan.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Qatar",
+        "imageName": "qatar.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Tunisia",
+        "imageName": "tunisia.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "South Korea",
+        "imageName": "south_korea.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Australia",
+        "imageName": "australia.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Iran",
+        "imageName": "iran.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Saudi Arabia",
+        "imageName": "saudi_arabia.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      },
+      {
+        "teamName": "Costa Rica",
+        "imageName": "costa_rica.png",
+        "minted": 84,
+        "percent": "0.08%",
+        "price": 96000
+      }
+    ]
   }
 ]
