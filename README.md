@@ -1,3 +1,5 @@
 # README
 
-change repo name
+```bash
+yarn && yarn dev
+```

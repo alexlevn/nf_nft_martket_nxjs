@@ -24,7 +24,7 @@ const ModalTrigger: FunctionComponent<IProps> = ({
     <>
       {trigger}
       <Modal
-        visible={visible}
+        open={visible}
         onCancel={(e) => {
           if (onCancel) {
             onCancel(e)

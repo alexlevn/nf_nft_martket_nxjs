@@ -2,37 +2,85 @@
 import { Layout } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import ModalTrigger from 'components/ModalTrigger'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import Sidebar from './Sidebar'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
-  const closeMenu = () => setIsShowMenu(false)
+  const closeMenu = () => {
+    console.log('clicked me!!')
+    setIsShowMenu(false)
+  }
 
   return (
     <Layout className="min-h-screen bg-dark text-white panchang  ">
+      {isShowMenu ? (
+        <div
+          className="h-screen w-screen fixed z-40 "
+          style={{
+            background: 'rgba(25, 29, 36, 0.64)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div
+            className="mobile-menu fixed top-16 left-0 w-10/12 
+            pl-5 h-screen  z-40 bg-dark
+            flex flex-col justify-between pb-32 
+            "
+          >
+            <div className="flex flex-col gap-5 mt-20 items-start">
+              <Link href={'/'}>
+                <a className="text-sm menu_item_gradient">Home</a>
+              </Link>
+              <Link href={'/market'}>
+                <a
+                  className="text-sm menu_item_gradient"
+                  onClick={(e) => {
+                    if (location.pathname === '/market') {
+                      e.preventDefault()
+                    }
+                    if (e.metaKey || e.ctrlKey) {
+                      e.stopPropagation()
+                    }
+                    closeMenu()
+                  }}
+                >
+                  Marketplace
+                </a>
+              </Link>
+              <Link href={'/assets'}>
+                <a className="text-sm menu_item_gradient">Assets</a>
+              </Link>
+              <Link href={'/referral'}>
+                <a className="text-sm menu_item_gradient">Referral Program</a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {/* TopNavigationHeader */}
       <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
         <div className="flex items-center relative">
           <div onClick={() => setIsShowMenu(!isShowMenu)}>
-            {/* {isShowMenu ? (
-              <Image
-                layout="fill"
+            {isShowMenu ? (
+              <img
                 src="/images/icon_close.svg"
                 alt=""
-                className="block lg:hidden w-9 mr-4 cursor-pointer"
+                className="block lg:hidden w-7 mr-3 cursor-pointer"
               />
             ) : (
-              <Image
-                layout="fill"
+              <img
                 src="/images/icon_menu.svg"
                 alt=""
-                className="block lg:hidden w-9 mr-4 cursor-pointer"
+                className="block lg:hidden w-7 mr-3 cursor-pointer"
               />
-            )} */}
+            )}
           </div>
 
-          <div className="text-white font-bold text-2xl cursor-pointer">
+          <div className="text-white font-bold text-xl cursor-pointer">
             WCFI
           </div>
         </div>
@@ -54,11 +102,14 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
             <div className="text-white font-sans text-xl font-thin">x</div>
           }
           renderTrigger={(openModal) => (
-            <ButtonBorderGradient className="px-5 py-3" onClick={openModal}>
+            <ButtonBorderGradient
+              className="px-3 py-1 lg:px-5 lg:py-3"
+              onClick={openModal}
+            >
               <span className="text-sm">0xBBB6...e96e</span>
             </ButtonBorderGradient>
           )}
-          renderChildren={(closeModal) => {
+          renderChildren={(_) => {
             return (
               <div className="rounded-lg text-white font-semibold flex flex-wrap gap-5 justify-center py-3 lg:py-5 panchang text-xs">
                 <div className="box-wallet">
