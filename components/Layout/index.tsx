@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Layout } from 'antd'
+import { Button, Drawer, Layout } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import ModalTrigger from 'components/ModalTrigger'
 import Image from 'next/image'
@@ -14,8 +14,18 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
     setIsShowMenu(false)
   }
 
+  const [open, setOpen] = useState(false)
+
+  const showDrawer = () => {
+    setOpen(true)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
   return (
-    <Layout className="min-h-screen bg-dark text-white panchang  ">
+    <Layout className="min-h-screen bg-dark text-white panchang">
       {isShowMenu ? (
         <div
           className="h-screen w-screen fixed z-40 "
@@ -64,7 +74,19 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
       {/* TopNavigationHeader */}
       <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
         <div className="flex items-center relative">
-          <div onClick={() => setIsShowMenu(!isShowMenu)}>
+          <Drawer
+            title="Basic Drawer"
+            placement="left"
+            onClose={onClose}
+            open={open}
+            className="bg-pcgray"
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Drawer>
+
+          <div onClick={showDrawer}>
             {isShowMenu ? (
               <img
                 src="/images/icon_close.svg"
@@ -86,10 +108,18 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
         </div>
 
         <div className="hidden lg:flex gap-10">
-          <div className="text-sm menu_item_gradient">Home</div>
-          <div className="text-sm menu_item_gradient">Marketplace</div>
-          <div className="text-sm menu_item_gradient">Assets</div>
-          <div className="text-sm menu_item_gradient">Referral Program</div>
+          <Link href={'/'}>
+            <div className="text-sm menu_item_gradient">Home</div>
+          </Link>
+          <Link href={'/market'}>
+            <div className="text-sm menu_item_gradient">Marketplace</div>
+          </Link>
+          <Link href={'/assets'}>
+            <div className="text-sm menu_item_gradient">Assets</div>
+          </Link>
+          <Link href={'/referral'}>
+            <div className="text-sm menu_item_gradient">Referral Program</div>
+          </Link>
         </div>
 
         <ModalTrigger
