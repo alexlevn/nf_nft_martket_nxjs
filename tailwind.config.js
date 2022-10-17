@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: ({ colors }) => ({
         pcgray: '#0E1114',
+        pcmodal: '#191D24',
         pcdark: '#080A0c',
         pcyellow: '#FFC71F',
       }),
@@ -17,6 +18,5 @@ module.exports = {
   plugins: [],
   corePlugins: {
     preflight: false,
-    // preflight: true,
   },
 }

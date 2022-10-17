@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { Layout, Modal } from 'antd'
+import { Layout } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import ModalTrigger from 'components/ModalTrigger'
 import { useState } from 'react'
 import Sidebar from './Sidebar'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
   const [isShowMenu, setIsShowMenu] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   const closeMenu = () => setIsShowMenu(false)
 
   return (
@@ -45,59 +44,62 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
           <div className="text-sm menu_item_gradient">Referral Program</div>
         </div>
 
-        <ButtonBorderGradient
-          className="px-5 py-3"
-          onClick={() => setIsModalOpen(!isModalOpen)}
-        >
-          <span className="text-sm">0xBBB6...e96e</span>
-        </ButtonBorderGradient>
-      </div>
-
-      <Layout className="flex justify-between mt-20  px-0  lg:px-14   flex-col lg:flex-row ">
-        <Modal
+        <ModalTrigger
           title={
             <div className="text-white panchang text-sm">Connect Metamask</div>
           }
           width={600}
-          open={isModalOpen}
-          className="p-0 text-white"
-          onCancel={() => setIsModalOpen(false)}
+          footer={null}
           closeIcon={
             <div className="text-white font-sans text-xl font-thin">x</div>
           }
-          footer={null}
-        >
-          <div className="bg-pcdark text-white font-semibold flex flex-wrap gap-5 justify-center py-3 lg:py-5 panchang text-xs">
-            <div className="box-wallet">
-              <img src="/images/icon_metamask.png" alt="" className="w-14" />
-              <span>Metamask</span>
-            </div>
-            <div className="box-wallet">
-              <img src="/images/icon_bitkepp.png" alt="" className="w-14" />
-              <span>BitKepp</span>
-            </div>
-            <div className="box-wallet">
-              <img src="/images/icon_c98.png" alt="" className="w-14" />
-              <span>C97</span>
-            </div>
-            <div className="box-wallet">
-              <img src="/images/icon_trust.png" alt="" className="w-14" />
-              <span>Trust Wallet</span>
-            </div>
-            <div className="box-wallet">
-              <img src="/images/icon_safepal.png" alt="" className="w-14" />
-              <span>SafePal</span>
-            </div>
-            <div className="box-wallet">
-              <img
-                src="/images/icon_walletconnect.png"
-                alt=""
-                className="w-14"
-              />
-              <span>Wallet Connect</span>
-            </div>
-          </div>
-        </Modal>
+          renderTrigger={(openModal) => (
+            <ButtonBorderGradient className="px-5 py-3" onClick={openModal}>
+              <span className="text-sm">0xBBB6...e96e</span>
+            </ButtonBorderGradient>
+          )}
+          renderChildren={(closeModal) => {
+            return (
+              <div className="rounded-lg text-white font-semibold flex flex-wrap gap-5 justify-center py-3 lg:py-5 panchang text-xs">
+                <div className="box-wallet">
+                  <img
+                    src="/images/icon_metamask.png"
+                    alt=""
+                    className="w-14"
+                  />
+                  <span>Metamask</span>
+                </div>
+                <div className="box-wallet">
+                  <img src="/images/icon_bitkepp.png" alt="" className="w-14" />
+                  <span>BitKepp</span>
+                </div>
+                <div className="box-wallet">
+                  <img src="/images/icon_c98.png" alt="" className="w-14" />
+                  <span>C97</span>
+                </div>
+                <div className="box-wallet">
+                  <img src="/images/icon_trust.png" alt="" className="w-14" />
+                  <span>Trust Wallet</span>
+                </div>
+                <div className="box-wallet">
+                  <img src="/images/icon_safepal.png" alt="" className="w-14" />
+                  <span>SafePal</span>
+                </div>
+                <div className="box-wallet">
+                  <img
+                    src="/images/icon_walletconnect.png"
+                    alt=""
+                    className="w-14"
+                  />
+                  <span>Wallet Connect</span>
+                </div>
+              </div>
+            )
+          }}
+        />
+      </div>
+
+      <Layout className="flex justify-between mt-20  px-0  lg:px-14   flex-col lg:flex-row ">
         <div className="w-1/12 p-5 hidden lg:block" />
         <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
           {children}
