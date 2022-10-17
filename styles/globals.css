@@ -24,11 +24,16 @@
 }
 
 .ant-modal-content {
-  @apply bg-pcdark rounded-md;
+  @apply bg-pcdark rounded-lg;
 }
 
 .ant-modal-header {
-  @apply border-0 bg-pcdark;
+  @apply border-0 bg-pcdark rounded-lg;
+}
+
+.ant-modal-wrap {
+  background: rgba(25, 29, 36, 0.64);
+  backdrop-filter: blur(8px);
 }
 
 .text_gradient {
@@ -83,7 +88,7 @@
 }
 
 .box-wallet {
-  @apply w-36 lg:w-40 h-36 flex flex-col items-center justify-center gap-3 bg-pcgray rounded-md  cursor-pointer;
+  @apply w-36 lg:w-40 h-36 flex flex-col items-center justify-center gap-3 bg-pcmodal rounded-md  cursor-pointer;
 }
 
 .hero {
