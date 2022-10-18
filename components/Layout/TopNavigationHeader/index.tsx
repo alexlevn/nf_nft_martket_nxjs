@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { Drawer } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import { ButtonGradient } from 'components/ButtonGradient'
 import ModalTrigger from 'components/ModalTrigger'
 import Link from 'next/link'
 import { useState } from 'react'
 
 const TopNavigationHeader = () => {
   const [isShowDrawer, setIsShowDrawer] = useState(false)
+  const [connected, setConnected] = useState(false)
 
   const showDrawer = () => setIsShowDrawer(true)
   const onClose = () => setIsShowDrawer(false)
@@ -93,18 +95,33 @@ const TopNavigationHeader = () => {
         closeIcon={
           <div className="text-white font-sans text-xl font-thin">x</div>
         }
-        renderTrigger={(openModal) => (
-          <ButtonBorderGradient
-            className="px-3 py-1 lg:px-5 lg:py-3"
-            onClick={openModal}
-          >
-            <span className="text-sm">0xBBB6...e96e</span>
-          </ButtonBorderGradient>
-        )}
-        renderChildren={(_) => {
+        renderTrigger={(openModal) =>
+          connected ? (
+            <ButtonBorderGradient
+              className="px-3 py-1 lg:px-5 lg:py-3"
+              onClick={openModal}
+            >
+              <span className="text-sm">0xBBB6...e96e</span>
+            </ButtonBorderGradient>
+          ) : (
+            <ButtonGradient
+              className="px-3 py-1 lg:px-5 lg:py-1 text-sm"
+              onClick={openModal}
+            >
+              Connect Wallet
+            </ButtonGradient>
+          )
+        }
+        renderChildren={(closeModal) => {
           return (
             <div className="rounded-lg text-white font-semibold flex flex-wrap gap-5 justify-center py-3 lg:py-5 panchang text-xs">
-              <div className="box-wallet">
+              <div
+                className="box-wallet"
+                onClick={() => {
+                  setConnected(!connected)
+                  closeModal()
+                }}
+              >
                 <img src="/images/icon_metamask.png" alt="" className="w-14" />
                 <span>Metamask</span>
               </div>
