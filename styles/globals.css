@@ -23,15 +23,11 @@
   background: #080a0c;
 }
 
-.ant-drawer-left > .ant-drawer-content-wrapper {
-  top: 82px;
-}
 /*
-.ant-drawer-header {
-  @apply bg-pcdark text-white;
+.ant-drawer-left > .ant-drawer-content-wrapper {
+  @apply: 
 }
 */
-
 .ant-drawer-mask {
   @apply bg-transparent;
 }

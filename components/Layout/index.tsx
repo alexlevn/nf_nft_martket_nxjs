@@ -65,7 +65,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
               backgroundColor: '#080A0c',
             }}
             contentWrapperStyle={{
-              marginTop: 30,
+              marginTop: 60,
             }}
             placement="left"
             onClose={onClose}
