@@ -5,6 +5,7 @@
 @import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
 
+/* SCROLL BAR */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -174,4 +175,20 @@
 .btn-main-inside {
   background: #0e1114;
   border-radius: 8px;
+}
+
+.btn-gradient {
+  box-sizing: border-box;
+  cursor: pointer;
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+
+  border: 2px solid #191d24;
+
+  box-shadow: 4px 4px 0px #ffffff;
 }
