@@ -7,6 +7,7 @@ import ModalTrigger from 'components/ModalTrigger'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { init } from 'common/web3client'
 
 const TopNavigationHeader = () => {
   const router = useRouter()
@@ -15,6 +16,10 @@ const TopNavigationHeader = () => {
 
   const showDrawer = () => setIsShowDrawer(true)
   const onClose = () => setIsShowDrawer(false)
+
+  const connectMetamask = () => {
+    init()
+  }
 
   return (
     <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
@@ -129,7 +134,8 @@ const TopNavigationHeader = () => {
               <div
                 className="box-wallet"
                 onClick={() => {
-                  setConnected(!connected)
+                  connectMetamask()
+                  setConnected(true)
                   closeModal()
                 }}
               >
