@@ -32,18 +32,18 @@
 }
 */
 
+.ant-drawer-mask {
+  @apply bg-transparent;
+}
 .ant-drawer-body {
   @apply bg-pcdark text-white;
 }
-
 .ant-modal-content {
   @apply bg-pcdark rounded-lg;
 }
-
 .ant-modal-header {
   @apply border-0 bg-pcdark rounded-lg;
 }
-
 .ant-modal-wrap {
   background: rgba(25, 29, 36, 0.64);
   backdrop-filter: blur(8px);
