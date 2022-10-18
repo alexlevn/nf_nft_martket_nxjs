@@ -1,17 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { Drawer } from 'antd'
+import { ROURES } from 'common/routes'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { ButtonGradient } from 'components/ButtonGradient'
 import ModalTrigger from 'components/ModalTrigger'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 const TopNavigationHeader = () => {
+  const router = useRouter()
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [connected, setConnected] = useState(false)
 
   const showDrawer = () => setIsShowDrawer(true)
   const onClose = () => setIsShowDrawer(false)
+
   return (
     <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
       <div className="flex items-center relative">
@@ -28,27 +32,20 @@ const TopNavigationHeader = () => {
           onClose={onClose}
           open={isShowDrawer}
         >
-          <div className="flex flex-col gap-5 items-start">
-            <Link href={'/'}>
-              <a className="text-md menu_item_gradient" onClick={onClose}>
-                Home
-              </a>
-            </Link>
-            <Link href={'/market'}>
-              <a className="text-md menu_item_gradient" onClick={onClose}>
-                Marketplace
-              </a>
-            </Link>
-            <Link href={'/assets'}>
-              <a className="text-md menu_item_gradient" onClick={onClose}>
-                Assets
-              </a>
-            </Link>
-            <Link href={'/referral'}>
-              <a className="text-md menu_item_gradient" onClick={onClose}>
-                Referral Program
-              </a>
-            </Link>
+          <div className="flex flex-col gap-5 items-start text-white">
+            {ROURES.map((item, index) => (
+              <Link href={item.path} key={index}>
+                <div
+                  className={
+                    'text-md menu-item-gradient ' +
+                    (router.pathname === item.path ? 'text-gradient' : '')
+                  }
+                  onClick={onClose}
+                >
+                  {item.name}
+                </div>
+              </Link>
+            ))}
           </div>
         </Drawer>
 
@@ -71,19 +68,19 @@ const TopNavigationHeader = () => {
         <div className="text-white font-bold text-xl cursor-pointer">WCFI</div>
       </div>
 
-      <div className="hidden lg:flex gap-10">
-        <Link href={'/'}>
-          <div className="text-sm menu_item_gradient">Home</div>
-        </Link>
-        <Link href={'/market'}>
-          <div className="text-sm menu_item_gradient">Marketplace</div>
-        </Link>
-        <Link href={'/assets'}>
-          <div className="text-sm menu_item_gradient">Assets</div>
-        </Link>
-        <Link href={'/referral'}>
-          <div className="text-sm menu_item_gradient">Referral Program</div>
-        </Link>
+      <div className="hidden lg:flex gap-10 text-white">
+        {ROURES.map((item, index) => (
+          <Link href={item.path} key={index}>
+            <div
+              className={
+                'text-sm menu-item-gradient ' +
+                (router.pathname === item.path ? 'text-gradient' : '')
+              }
+            >
+              {item.name}
+            </div>
+          </Link>
+        ))}
       </div>
 
       <ModalTrigger
