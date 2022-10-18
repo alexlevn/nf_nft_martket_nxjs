@@ -74,7 +74,7 @@
 }
 
 /* TEXT */
-.text_gradient {
+.text-gradient {
   background: linear-gradient(
     102.88deg,
     #80e8dd 10.19%,
@@ -89,7 +89,7 @@
 }
 
 @media (min-width: 640px) {
-  .sm\:text_gradient {
+  .sm\:text-gradient {
     background: linear-gradient(
       102.88deg,
       #80e8dd 10.19%,
@@ -104,7 +104,7 @@
   }
 }
 
-.hover\:text_gradient:hover {
+.hover\:text-gradient:hover {
   background: linear-gradient(
     102.88deg,
     #80e8dd 10.19%,
@@ -118,8 +118,8 @@
   text-fill-color: transparent;
 }
 
-.menu_item_gradient {
-  @apply text-white hover:text_gradient font-bold cursor-pointer;
+.menu-item-gradient {
+  @apply hover:text-gradient font-bold cursor-pointer;
 }
 
 .panchang {

@@ -40,7 +40,7 @@ const TierDetail: React.FC<{
   return (
     <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
       <div className="w-full flex justify-between">
-        <span className="font-semibold text_gradient lg:text-pcyellow">
+        <span className="font-semibold text-gradient lg:text-pcyellow">
           {title || 'Tier'}
         </span>
         <span className="text-content">Rarity</span>
