@@ -8,25 +8,22 @@ import { useState } from 'react'
 import Sidebar from './Sidebar'
 
 const AppLayout: React.FC<{ children: any }> = ({ children }) => {
-  const [isShowMenu, setIsShowMenu] = useState(false)
-  const closeMenu = () => {
-    console.log('clicked me!!')
-    setIsShowMenu(false)
-  }
+  const [isShowDrawer, setIsShowDrawer] = useState(false)
 
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
 
   const showDrawer = () => {
-    setOpen(true)
+    // setOpen(true)
+    setIsShowDrawer(true)
   }
 
   const onClose = () => {
-    setOpen(false)
+    setIsShowDrawer(false)
   }
 
   return (
     <Layout className="min-h-screen bg-dark text-white panchang">
-      {isShowMenu ? (
+      {isShowDrawer ? (
         <div
           className="h-screen w-screen fixed z-40 "
           style={{
@@ -45,20 +42,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
                 <a className="text-sm menu_item_gradient">Home</a>
               </Link>
               <Link href={'/market'}>
-                <a
-                  className="text-sm menu_item_gradient"
-                  onClick={(e) => {
-                    if (location.pathname === '/market') {
-                      e.preventDefault()
-                    }
-                    if (e.metaKey || e.ctrlKey) {
-                      e.stopPropagation()
-                    }
-                    closeMenu()
-                  }}
-                >
-                  Marketplace
-                </a>
+                <a className="text-sm menu_item_gradient">Marketplace</a>
               </Link>
               <Link href={'/assets'}>
                 <a className="text-sm menu_item_gradient">Assets</a>
@@ -75,19 +59,50 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
       <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
         <div className="flex items-center relative">
           <Drawer
-            title="Basic Drawer"
+            title=""
+            headerStyle={{ display: 'none' }}
+            bodyStyle={{
+              backgroundColor: '#080A0c',
+            }}
+            contentWrapperStyle={{
+              marginTop: 30,
+            }}
             placement="left"
             onClose={onClose}
-            open={open}
             className=""
+            open={isShowDrawer}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <div className="flex flex-col gap-5 items-start">
+              <Link href={'/'}>
+                <a className="text-md menu_item_gradient" onClick={onClose}>
+                  Home
+                </a>
+              </Link>
+              <Link href={'/market'}>
+                <a className="text-md menu_item_gradient" onClick={onClose}>
+                  Marketplace
+                </a>
+              </Link>
+              <Link href={'/assets'}>
+                <a className="text-md menu_item_gradient" onClick={onClose}>
+                  Assets
+                </a>
+              </Link>
+              <Link href={'/referral'}>
+                <a className="text-md menu_item_gradient" onClick={onClose}>
+                  Referral Program
+                </a>
+              </Link>
+            </div>
           </Drawer>
 
-          <div onClick={showDrawer}>
-            {isShowMenu ? (
+          <div
+            onClick={() => {
+              showDrawer()
+              showDrawer
+            }}
+          >
+            {isShowDrawer ? (
               <img
                 src="/images/icon_close.svg"
                 alt=""
