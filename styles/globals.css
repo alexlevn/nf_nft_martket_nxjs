@@ -23,6 +23,19 @@
   background: #080a0c;
 }
 
+.ant-drawer-left > .ant-drawer-content-wrapper {
+  top: 82px;
+}
+/*
+.ant-drawer-header {
+  @apply bg-pcdark text-white;
+}
+*/
+
+.ant-drawer-body {
+  @apply bg-pcdark text-white;
+}
+
 .ant-modal-content {
   @apply bg-pcdark rounded-lg;
 }
