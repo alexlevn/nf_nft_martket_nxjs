@@ -7,9 +7,11 @@ import ModalTrigger from 'components/ModalTrigger'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { init } from 'common/web3client'
+import useWeb3 from 'common/hooks/useWeb3'
 
 const TopNavigationHeader = () => {
+  const { wallet, connect } = useWeb3()
+
   const router = useRouter()
   const [isShowDrawer, setIsShowDrawer] = useState(false)
   const [connected, setConnected] = useState(false)
@@ -18,7 +20,7 @@ const TopNavigationHeader = () => {
   const onClose = () => setIsShowDrawer(false)
 
   const connectMetamask = () => {
-    init()
+    connect()
   }
 
   return (
@@ -116,7 +118,15 @@ const TopNavigationHeader = () => {
                 className="px-3 py-1 lg:px-5 lg:py-3 "
                 onClick={openModal}
               >
-                <span className="text-sm">0xBBB6...e96e</span>
+                {wallet?.address ? (
+                  <span className="text-sm">
+                    {wallet.address.slice(0, 6) +
+                      '...' +
+                      wallet.address.slice(-3)}
+                  </span>
+                ) : (
+                  <span className="text-sm">0xBBB6...e96e</span>
+                )}
               </ButtonBorderGradient>
             </div>
           ) : (

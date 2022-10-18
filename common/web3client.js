@@ -1,11 +1,9 @@
 import Web3 from 'web3'
 
 let selectedAccount
-
 let isInitialied = false
 
-const ABC = 'abc'
-export { ABC }
+
 
 export const init = async () => {
   let provider = window.ethereum
