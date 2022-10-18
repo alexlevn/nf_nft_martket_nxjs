@@ -69,7 +69,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
             }}
             placement="left"
             onClose={onClose}
-            className=""
+            
             open={isShowDrawer}
           >
             <div className="flex flex-col gap-5 items-start">
