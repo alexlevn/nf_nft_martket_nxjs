@@ -97,12 +97,26 @@ const TopNavigationHeader = () => {
         }
         renderTrigger={(openModal) =>
           connected ? (
-            <ButtonBorderGradient
-              className="px-3 py-1 lg:px-5 lg:py-3"
-              onClick={openModal}
-            >
-              <span className="text-sm">0xBBB6...e96e</span>
-            </ButtonBorderGradient>
+            <div className="flex justify-center items-center gap-7">
+              <div className="hidden lg:flex gap-1 justify-center items-center">
+                <img
+                  src="/images/busd.svg"
+                  alt=""
+                  className="lg:block w-8 h-8"
+                />
+                <div className="flex flex-col">
+                  <span className="text-scgray text-xs font-thin">BUSD</span>
+                  <span className="text-base font-semibold">200,000.00</span>
+                </div>
+              </div>
+
+              <ButtonBorderGradient
+                className="px-3 py-1 lg:px-5 lg:py-3 "
+                onClick={openModal}
+              >
+                <span className="text-sm">0xBBB6...e96e</span>
+              </ButtonBorderGradient>
+            </div>
           ) : (
             <ButtonGradient
               className="px-3 py-1 lg:px-5 lg:py-1 text-sm"

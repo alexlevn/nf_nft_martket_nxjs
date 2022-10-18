@@ -9,6 +9,8 @@ module.exports = {
     extend: {
       colors: ({ colors }) => ({
         pcgray: '#0E1114',
+        scgray: '#7D8DA7',
+        
         pcmodal: '#191D24',
         pcdark: '#080A0c',
         pcyellow: '#FFC71F',
