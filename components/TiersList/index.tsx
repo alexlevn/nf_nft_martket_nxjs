@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+
+import { Carousel } from 'antd'
 import arrTiers from './data.json'
 interface TeamRarityInfo {
   teamName: string
@@ -38,7 +40,9 @@ const TierDetail: React.FC<{
   return (
     <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
       <div className="w-full flex justify-between">
-        <span className="font-semibold text-pcyellow">{title || "Tier"}</span>
+        <span className="font-semibold text_gradient lg:text-pcyellow">
+          {title || 'Tier'}
+        </span>
         <span className="text-content">Rarity</span>
       </div>
       <div className="flex flex-col gap-3 mt-5">
@@ -52,13 +56,27 @@ const TierDetail: React.FC<{
 
 const TiersList = () => (
   <>
-    <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
-      <TierDetail title = "Tier 1" dataSource={arrTiers[0]?.list || []} />
-      <TierDetail title = "Tier 2" dataSource={arrTiers[1]?.list || []} />
+    <div className="block lg:hidden">
+      <Carousel>
+        {arrTiers.map((item, index) => {
+          return (
+            <TierDetail
+              key={index}
+              dataSource={item?.list}
+              title={'Tier ' + (index + 1)}
+            />
+          )
+        })}
+      </Carousel>
     </div>
-    <div className="flex flex-row gap-5 flex-wrap lg:flex-nowrap">
-      <TierDetail title = "Tier 3" dataSource={arrTiers[2]?.list || []} />
-      <TierDetail title = "Tier 4" dataSource={arrTiers[3]?.list || []} />
+
+    <div className="hidden lg:flex lg:flex-row lg:gap-5 lg:flex-nowrap">
+      <TierDetail title="Tier 1" dataSource={arrTiers[0]?.list || []} />
+      <TierDetail title="Tier 2" dataSource={arrTiers[1]?.list || []} />
+    </div>
+    <div className="hidden lg:flex lg:flex-row lg:gap-5 lg:flex-nowrap">
+      <TierDetail title="Tier 3" dataSource={arrTiers[2]?.list || []} />
+      <TierDetail title="Tier 4" dataSource={arrTiers[3]?.list || []} />
     </div>
   </>
 )
