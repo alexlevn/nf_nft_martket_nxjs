@@ -79,7 +79,7 @@ const AppLayout: React.FC<{ children: any }> = ({ children }) => {
             placement="left"
             onClose={onClose}
             open={open}
-            className="bg-pcgray"
+            className=""
           >
             <p>Some contents...</p>
             <p>Some contents...</p>
