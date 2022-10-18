@@ -45,6 +45,27 @@
   backdrop-filter: blur(8px);
 }
 
+/* CAROUSEL */
+
+.ant-carousel .slick-dots-bottom {
+  @apply bottom-0;
+}
+.ant-carousel .slick-dots li.slick-active button {
+  @apply w-6 h-2;
+}
+.ant-carousel .slick-dots li.slick-active button {
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+}
+.ant-carousel .slick-dots li button {
+  @apply bg-gray-400 rounded-full w-2 h-2;
+}
+
 .text_gradient {
   background: linear-gradient(
     102.88deg,
@@ -58,6 +79,23 @@
   background-clip: text;
   text-fill-color: transparent;
 }
+
+@media (min-width: 640px) {
+  .sm\:text_gradient {
+    background: linear-gradient(
+      102.88deg,
+      #80e8dd 10.19%,
+      #7cc2f6 43.04%,
+      #af81e4 72%,
+      #d855a6 93.18%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
+}
+
 .hover\:text_gradient:hover {
   background: linear-gradient(
     102.88deg,
