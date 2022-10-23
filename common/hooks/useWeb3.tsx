@@ -34,6 +34,11 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
   const [wallet, setWallet] = useState<IWallet | null>(null)
 
   useEffect(() => {
+    console.log('-- called me! connect at the first time')
+    connect()
+  }, [])
+
+  useEffect(() => {
     console.log('Selected account changed to accs: ', wallet?.address)
   }, [wallet])
 
