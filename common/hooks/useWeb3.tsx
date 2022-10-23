@@ -9,7 +9,8 @@ import Web3 from 'web3'
 
 export interface IWallet {
   address: string
-  busd?: number
+  bnb?: string
+  busd?: string
   asset?: object
 }
 
@@ -40,7 +41,38 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
   useEffect(() => {
     console.log('Selected account changed to accs: ', wallet?.address)
-  }, [wallet])
+
+    const getBalance = async () => {
+      let provider = window.ethereum
+      const web3 = new Web3(provider)
+      const netWorkId = await web3.eth.net.getId()
+      console.log(netWorkId)
+
+      if (wallet) {
+        const busdAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
+        const holderAddress = wallet.address
+
+        const abiJson = [
+          {
+            constant: true,
+            inputs: [{ name: 'who', type: 'address' }],
+            name: 'balanceOf',
+            outputs: [{ name: '', type: 'uint256' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+          },
+        ]
+        const contract = new web3.eth.Contract(abiJson as any, busdAddress)
+        const balance = await contract.methods.balanceOf(holderAddress).call()
+        // note that this number includes the decimal places (in case of BUSD, that's 18 decimal places)
+        // console.log('balance = ', Web3.utils.fromWei(balance))
+        setWallet({ ...wallet, busd: Web3.utils.fromWei(balance) })
+      }
+    }
+
+    getBalance()
+  }, [wallet?.address])
 
   const connect = async () => {
     let provider = window.ethereum
@@ -71,6 +103,22 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     const web3 = new Web3(provider)
     const netWorkId = await web3.eth.net.getId()
     console.log(netWorkId)
+
+    // if (wallet) {
+    //   const abiJson = [
+    //     {
+    //       constant: true,
+    //       inputs: [{ name: 'who', type: 'address' }],
+    //       name: 'balanceOf',
+    //       outputs: [{ name: '', type: 'uint256' }],
+    //       payable: false,
+    //       stateMutability: 'view',
+    //       type: 'function',
+    //     },
+    //   ]
+    //   const contract = new web3.eth.Contract(abiJson as any, busdAddress);
+    // }
+
     isInitialied = true
   }
   const logout = () => {
