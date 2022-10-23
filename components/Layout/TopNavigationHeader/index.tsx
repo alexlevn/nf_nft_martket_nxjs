@@ -24,7 +24,7 @@ const TopNavigationHeader = () => {
   }
 
   useEffect(() => {
-    setConnected(true)
+    setConnected(wallet ? true : false)
   }, [wallet])
 
   return (
@@ -114,7 +114,8 @@ const TopNavigationHeader = () => {
                 />
                 <div className="flex flex-col">
                   <span className="text-scgray text-xs font-thin">BUSD</span>
-                  <span className="text-base font-semibold">200,000.00</span>
+                  {/* <span className="text-base font-semibold">200,000.00</span> */}
+                  <span className="text-base font-semibold">{wallet?.busd}</span>
                 </div>
               </div>
 
