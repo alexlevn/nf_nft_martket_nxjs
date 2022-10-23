@@ -18,15 +18,16 @@ interface IWeb3Ctx {
   wallet: IWallet | null
   connect: () => Promise<void>
   logout: () => void
+  connected: () => boolean
 }
 
-// let selectedAccount
 let isInitialied = false
 
 const Web3Context = createContext<IWeb3Ctx>({
   wallet: null,
   connect: async () => {},
   logout: async () => {},
+  connected: () => false,
 })
 
 export const Web3Provider: FunctionComponent<{ children: any }> = ({
@@ -35,12 +36,12 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
   const [wallet, setWallet] = useState<IWallet | null>(null)
 
   useEffect(() => {
-    console.log('-- called me! connect at the first time')
-    connect()
+    // NOT CONNECT AT START UP
+    // connect()
   }, [])
 
   useEffect(() => {
-    console.log('Selected account changed to accs: ', wallet?.address)
+    // console.log('Selected account changed to accs: ', wallet?.address)
 
     const getBalance = async () => {
       let provider = window.ethereum
@@ -48,26 +49,28 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
       const netWorkId = await web3.eth.net.getId()
       console.log(netWorkId)
 
-      if (wallet) {
-        const busdAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
-        const holderAddress = wallet.address
+      try {
+        if (wallet) {
+          const busdAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
+          const holderAddress = wallet.address
 
-        const abiJson = [
-          {
-            constant: true,
-            inputs: [{ name: 'who', type: 'address' }],
-            name: 'balanceOf',
-            outputs: [{ name: '', type: 'uint256' }],
-            payable: false,
-            stateMutability: 'view',
-            type: 'function',
-          },
-        ]
-        const contract = new web3.eth.Contract(abiJson as any, busdAddress)
-        const balance = await contract.methods.balanceOf(holderAddress).call()
-        // note that this number includes the decimal places (in case of BUSD, that's 18 decimal places)
-        // console.log('balance = ', Web3.utils.fromWei(balance))
-        setWallet({ ...wallet, busd: Web3.utils.fromWei(balance) })
+          const abiJson = [
+            {
+              constant: true,
+              inputs: [{ name: 'who', type: 'address' }],
+              name: 'balanceOf',
+              outputs: [{ name: '', type: 'uint256' }],
+              payable: false,
+              stateMutability: 'view',
+              type: 'function',
+            },
+          ]
+          const contract = new web3.eth.Contract(abiJson as any, busdAddress)
+          const balance = await contract.methods.balanceOf(holderAddress).call()
+          setWallet({ ...wallet, busd: Web3.utils.fromWei(balance) })
+        }
+      } catch (err) {
+        console.log('Error: ', err)
       }
     }
 
@@ -76,27 +79,18 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
   const connect = async () => {
     let provider = window.ethereum
-
     if (typeof provider !== 'undefined') {
       provider
-        .request({
-          method: 'eth_requestAccounts',
-        })
+        .request({ method: 'eth_requestAccounts' })
         .then((accounts: string[]) => {
           setWallet({ address: accounts[0] })
-          // selectedAccount = accounts[0]
-          console.log('accs = ', accounts)
-          // console.log('Selected account: ', accounts[0])
         })
         .catch((err: any) => {
           console.log('Error: ', err)
           return
         })
-
       window.ethereum.on('accountsChanged', (accounts: string[]) => {
         setWallet({ address: accounts[0] })
-        // selectedAccount = accounts[0]
-        // console.log('Selected account changed to accs: ', selectedAccount)
       })
     }
 
@@ -104,30 +98,17 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     const netWorkId = await web3.eth.net.getId()
     console.log(netWorkId)
 
-    // if (wallet) {
-    //   const abiJson = [
-    //     {
-    //       constant: true,
-    //       inputs: [{ name: 'who', type: 'address' }],
-    //       name: 'balanceOf',
-    //       outputs: [{ name: '', type: 'uint256' }],
-    //       payable: false,
-    //       stateMutability: 'view',
-    //       type: 'function',
-    //     },
-    //   ]
-    //   const contract = new web3.eth.Contract(abiJson as any, busdAddress);
-    // }
-
     isInitialied = true
   }
+
   const logout = () => {
-    // TODO:
-    // console.log('disconnect wallet ---')
+    // USER LOGOUT BY Metamask.
   }
 
+  const connected = () => (wallet?.address ? true : false)
+
   return (
-    <Web3Context.Provider value={{ wallet, connect, logout }}>
+    <Web3Context.Provider value={{ wallet, connect, logout, connected }}>
       {children}
     </Web3Context.Provider>
   )
