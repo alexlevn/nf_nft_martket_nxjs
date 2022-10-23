@@ -6,7 +6,7 @@ import { ButtonGradient } from 'components/ButtonGradient'
 import ModalTrigger from 'components/ModalTrigger'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useWeb3 from 'common/hooks/useWeb3'
 
 const TopNavigationHeader = () => {
@@ -22,6 +22,10 @@ const TopNavigationHeader = () => {
   const connectMetamask = () => {
     connect()
   }
+
+  useEffect(() => {
+    setConnected(true)
+  }, [wallet])
 
   return (
     <div className="flex justify-between px-5 lg:px-14 items-center py-5 w-full  z-50 fixed bg-dark ">
