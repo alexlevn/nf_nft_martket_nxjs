@@ -8,7 +8,8 @@ export const ButtonBorderGradient: React.FC<{
   <div className="border-btn-gradient" onClick={onClick}>
     <div
       className={
-        'btn-main-inside cursor-pointer hover:opacity-95 text-white font-semibold ' +
+        'btn-main-inside cursor-pointer hover:opacity-95 text-white font-semibold' +
+        ' ' +
         (className ? className : '')
       }
     >

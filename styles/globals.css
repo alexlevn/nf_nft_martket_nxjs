@@ -197,6 +197,17 @@
 .shadow-border {
   box-shadow: inset 0px -1px 0px #191d24;
 }
-.commission-cell{
-@apply w-1/2 p-2
+.commission-cell {
+  @apply w-1/2 p-2;
+}
+.referral-cell {
+  @apply w-1/3 p-2;
+}
+
+.box-pagination {
+  @apply rounded-md border  w-10 h-10 justify-center items-center flex border-scgray_4   cursor-pointer;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
 }
