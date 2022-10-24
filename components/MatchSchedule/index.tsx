@@ -132,9 +132,7 @@ const MatchSchedule = () => {
       </div>
       {/* table-footer */}
       <div className="flex flex-row gap-2">
-        <ButtonBorderGradient className="px-4 py-2 text-center">
-          {'<'}
-        </ButtonBorderGradient>
+        <div className="box-pagination text-white">{'<'}</div>
         <ButtonBorderGradient className="px-4 py-2 text-center">
           {'>'}
         </ButtonBorderGradient>

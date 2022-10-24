@@ -189,7 +189,6 @@
   );
 
   border: 2px solid #191d24;
-
   box-shadow: 4px 4px 0px #ffffff;
 }
 
@@ -210,4 +209,10 @@
 
 .flex-center {
   @apply flex justify-center items-center;
+}
+
+/* notification */
+
+.ant-notification-notice-message {
+  color: white;
 }

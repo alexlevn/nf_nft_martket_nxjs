@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import { notification } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 const Referral: FC = () => {
   return (
@@ -16,7 +17,60 @@ const Referral: FC = () => {
         <CommissionTable />
         <ReferralListTable />
       </div>
-      <div className="w-full lg:w-5/12">My Referral Link</div>
+      <MyReferralLink />
+    </div>
+  )
+}
+
+const MyReferralLink = () => {
+  const [referralLink, _] = useState('https://wcfi.io/ref=2ckni9ajas01')
+  const notificationCopy = () => {
+    navigator.clipboard.writeText(referralLink)
+    notification.success({
+      message: 'Copy success!',
+      style: {
+        background: '#191D24',
+        borderRadius: '12px',
+      },
+      duration: 0.8,
+    })
+  }
+
+  return (
+    <div className="w-full lg:w-5/12 flex flex-col gap-5">
+      <div className="bg-pcgray p-8 rounded-lg flex flex-col gap-5">
+        <h3 className="text-white">My Referral Link</h3>
+        <div
+          className="flex  rounded-md justify-between items-center border border-scgray_4 px-5 py-3
+         cursor-pointer hover:opacity-80 text-white "
+          onClick={notificationCopy}
+        >
+          <span>{referralLink.slice(0, 15)}...</span>
+
+          <img src="/images/icon_copy.svg" alt="" className="w-5 h-5" />
+        </div>
+      </div>
+
+      <div className="bg-pcgray p-8 rounded-lg">
+        <h3 className="text-scgray_3 font-bold">Total Friends</h3>
+        <p className="flex items-center gap-2 mt-3 text-white font-bold">
+          <img src="/images/group_users.svg" alt="" className="w-6 h-6" /> 30
+        </p>
+
+        <div className="flex flex-col lg:flex-row mt-8 justify-between gap-5">
+          <div className="flex flex-col">
+            <h3 className="text-scgray_3 font-bold">Total Earned</h3>
+            <p className="flex items-center gap-2 mt-3 text-white font-bold">
+              <img src="/images/busd.svg" alt="" className="w-6 h-6" /> 666.00
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-center items-center rounded-lg bg-pcmodal w-full lg:w-2/3 p-3 text-scgray_3">
+            <span>Available to Withdraw on</span>
+            <span className="font-bold">25/12/2022</span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -30,6 +84,9 @@ const ReferralListTable: FC = () => (
         <div className="referral-cell">Date</div>
         <div className="referral-cell">Wallet Address</div>
         <div className="referral-cell">Earned</div>
+      </div>
+      <div className="mt-5 py-5 shadow-border flex-center gap-5">
+        <img src="/images/no_data.svg" alt="" className="w-20 h-20" />
       </div>
 
       {[1, 2, 3, 4, 5, 6].map((item) => (
@@ -48,7 +105,7 @@ const ReferralListTable: FC = () => (
           1
         </ButtonBorderGradient>
         <div className="box-pagination text-white text-sm font-semibold">2</div>
-        <div className="box-pagination text-white ">{'>'}</div>
+        <div className="box-pagination text-white">{'>'}</div>
       </div>
     </div>
   </div>
