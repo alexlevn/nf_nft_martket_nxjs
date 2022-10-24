@@ -17,6 +17,7 @@ export interface IWallet {
 interface IWeb3Ctx {
   wallet: IWallet | null
   connect: () => Promise<void>
+  approve: () => void
   logout: () => void
   connected: () => boolean
 }
@@ -26,6 +27,7 @@ let isInitialied = false
 const Web3Context = createContext<IWeb3Ctx>({
   wallet: null,
   connect: async () => {},
+  approve: async () => {},
   logout: async () => {},
   connected: () => false,
 })
@@ -105,10 +107,16 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     // USER LOGOUT BY Metamask.
   }
 
+  const approve = () => {
+    // approve to mint
+  }
+
   const connected = () => (wallet?.address ? true : false)
 
   return (
-    <Web3Context.Provider value={{ wallet, connect, logout, connected }}>
+    <Web3Context.Provider
+      value={{ wallet, connect, logout, connected, approve }}
+    >
       {children}
     </Web3Context.Provider>
   )

@@ -3,13 +3,24 @@ import Image from 'next/image'
 import { FC } from 'react'
 import MintNFT from 'components/MintNFT'
 import TiersList from 'components/TiersList'
+import { Layout } from 'antd'
+import Sidebar from 'components/Layout/Sidebar'
 
 const Home: FC = () => {
   return (
-    <div
-      className="text-xl font-light  bg-dark  p-0
-        flex flex-col gap-5"
-    >
+    <>
+      <div className="w-1/12 p-5 hidden lg:block" />
+      <Layout.Content className="w-full lg:w-8/12 p-5 lg:block">
+        <MiddleComponent />
+      </Layout.Content>
+      <Sidebar />
+    </>
+  )
+}
+
+const MiddleComponent: FC = () => {
+  return (
+    <div className="text-xl font-light bg-dark p-0 flex flex-col gap-5">
       {/* REWARD */}
       <div className="bg-pcgray rounded-xl flex flex-col lg:flex-row justify-around p-10 lg:gap-40 gap-2 ">
         <div className="flex flex-col gap-1 justify-center items-start text-left">
