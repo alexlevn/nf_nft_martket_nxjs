@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [],
   corePlugins: {
-    preflight: false,
+    // preflight: false,
     // preflight: true,
     // Phải set false để có thể sử dụng các component của antd không bị lỗi
     // Vấn đề là: khi set false => sẽ không có border cho 1 số thuộc tính?
@@ -31,5 +31,8 @@ module.exports = {
     // còn antd chỉ để sài cho component & chức năng
 
     // Test thử = false & tự set base => dùng cách 2
+
+    // preflight: false,
+    preflight: true, // Will get error with some antd component => reset after with test
   },
 }

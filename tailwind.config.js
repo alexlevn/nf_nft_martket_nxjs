@@ -10,6 +10,8 @@ module.exports = {
       colors: ({ colors }) => ({
         pcgray: '#0E1114',
         scgray: '#7D8DA7',
+        scgray_3: '#637592',
+        scgray_4: '#29313D',
 
         pcmodal: '#191D24',
         pcdark: '#080A0c',
@@ -20,7 +22,6 @@ module.exports = {
   },
   plugins: [],
   corePlugins: {
-    // preflight: false,
-    preflight: true, // Will get error with some antd component => reset after with test
+    preflight: true,
   },
 }
