@@ -10,6 +10,7 @@ module.exports = {
       colors: ({ colors }) => ({
         pcgray: '#0E1114',
         scgray: '#7D8DA7',
+        scgray_3: '#637592',
 
         pcmodal: '#191D24',
         pcdark: '#080A0c',

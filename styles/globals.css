@@ -5,21 +5,6 @@
 @import '~antd/dist/antd.css';
 @import url('../css/panchang.css');
 
-/* base manual from tailwinds */
-/* CHỖ NÀY SỬA LỖI KHÔNG CÓ BORDER */
-
-/*
-*,
-::before,
-::after {
-  border-width: 0;
-  border-style: solid;
-  border-color: theme('borderColor.DEFAULT', currentColor);
-}
-*/
-
-
-
 /* SCROLL BAR */
 ::-webkit-scrollbar {
   display: none;
@@ -206,4 +191,12 @@
   border: 2px solid #191d24;
 
   box-shadow: 4px 4px 0px #ffffff;
+}
+
+/* BOX */
+.shadow-border {
+  box-shadow: inset 0px -1px 0px #191d24;
+}
+.commission-cell{
+@apply w-1/2 p-2
 }
