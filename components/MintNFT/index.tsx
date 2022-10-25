@@ -49,30 +49,32 @@ const MintNFT = () => {
             width={400}
             footer={null}
             closeIcon={null}
-            open={true}
-            onCancel={(_) => {}}
+            open={loadingMint}
+            onCancel={(_) => {
+              setLoadingMint(false)
+            }}
             className="bg-transparent"
           >
             <div className="text-white flex-center flex flex-col">
-              <ButtonBorderGradient>
+              <ButtonBorderGradient className="cursor-auto">
                 <div className="flex-center">
                   <img
                     src="/images/shoes/shoe_brazil.png"
                     alt=""
-                    className="cursor-auto h-60 w-60 lg:w-80 lg:h-80"
+                    className="h-60 w-60 lg:w-96 lg:h-96"
                   />
                 </div>
-                <div className="flex flex-wrap w-full text-base">
+                <div className="flex flex-wrap w-full text-base font-light">
                   <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
-                    <span className="text-scgray_4">Team</span>
+                    <span className="text-scgray">Team</span>
                     <span className="text-white">Brazil</span>
                   </div>
                   <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
-                    <span className="text-scgray_4">Rarity</span>
+                    <span className="text-scgray">Rarity</span>
                     <span className="text-white">0,08%</span>
                   </div>
                   <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
-                    <span className="text-scgray_4">Estimate</span>
+                    <span className="text-scgray">Estimate</span>
                   </div>
                   <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
                     <span className="text-white">≈ $68,000</span>
@@ -81,14 +83,17 @@ const MintNFT = () => {
               </ButtonBorderGradient>
             </div>
             <div className="mt-5">
-              <ButtonGradient onClick={() => {}} className="py-3 text-lg ">
+              <ButtonGradient
+                onClick={() => {}}
+                className="py-3 text-lg cursor-pointer"
+              >
                 Collect
               </ButtonGradient>
             </div>
             <div className="mt-5">
               <ButtonBorderGradient
                 onClick={() => {}}
-                className="py-3 text-lg flex-center"
+                className="py-3 text-lg flex-center cursor-pointer"
               >
                 <span>View on BSCscan</span>
               </ButtonBorderGradient>
