@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { notification } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import { ButtonGradient } from 'components/ButtonGradient'
 import { FC, useState } from 'react'
 
 const Referral: FC = () => {
@@ -38,7 +39,7 @@ const MyReferralLink = () => {
 
   return (
     <div className="w-full lg:w-5/12 flex flex-col gap-5">
-      <div className="bg-pcgray p-8 rounded-lg flex flex-col gap-5">
+      <div className="bg-pcgray p-5 rounded-lg flex flex-col gap-5">
         <h3 className="text-white">My Referral Link</h3>
         <div
           className="flex  rounded-md justify-between items-center border border-scgray_4 px-5 py-3
@@ -51,24 +52,32 @@ const MyReferralLink = () => {
         </div>
       </div>
 
-      <div className="bg-pcgray p-8 rounded-lg">
-        <h3 className="text-scgray_3 font-bold">Total Friends</h3>
-        <p className="flex items-center gap-2 mt-3 text-white font-bold">
-          <img src="/images/group_users.svg" alt="" className="w-6 h-6" /> 30
-        </p>
+      <div className="bg-pcgray p-5 rounded-lg">
+        <div>
+          <h3 className="text-scgray_3 font-bold">Total Friends</h3>
+          <p className="flex items-center gap-2 mt-3 text-white font-bold">
+            <img src="/images/group_users.svg" alt="" className="w-6 h-6" /> 30
+          </p>
+        </div>
 
-        <div className="flex flex-col lg:flex-row mt-8 justify-between gap-5">
-          <div className="flex flex-col">
-            <h3 className="text-scgray_3 font-bold">Total Earned</h3>
-            <p className="flex items-center gap-2 mt-3 text-white font-bold">
-              <img src="/images/busd.svg" alt="" className="w-6 h-6" /> 666.00
-            </p>
+        <div className="flex flex-col gap-5 flex-wrap items-center">
+          <div className="w-full flex flex-col lg:flex-row mt-8 justify-between gap-5">
+            <div className="flex flex-col">
+              <h3 className="text-scgray_3 font-bold">Total Earned</h3>
+              <p className="flex items-center gap-2 mt-3 text-white font-bold">
+                <img src="/images/busd.svg" alt="" className="w-6 h-6" /> 688.00
+              </p>
+            </div>
+
+            <div className="flex flex-col justify-center items-center rounded-lg bg-pcmodal w-full lg:w-2/3 p-3 text-scgray_3">
+              <span>Available to Withdraw on</span>
+              <span className="font-bold">25/12/2022</span>
+            </div>
           </div>
 
-          <div className="flex flex-col justify-center items-center rounded-lg bg-pcmodal w-full lg:w-2/3 p-3 text-scgray_3">
-            <span>Available to Withdraw on</span>
-            <span className="font-bold">25/12/2022</span>
-          </div>
+          <ButtonGradient className="w-full py-2 text-lg">
+            Withdraw
+          </ButtonGradient>
         </div>
       </div>
     </div>
