@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react'
 import useWeb3 from 'common/hooks/useWeb3'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { ButtonGradient } from 'components/ButtonGradient'
-import { Modal } from 'antd'
+import { Modal, notification } from 'antd'
 
 const MintNFT = () => {
   const { connected, connect, allowance, approve, mint } = useWeb3()
@@ -16,9 +16,27 @@ const MintNFT = () => {
     setLoadingApprove(false)
   }, [])
 
-  const onClickApprove = useCallback(() => {
+  const onClickApprove = useCallback(async () => {
     setLoadingApprove(true)
-    approve(callbackApprove)
+    try {
+      await approve(callbackApprove)
+    } catch (err) {
+      setLoadingApprove(false)
+      notification.warning({
+        message: (
+          <div className="text-yellow-200">
+            You just declined the approval request in Metamask!
+          </div>
+        ),
+        style: {
+          background: '#191D24',
+          borderRadius: '12px',
+          color: 'yello',
+        },
+        duration: 6,
+        placement: 'top',
+      })
+    }
   }, [approve, callbackApprove])
 
   const callbackMint = useCallback(() => {
@@ -32,14 +50,8 @@ const MintNFT = () => {
 
   const renderBtn = useCallback(() => {
     const renderSpinner = () => (
-      <Modal
-        width={300}
-        footer={null}
-        closeIcon={null}
-        open={loadingApprove}
-        onCancel={(_) => {}}
-      >
-        <div className="h-48 text-white flex-center">
+      <Modal width={300} footer={null} closeIcon={null} open={loadingApprove}>
+        <div className="h-64 text-white flex-center">
           <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
         </div>
       </Modal>
