@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import useWeb3 from 'common/hooks/useWeb3'
 import MintNFT from 'components/MintNFT'
 import TiersList from 'components/TiersList'
-import { Layout } from 'antd'
 import Sidebar from 'components/Layout/Sidebar'
+import { Layout } from 'antd'
 
 const Home: FC = () => {
   return (
@@ -19,13 +20,19 @@ const Home: FC = () => {
 }
 
 const MiddleComponent: FC = () => {
+  const { totalReward, getTotalReward } = useWeb3()
+
+  useEffect(() => {
+    getTotalReward()
+  },[getTotalReward])
+
   return (
     <div className="text-xl font-light bg-dark p-0 flex flex-col gap-5">
       {/* REWARD */}
       <div className="bg-pcgray rounded-xl flex flex-col lg:flex-row justify-around p-10 lg:gap-40 gap-2 ">
         <div className="flex flex-col gap-1 justify-center items-start text-left">
           <div className="text-content">Total Reward</div>
-          <div className="text-xl lg:text-3xl font-semibold">$8.064.000</div>
+          <div className="text-xl lg:text-3xl font-semibold">{`$${Math.floor(Number(totalReward) * 100) / 100}`}</div>
           <Image
             src="/images/btn_view_contract.svg"
             alt=""
