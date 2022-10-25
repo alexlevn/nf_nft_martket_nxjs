@@ -25,7 +25,7 @@ const ModalWalletDetail = () => {
             <img src="/images/busd.svg" alt="" className="lg:block w-8 h-8" />
             <div className="flex flex-col">
               <span className="text-scgray text-xs font-thin">BUSD</span>
-              <span className="text-base font-semibold">{wallet?.busd}</span>
+              <span className="text-base font-semibold">{wallet?.busd ? Math.floor(Number(wallet?.busd) * 100) / 100 : ''}</span>
             </div>
           </div>
 
