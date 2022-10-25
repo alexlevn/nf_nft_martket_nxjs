@@ -7,10 +7,10 @@ import { Modal, notification } from 'antd'
 
 const MintNFT = () => {
   const { connected, connect, allowance, approve, mint } = useWeb3()
-  console.log(allowance)
-
+  
   const [loadingApprove, setLoadingApprove] = useState(false)
   const [loadingMint, setLoadingMint] = useState(false)
+  const [isShowModalShoeNFT, setIsShowModalShoeNFT] = useState(false)
 
   const callbackApprove = useCallback(() => {
     setLoadingApprove(false)
@@ -41,16 +41,35 @@ const MintNFT = () => {
 
   const callbackMint = useCallback(() => {
     setLoadingMint(false)
+    setIsShowModalShoeNFT(true)
   }, [])
 
-  const onClickMint = useCallback(() => {
+  const onClickMint = useCallback(async () => {
     setLoadingMint(true)
-    mint(callbackMint)
+    try {
+      await mint(callbackMint)
+    } catch (err) {
+      setLoadingMint(false)
+      notification.warning({
+        message: (
+          <div className="text-yellow-200">
+            You just declined the approval request in Metamask!
+          </div>
+        ),
+        style: {
+          background: '#191D24',
+          borderRadius: '12px',
+          color: 'yello',
+        },
+        duration: 6,
+        placement: 'top',
+      })
+    }
   }, [mint, callbackMint])
 
   const renderBtn = useCallback(() => {
     const renderSpinner = () => (
-      <Modal width={300} footer={null} closeIcon={null} open={loadingApprove}>
+      <Modal width={300} footer={null} closeIcon={null} open={loadingApprove || loadingMint}>
         <div className="h-64 text-white flex-center">
           <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
         </div>
@@ -62,9 +81,9 @@ const MintNFT = () => {
         width={400}
         footer={null}
         closeIcon={null}
-        open={loadingMint}
+        open={isShowModalShoeNFT}
         onCancel={(_) => {
-          setLoadingMint(false)
+          setIsShowModalShoeNFT(false)
         }}
         className="bg-transparent"
       >
@@ -122,6 +141,7 @@ const MintNFT = () => {
               <span>Mint NFT</span>
             </ButtonGradient>
             {renderModalShoeNFT()}
+            {renderSpinner()}
           </>
         )
       } else {
@@ -152,6 +172,7 @@ const MintNFT = () => {
     onClickMint,
     loadingApprove,
     loadingMint,
+    isShowModalShoeNFT,
   ])
 
   return (
