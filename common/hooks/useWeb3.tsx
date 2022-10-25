@@ -8,7 +8,12 @@ import {
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 
-import { SC_ADDRESS, SC_MINT_ADDRESS, SPENDER_ADDRESS, TOTAL_REWARD_ADDRESS } from 'constants/index'
+import {
+  SC_ADDRESS,
+  SC_MINT_ADDRESS,
+  SPENDER_ADDRESS,
+  TOTAL_REWARD_ADDRESS,
+} from 'constants/index'
 import ABI from 'constants/ABI.json'
 import ABI_MINT from 'constants/ABI-Mint.json'
 
@@ -73,7 +78,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
           const contract = new web3.eth.Contract(ABI as AbiItem[], SC_ADDRESS)
           const balance = await contract.methods.balanceOf(holderAddress).call()
-          setWallet({ ...wallet, busd: web3.utils.fromWei(balance, "ether") })
+          setWallet({ ...wallet, busd: web3.utils.fromWei(balance, 'ether') })
         }
       } catch (err) {
         console.log('Error: ', err)
@@ -94,8 +99,10 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
         .then(async (accounts: string[]) => {
           setWallet({ address: accounts[0] })
 
-          const res = await nftContract.methods.allowance(accounts[0], SPENDER_ADDRESS).call()
-          
+          const res = await nftContract.methods
+            .allowance(accounts[0], SPENDER_ADDRESS)
+            .call()
+
           if (Number(res) > 10000) {
             setAllowance(true)
           } else {
@@ -109,8 +116,10 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
       window.ethereum.on('accountsChanged', async (accounts: string[]) => {
         setWallet({ address: accounts[0] })
 
-        const res = await nftContract.methods.allowance(accounts[0], SPENDER_ADDRESS).call()
-        
+        const res = await nftContract.methods
+          .allowance(accounts[0], SPENDER_ADDRESS)
+          .call()
+
         if (Number(res) > 10000) {
           setAllowance(true)
         } else {
@@ -134,17 +143,23 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     const web3 = new Web3(provider)
     const nftContract = new web3.eth.Contract(ABI as AbiItem[], SC_ADDRESS)
 
-    const resApprove = await nftContract.methods
-      .approve(SPENDER_ADDRESS, 10000000000)
-      .send({from: wallet?.address})
+    try {
+      const resApprove = await nftContract.methods
+        .approve(SPENDER_ADDRESS, 10000000000)
+        .send({ from: wallet?.address })
 
-      const resAllowance = await nftContract.methods.allowance(wallet?.address, SPENDER_ADDRESS ).call()
-          
+      const resAllowance = await nftContract.methods
+        .allowance(wallet?.address, SPENDER_ADDRESS)
+        .call()
+
       if (Number(resAllowance) > 10000) {
         setAllowance(true)
       } else {
         setAllowance(false)
       }
+    } catch (err) {
+      throw err
+    }
 
     callback()
   }
@@ -152,13 +167,16 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
   const mint = async (callback: any) => {
     let provider = window.ethereum
     const web3 = new Web3(provider)
-    const nftContract = new web3.eth.Contract(ABI_MINT as AbiItem[], SC_MINT_ADDRESS)
+    const nftContract = new web3.eth.Contract(
+      ABI_MINT as AbiItem[],
+      SC_MINT_ADDRESS,
+    )
 
     const res = await nftContract.methods
       .mintToken()
-      .send({from: wallet?.address})
+      .send({ from: wallet?.address })
 
-      callback()
+    callback()
   }
 
   const getTotalReward = async () => {
@@ -166,14 +184,24 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     const web3 = new Web3(provider)
     const balanceRes = await web3.eth.getBalance(TOTAL_REWARD_ADDRESS)
 
-    setTotalReward(web3.utils.fromWei(balanceRes, "ether" ))
+    setTotalReward(web3.utils.fromWei(balanceRes, 'ether'))
   }
 
   const connected = () => (wallet?.address ? true : false)
 
   return (
     <Web3Context.Provider
-      value={{ wallet, totalReward, allowance, connect, getTotalReward, approve, mint, logout, connected }}
+      value={{
+        wallet,
+        totalReward,
+        allowance,
+        connect,
+        getTotalReward,
+        approve,
+        mint,
+        logout,
+        connected,
+      }}
     >
       {children}
     </Web3Context.Provider>
