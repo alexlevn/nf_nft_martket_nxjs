@@ -10,10 +10,12 @@ const Assets = () => {
       {/* Filter Form */}
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <div className="flex gap-5">
-          <span className="text-white block pb-1 border-b-2 border-white">
+          <span className="text-white block pb-1 border-b-2 border-white cursor-pointer">
             My assets ({total})
           </span>
-          <span className="text-scgray">My assets ({total})</span>
+          <span className="text-scgray cursor-pointer">
+            My assets ({total})
+          </span>
         </div>
 
         <div className="flex gap-5 flex-col lg:flex-row">
