@@ -49,7 +49,8 @@
 /*
 .ant-modal-content {
   background-color: transparent;
-}*/
+} For Modal Collect NFT
+*/
 
 .ant-modal-body {
   padding: 0px;
@@ -183,7 +184,7 @@
 }
 
 .btn-main-inside {
-  background: #0e1114;
+  background: #0e1114; /*pcgray*/
   border-radius: 8px;
 }
 
@@ -200,6 +201,38 @@
 
   border: 2px solid #191d24;
   box-shadow: 4px 4px 0px #ffffff;
+}
+
+.btn-dropdown {
+  @apply flex justify-between items-center gap-10 cursor-pointer font-normal px-5 py-2 border rounded-md border-scgray_4 text-sm opacity-60 hover:opacity-100;
+}
+
+/* 2nd-way Simple */
+/* GRADIENT */
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  padding: 1.5px;
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* CARD */
+.card-nft {
+  @apply flex flex-col gap-5 bg-pcgray hover:opacity-95 cursor-pointer rounded-md;
 }
 
 /* BOX */
@@ -221,7 +254,7 @@
   @apply flex justify-center items-center;
 }
 
-/* notification */
+/* NOTIFICATION */
 
 .ant-notification-notice-message {
   color: white;

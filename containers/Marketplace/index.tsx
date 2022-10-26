@@ -1,17 +1,37 @@
+/* eslint-disable @next/next/no-img-element */
+import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import CardsList from 'components/CardsList'
+
 const Marketplace = () => {
   const total = 6969
   return (
     <div className="">
-      <div className="flex flex-col justify-between  items-start gap-5">
+      {/* Total Volume */}
+
+      {/* Filter Form */}
+      <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <span className="font-semibold">Items (Total {total})</span>
-        <div className="flex gap-5 flex-col">
-          <div className="font-normal px-5 py-2 border inline-block rounded-md border-scgray_4 text-sm">
+
+        <div className="flex gap-5 flex-col lg:flex-row">
+          <div className="btn-dropdown">
             Newest
+            <img src="/images/arrow_down.svg" alt="" className="h-3 w-3" />
           </div>
-          <div className="font-normal px-5 py-2 border inline-block rounded-md border-scgray_4 text-sm">
+          <div className="btn-dropdown">
             Filter
+            <img src="/images/filter.svg" alt="" className="h-3 w-3" />
           </div>
         </div>
+      </div>
+
+      {/* Table */}
+      <CardsList data={Array.from(Array(20).keys())} />
+
+      {/* Load More */}
+      <div className="flex-center mt-10">
+        <ButtonBorderGradient className="px-10 py-3">
+          Load more
+        </ButtonBorderGradient>
       </div>
     </div>
   )
