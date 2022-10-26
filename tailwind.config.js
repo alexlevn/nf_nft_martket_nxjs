@@ -15,8 +15,11 @@ module.exports = {
 
         pcmodal: '#191D24',
         pcdark: '#080A0c',
-        pcyellow: '#FFC71F',
         pcgreen: '#64D121',
+
+        pcyellow: '#FFC71F',
+        pcblue: '#027EF2',
+        pcgray_2: '#B6BFCD',
       }),
     },
   },
