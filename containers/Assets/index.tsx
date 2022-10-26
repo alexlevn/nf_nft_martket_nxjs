@@ -13,9 +13,7 @@ const Assets = () => {
           <span className="text-white block pb-1 border-b-2 border-white cursor-pointer">
             My assets ({total})
           </span>
-          <span className="text-scgray cursor-pointer">
-            My assets ({total})
-          </span>
+          <span className="text-scgray cursor-pointer">Listing (3)</span>
         </div>
 
         <div className="flex gap-5 flex-col lg:flex-row">
