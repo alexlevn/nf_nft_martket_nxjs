@@ -1,7 +1,90 @@
 /* eslint-disable @next/next/no-img-element */
+import { ALL_TEAMS } from 'components/TiersList/constants'
+import { ITeam } from 'components/TiersList/interface'
 import { FC } from 'react'
+export interface INft {
+  id: string
+  tokenId: string
+  tokenAddress: string
+  tokenType: string
+  image: string
+  owner: string
+  isOnSale: false
+  listingId: null
+  price: null
+  creator: string
+  createdAt: string
+}
 
-const CardNft: FC<{ tier?: number }> = ({ tier }) => {
+const getTeam: (nft: INft) => ITeam = (nft) => {
+  const tokenType = nft.tokenType
+  const arr = ALL_TEAMS.filter((t) => t.tokenType === tokenType)
+  return arr[0] || ALL_TEAMS[31] // DEFAUL = 31
+}
+
+const getBorderClassname = (tier: number) => {
+  const arrayBorders = [
+    'border-gradient',
+    'border border-pcblue',
+    'border border-pcyellow',
+    'border border-pcgray_2',
+  ]
+  return arrayBorders[tier - 1]
+}
+
+const CardNft: FC<{ item: INft }> = ({ item }) => {
+  const team = getTeam(item)
+  const border = getBorderClassname(team.tier)
+
+  return (
+    <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
+      <div className={'card-nft' + ' ' + border}>
+        {/* IMAGE */}
+        <div className="flex-center overflow-hidden">
+          <img
+            // TODO: sửa path image
+            src={item.image}
+            alt=""
+            placeholder="blur"
+            className="h-80 w-80"
+          />
+        </div>
+
+        {/* INFO */}
+        <div className="flex flex-wrap w-full text-sm font-light">
+          <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
+            <span className="text-scgray">Team</span>
+            <span className="text-white">{team.name}</span>
+          </div>
+          <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
+            <span className="text-scgray">Rarity</span>
+            <span className="text-white">{team.rarity}%</span>
+          </div>
+          <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
+            <span className="text-scgray">Price</span>
+          </div>
+          <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
+            <span className="text-white font-bold flex gap-1 items-center">
+              <img src="/images/busd.svg" alt="" className="w-6 h-6" />
+              {item.price || 'null'}
+              {/* 68,000 */}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CardNft
+
+// MOCKUP DATA ----------------------
+export const CardNftMookup: FC<{ tier?: number; item: any }> = ({
+  tier,
+  item,
+}) => {
+  const fakeData = true
+
   const arrayBorders = [
     'border-gradient',
     'border border-pcblue',
@@ -13,6 +96,8 @@ const CardNft: FC<{ tier?: number }> = ({ tier }) => {
     tier === undefined || arrayBorders[tier] === undefined
       ? arrayBorders[3]
       : arrayBorders[tier]
+
+  console.log('item = ', item)
 
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
@@ -50,4 +135,3 @@ const CardNft: FC<{ tier?: number }> = ({ tier }) => {
     </div>
   )
 }
-export default CardNft
