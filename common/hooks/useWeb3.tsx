@@ -58,8 +58,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
   const [allowance, setAllowance] = useState<boolean>(false)
 
   useEffect(() => {
-    // NOT CONNECT AT START UP
-    // connect()
+    /*CONNECT AT START UP*/
+    connect()
   }, [])
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     }
 
     getBalance()
-  }, [wallet?.address])
+  }, [wallet])
 
   const connect = async () => {
     let provider = window.ethereum
