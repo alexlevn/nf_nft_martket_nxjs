@@ -275,3 +275,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* DROPDOWN */
+
+.ant-dropdown-menu {
+  @apply bg-pcmodal rounded-xl;
+}
+
+.ant-dropdown-menu-item {
+  @apply w-64;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-active {
+  @apply bg-scgray_4 rounded-xl;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-active > span > a {
+  @apply text-gradient;
+}
+
+.ant-dropdown-menu-title-content {
+  @apply text-white text-sm panchang flex flex-wrap gap-5 justify-between font-normal;
+}

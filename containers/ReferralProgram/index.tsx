@@ -28,7 +28,7 @@ const MyReferralLink = () => {
   const notificationCopy = () => {
     navigator.clipboard.writeText(referralLink)
     notification.success({
-      message: 'Copy success!',
+      message: 'Link Copied!',
       style: {
         background: '#191D24',
         borderRadius: '12px',
