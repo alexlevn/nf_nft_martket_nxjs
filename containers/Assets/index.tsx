@@ -1,8 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
+import useWeb3 from 'common/hooks/useWeb3'
 import CardsList from 'components/CardsList'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { getResponseData } from 'common/util'
 
 const Assets = () => {
-  const total = 6
+  const { wallet } = useWeb3()
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const apiUrl = `http://wcfi.wii.camp/v1.0/nfts?owner=${wallet?.address}`
+      const params = {
+        // tokenTypes: [1, 2],
+      }
+      const res = await axios.get(apiUrl, { params })
+      setData(getResponseData(res))
+    }
+    if (wallet && wallet.address) {
+      fetchData()
+    }
+  }, [wallet?.address])
+
   return (
     <div className="">
       {/* Total Volume */}
@@ -11,9 +31,9 @@ const Assets = () => {
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <div className="flex gap-5">
           <span className="text-white block pb-1 border-b-2 border-white cursor-pointer">
-            My assets ({total})
+            My assets ({data.length})
           </span>
-          <span className="text-scgray cursor-pointer">Listing (3)</span>
+          <span className="text-scgray cursor-pointer">Listing (0)</span>
         </div>
 
         <div className="flex gap-5 flex-col lg:flex-row">
@@ -24,8 +44,7 @@ const Assets = () => {
         </div>
       </div>
 
-      {/* Table */}
-      <CardsList data={Array.from(Array(6).keys())} />
+      <CardsList data={data} />
     </div>
   )
 }
