@@ -295,5 +295,5 @@
 }
 
 .ant-dropdown-menu-title-content {
-  @apply text-white text-sm panchang flex flex-wrap gap-5 justify-between font-normal;
+  @apply text-white text-sm panchang flex flex-wrap gap-5 justify-between font-normal items-center;
 }

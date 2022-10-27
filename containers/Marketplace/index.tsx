@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Dropdown, Menu } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
-import CardsList from 'components/CardsList'
+import CardsList, { CardsListMookup } from 'components/CardsList'
 
 const Marketplace = () => {
   const total = 6969
@@ -40,10 +40,7 @@ const Marketplace = () => {
         <span className="font-semibold">Items (Total {total})</span>
 
         <div className="flex gap-5 flex-col lg:flex-row">
-          <Dropdown
-            // open={true}
-            overlay={menu}
-          >
+          <Dropdown overlay={menu}>
             <div className="btn-dropdown">
               Newest
               <img src="/images/arrow_down.svg" alt="" className="h-3 w-3" />
@@ -58,7 +55,9 @@ const Marketplace = () => {
       </div>
 
       {/* Table */}
-      <CardsList data={Array.from(Array(20).keys())} />
+
+      {/* <CardsList data={Array.from(Array(20).keys())} /> */}
+      <CardsListMookup data={Array.from(Array(20).keys())} />
 
       {/* Load More */}
       <div className="flex-center mt-10">
