@@ -86,7 +86,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     }
 
     getBalance()
-  }, [wallet])
+  }, [wallet?.address])
 
   const connect = async () => {
     let provider = window.ethereum
