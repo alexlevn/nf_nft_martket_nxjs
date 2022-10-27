@@ -11,7 +11,7 @@ const Assets = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiUrl = `http://wcfi.wii.camp/v1.0/nfts?owner=${wallet?.address}`
+      const apiUrl = `https://wcfi.wii.camp/v1.0/nfts?owner=${wallet?.address}`
       const params = {
         // tokenTypes: [1, 2],
       }
