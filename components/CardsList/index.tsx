@@ -52,7 +52,6 @@ const NFTDetail: FC<{ item: INft }> = ({ item }) => {
         <img
           // TODO: path image
           src={image}
-          // src="/images/shoes/shoe_brazil.png"
           alt=""
           placeholder="blur"
           className=""
@@ -61,7 +60,13 @@ const NFTDetail: FC<{ item: INft }> = ({ item }) => {
 
       {/* INFO */}
       <div className="w-full lg:w-1/2  flex flex-col gap-3 justify-center text-base  font-light p-8">
-        <div className={'font-semibold text-lg' + ' ' + getFontColorClassname(team.tier || 4)}>
+        <div
+          className={
+            'font-semibold text-lg' +
+            ' ' +
+            getFontColorClassname(team.tier || 4)
+          }
+        >
           Tier {team.tier}
         </div>
         <div className="flex justify-between">
