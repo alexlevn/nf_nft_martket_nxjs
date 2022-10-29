@@ -38,15 +38,27 @@ interface ITeamInfo {
 // },
 
 //
-const TeamRarity: React.FC<{ info: TeamRarityInfo }> = ({ info }) => (
+
+const getFlagImageUrl = (teamName: string) => {
+  return '/images/flags/' + teamName.replaceAll(' ', '_').toLowerCase() + ".png"
+}
+const TeamRarity: React.FC<{
+  // info: TeamRarityInfo
+  info: ITeamInfo
+}> = ({ info }) => (
   <div className="w-full flex justify-between items-center">
     {/* TEAM */}
     <div className="flex gap-3 items-center text-sm">
-      <img src={`/images/flags/${info.imageName}`} alt="" className="w-5" />
+      <img
+        // src={`/images/flags/${info.imageName}`}
+        src={getFlagImageUrl(info.name)}
+        alt=""
+        className="w-5"
+      />
       <div className="flex flex-col">
-        <span className="text-white font-semibold">{info.teamName}</span>
+        <span className="text-white font-semibold">{info.name}</span>
         <span className="text-gray-400" style={{ fontSize: 11 }}>
-          Minted {info.minted}
+          Minted {info.totalMinted}
         </span>
       </div>
     </div>
@@ -61,9 +73,12 @@ const TeamRarity: React.FC<{ info: TeamRarityInfo }> = ({ info }) => (
 )
 
 const TierDetail: React.FC<{
-  dataSource: TeamRarityInfo[]
+  // dataSource: TeamRarityInfo[]
+  dataSource: ITeamInfo[]
   title?: string
 }> = ({ dataSource, title }) => {
+  console.log('\n TITLE = ', title)
+  console.log('data source = ', dataSource)
   return (
     <div className="w-full bg-pcgray rounded-md p-5 gap-5 ">
       <div className="w-full flex justify-between">
@@ -82,16 +97,19 @@ const TierDetail: React.FC<{
 }
 
 const TiersList = () => {
-  const [arrTeams, setArrTeams] = useState<any>()
+  const [arrTeams, setArrTeams] = useState<ITeamInfo[]>([])
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get('https://wcfi.wii.camp/v1.0/teams')
       const data: ITeamInfo[] = getResponseData(res)
-      console.log('data = ', data)
+      // console.log('data = ', data)
       console.log(
         'arr 1 ',
         data.filter((item) => item.tier === 1),
       )
+
+      setArrTeams(data)
+      // setArrTeams(arrTeams)
     }
 
     fetchData()
@@ -104,7 +122,8 @@ const TiersList = () => {
             return (
               <TierDetail
                 key={index}
-                dataSource={item?.list}
+                // dataSource={item?.list}
+                dataSource={arrTeams}
                 title={'Tier ' + (index + 1)}
               />
             )
@@ -113,12 +132,27 @@ const TiersList = () => {
       </div>
 
       <div className="hidden lg:flex lg:flex-row lg:gap-5 lg:flex-nowrap">
-        <TierDetail title="Tier 1" dataSource={arrTiers[0]?.list || []} />
-        <TierDetail title="Tier 2" dataSource={arrTiers[1]?.list || []} />
+        <TierDetail
+          title="Tier 1"
+          // dataSource={arrTiers[0]?.list || []}
+          dataSource={arrTeams.filter((item) => item.tier === 1)}
+        />
+        <TierDetail
+          title="Tier 2"
+          dataSource={arrTeams.filter((item) => item.tier === 2)}
+        />
       </div>
       <div className="hidden lg:flex lg:flex-row lg:gap-5 lg:flex-nowrap">
-        <TierDetail title="Tier 3" dataSource={arrTiers[2]?.list || []} />
-        <TierDetail title="Tier 4" dataSource={arrTiers[3]?.list || []} />
+        {/* <TierDetail title="Tier 3" dataSource={arrTiers[2]?.list || []} />
+        <TierDetail title="Tier 4" dataSource={arrTiers[3]?.list || []} /> */}
+        <TierDetail
+          title="Tier 3"
+          dataSource={arrTeams.filter((item) => item.tier === 3)}
+        />
+        <TierDetail
+          title="Tier 3"
+          dataSource={arrTeams.filter((item) => item.tier === 4)}
+        />
       </div>
     </>
   )
