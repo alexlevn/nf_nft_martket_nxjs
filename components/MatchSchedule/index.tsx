@@ -26,7 +26,8 @@ const MATCH_2 = {
     },
     {
       name: 'NED',
-      image: 'netherlands.png',
+      image: 'nederland.png',
+      // image: 'netherlands.png',
     },
   ],
   schedule: {
@@ -56,7 +57,8 @@ const MATCH_4 = {
   teams: [
     {
       name: 'USA',
-      image: 'united_states.png',
+      image: 'america.png',
+      // image: 'united_states.png',
     },
     {
       name: 'WAL',
