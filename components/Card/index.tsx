@@ -98,8 +98,6 @@ export const CardNftMookup: FC<{ tier?: number; item: any }> = ({
   tier,
   item,
 }) => {
-  const fakeData = true
-
   const arrayBorders = [
     'border-gradient',
     'border border-pcblue',
@@ -112,7 +110,7 @@ export const CardNftMookup: FC<{ tier?: number; item: any }> = ({
       ? arrayBorders[3]
       : arrayBorders[tier]
 
-  console.log('item = ', item)
+  // console.log('item = ', item)
 
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
