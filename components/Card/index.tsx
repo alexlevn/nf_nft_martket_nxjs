@@ -17,9 +17,19 @@ export interface INft {
 }
 
 const getTeam: (nft: INft) => ITeam = (nft) => {
+  const DEFAULT = {
+    id: 30,
+    tier: 1,
+    tokenType: '30',
+    name: 'NO TEAM',
+    flag: 'public/images/teams/vertical/30.png',
+    fifaCode: 'IRN',
+    group: 'B',
+    rarity: '9.32',
+  }
   const tokenType = nft.tokenType
   const arr = ALL_TEAMS.filter((t) => t.tokenType === tokenType)
-  return arr[0] || ALL_TEAMS[31] // DEFAUL = 31
+  return arr[0] || DEFAULT
 }
 
 const getBorderClassname = (tier: number) => {
@@ -36,25 +46,30 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
   const team = getTeam(item)
   const border = getBorderClassname(team.tier)
 
+  // TODO: path image
+  const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
+
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
       <div className={'card-nft' + ' ' + border}>
         {/* IMAGE */}
-        <div className="flex-center overflow-hidden">
+        <div className="flex-center overflow-hidden h-80">
           <img
-            // TODO: sửa path image
-            src={item.image}
+            // TODO: path image
+            // src={item.image}
+            src={image}
             alt=""
             placeholder="blur"
-            className="h-80 w-80"
+            className=""
           />
         </div>
 
         {/* INFO */}
-        <div className="flex flex-wrap w-full text-sm font-light">
+        <div className="flex flex-wrap w-full text-sm lg:text-xs font-light">
           <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
             <span className="text-scgray">Team</span>
             <span className="text-white">{team.name}</span>
+            {/* <span className="text-white">{team.name} - {team.tier}</span> */}
           </div>
           <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
             <span className="text-scgray">Rarity</span>
