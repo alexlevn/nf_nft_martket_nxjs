@@ -3,7 +3,7 @@ import { Carousel } from 'antd'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
 import { useEffect, useState } from 'react'
-import arrTiers from './data.json'
+
 interface ITeamInfo {
   id: number
   tier: number
@@ -137,24 +137,3 @@ const TiersList = () => {
 }
 
 export default TiersList
-
-const resTmp =
-  // 20221029105957
-  // https://wcfi.wii.camp/v1.0/teams
-
-  {
-    code: 200,
-    payload: [
-      {
-        id: 1,
-        tier: 1,
-        tokenType: 1,
-        name: 'Brazil',
-        fifaCode: 'BRA',
-        group: 'G',
-        rarity: 0.08,
-        totalMinted: 0,
-        totalPool: 0,
-      },
-    ],
-  }
