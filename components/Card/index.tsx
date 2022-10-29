@@ -17,9 +17,19 @@ export interface INft {
 }
 
 const getTeam: (nft: INft) => ITeam = (nft) => {
+  const DEFAULT = {
+    id: 30,
+    tier: 1,
+    tokenType: '30',
+    name: 'NO TEAM',
+    flag: 'public/images/teams/vertical/30.png',
+    fifaCode: 'IRN',
+    group: 'B',
+    rarity: '9.32',
+  }
   const tokenType = nft.tokenType
   const arr = ALL_TEAMS.filter((t) => t.tokenType === tokenType)
-  return arr[0] || ALL_TEAMS[31] // DEFAUL = 31
+  return arr[0] || DEFAULT
 }
 
 const getBorderClassname = (tier: number) => {
