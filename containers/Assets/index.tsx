@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import useWeb3 from 'common/hooks/useWeb3'
-import CardsList from 'components/CardsList'
+import { CardsListWithSellModal } from 'components/CardsList'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
@@ -44,7 +44,7 @@ const Assets = () => {
         </div>
       </div>
 
-      <CardsList data={data} />
+      <CardsListWithSellModal data={data} />
     </div>
   )
 }

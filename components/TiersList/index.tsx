@@ -50,7 +50,7 @@ const TeamRarity: React.FC<{
   </div>
 )
 
-const getFontColorClassname = (tier: number) => {
+export const getFontColorClassname = (tier: number) => {
   const arrayColors = [
     'text-gradient',
     'text-pcblue',

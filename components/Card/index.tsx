@@ -16,7 +16,7 @@ export interface INft {
   createdAt: string
 }
 
-const getTeam: (nft: INft) => ITeam = (nft) => {
+export const getTeam: (nft: INft) => ITeam = (nft) => {
   const DEFAULT = {
     id: 30,
     tier: 1,
