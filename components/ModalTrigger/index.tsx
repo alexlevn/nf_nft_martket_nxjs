@@ -32,6 +32,7 @@ const ModalTrigger: FunctionComponent<IProps> = ({
           setVisible(false)
         }}
         {...restProps}
+        className="panchang"
       >
         {children}
       </Modal>

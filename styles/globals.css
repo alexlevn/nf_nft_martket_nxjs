@@ -203,6 +203,10 @@
   box-shadow: 4px 4px 0px #ffffff;
 }
 
+.btn-pcmodal {
+  @apply flex-center bg-pcmodal py-2 rounded-lg text-white hover:bg-opacity-80 font-semibold;
+}
+
 .btn-dropdown {
   @apply flex justify-between items-center gap-10 cursor-pointer font-normal px-5 py-2 border rounded-md border-scgray_4 text-sm opacity-60 hover:opacity-100;
 }
