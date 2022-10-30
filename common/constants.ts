@@ -1,4 +1,4 @@
-import { ITeam } from "./interface";
+import { ITeam } from "components/TiersList/interface";
 
 export const ALL_TEAMS: ITeam[] = [
   {

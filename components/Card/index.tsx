@@ -1,46 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { ALL_TEAMS } from 'components/TiersList/constants'
-import { ITeam } from 'components/TiersList/interface'
+import { getBorderClassname, getTeam } from 'common/util'
 import { FC } from 'react'
-export interface INft {
-  id: string
-  tokenId: string
-  tokenAddress: string
-  tokenType: string
-  image: string
-  owner: string
-  isOnSale: false
-  listingId: null
-  price: null
-  creator: string
-  createdAt: string
-}
-
-export const getTeam: (nft: INft) => ITeam = (nft) => {
-  const DEFAULT = {
-    id: 30,
-    tier: 1,
-    tokenType: '30',
-    name: 'NO TEAM',
-    flag: 'public/images/teams/vertical/30.png',
-    fifaCode: 'IRN',
-    group: 'B',
-    rarity: '9.32',
-  }
-  const tokenType = nft.tokenType
-  const arr = ALL_TEAMS.filter((t) => t.tokenType === tokenType)
-  return arr[0] || DEFAULT
-}
-
-const getBorderClassname = (tier: number) => {
-  const arrayBorders = [
-    'border-gradient',
-    'border border-pcblue',
-    'border border-pcyellow',
-    'border border-pcgray_2',
-  ]
-  return arrayBorders[tier - 1]
-}
+import { INft } from './interface'
 
 const CardNft: FC<{ item: INft }> = ({ item }) => {
   const team = getTeam(item)
