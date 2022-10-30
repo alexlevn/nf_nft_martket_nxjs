@@ -8,7 +8,11 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
   const border = getBorderClassname(team.tier)
 
   // TODO: path image
-  const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
+  // const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
+  const image =
+    '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
+
+  console.log('image = ', image)
 
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
@@ -21,7 +25,7 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
             src={image}
             alt=""
             placeholder="blur"
-            className=""
+            className="w-52"
           />
         </div>
 

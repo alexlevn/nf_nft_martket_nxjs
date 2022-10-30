@@ -54,3 +54,11 @@ API Phần ref:
 5. Market Place: BE + FE
    - api get List Items
      ...
+
+## Hình ảnh
+
+- [web nén hình](https://imagecompressor.com/)
+- [có tính phí & tốt hơn](https://tinypng.com/)
+- tự cài photoshop
+- [đọc thêm](https://www.wpbeginner.com/beginners-guide/speed-wordpress-save-images-optimized-web/)
+- hiện tại BE vẫn trả ra theo dạng số => FE dùng tên cho dễ nhớ
