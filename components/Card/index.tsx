@@ -12,7 +12,7 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
   const image =
     '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
 
-  console.log('image = ', image)
+  
 
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
