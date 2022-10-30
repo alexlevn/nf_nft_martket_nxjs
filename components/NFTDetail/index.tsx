@@ -8,18 +8,20 @@ import { FC, useEffect, useState } from 'react'
 
 const NFTDetail: FC<{ item: INft }> = ({ item }) => {
   const team = getTeam(item)
-  const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
+  // const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
+  const image =
+    '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
 
   return (
     <div className="flex flex-col lg:flex-row py-5">
       {/* IMAGE */}
-      <div className="w-full lg:w-1/2 flex-center overflow-hidden debug h-60">
+      <div className="w-full lg:w-1/2 flex-center overflow-hidden h-60">
         <img
           // TODO: path image
           src={image}
           alt=""
           placeholder="blur"
-          className=""
+          className="w-52"
         />
       </div>
 
