@@ -18,7 +18,7 @@ const Assets = () => {
       const res = await axios.get(apiUrl, { params })
       setData(getResponseData(res))
     }
-    if (wallet && wallet.address) {
+    if (wallet?.address) {
       fetchData()
     }
   }, [wallet?.address])

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import CardNft, { CardNftMookup, INft } from 'components/Card'
+import CardNft, { CardNftMookup } from 'components/Card'
+import { INft } from 'components/Card/interface'
 import ModalTrigger from 'components/ModalTrigger'
 import NFTDetail from 'components/NFTDetail'
 import { FC } from 'react'

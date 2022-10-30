@@ -30,7 +30,6 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
           <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
             <span className="text-scgray">Team</span>
             <span className="text-white">{team.name}</span>
-            {/* <span className="text-white">{team.name} - {team.tier}</span> */}
           </div>
           <div className="flex flex-col w-1/2 px-5 py-3 gap-1">
             <span className="text-scgray">Rarity</span>
@@ -43,7 +42,6 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
             <span className="text-white font-bold flex gap-1 items-center">
               <img src="/images/busd.svg" alt="" className="w-6 h-6" />
               {item.price || 'null'}
-              {/* 68,000 */}
             </span>
           </div>
         </div>
@@ -70,8 +68,6 @@ export const CardNftMookup: FC<{ tier?: number; item: any }> = ({
     tier === undefined || arrayBorders[tier] === undefined
       ? arrayBorders[3]
       : arrayBorders[tier]
-
-  // console.log('item = ', item)
 
   return (
     <div className="max-w-sm lg:max-w-xs bg-gray-400 rounded-md">
