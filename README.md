@@ -62,3 +62,65 @@ API Phần ref:
 - tự cài photoshop
 - [đọc thêm](https://www.wpbeginner.com/beginners-guide/speed-wordpress-save-images-optimized-web/)
 - hiện tại BE vẫn trả ra theo dạng số => FE dùng tên cho dễ nhớ
+
+## Data mẫu
+
+Data mẫu:
+
+1. https://wcfi.wii.camp/v1.0/refs/commission?address=0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA
+2. https://wcfi.wii.camp/v1.0/refs/commission-histories?address=0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA
+
+```json
+// 20221031083223
+// https://wcfi.wii.camp/v1.0/refs/commission?address=0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA
+
+{
+  "code": 200,
+  "payload": {
+    "address": "0xead9f306bc8705fd8d77f6b9e3b4aff466280bda",
+    "commission": 15,
+    "totalRefs": 1
+  }
+}
+```
+
+```json
+// 20221031083240
+// https://wcfi.wii.camp/v1.0/refs/commission-histories?address=0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA
+
+{
+  "code": 200,
+  "payload": [
+    {
+      "createdAt": "1667138281",
+      "downLine": "0x44c42e632d4d95050e709358ca7c2bdbafc5da82",
+      "commission": 5
+    },
+    {
+      "createdAt": "1667138281",
+      "downLine": "0x44c42e632d4d95050e709358ca7c2bdbafc5da82",
+      "commission": 5
+    },
+    {
+      "createdAt": "1667138275",
+      "downLine": "0x44c42e632d4d95050e709358ca7c2bdbafc5da82",
+      "commission": 5
+    }
+  ]
+}
+```
+
+## Marketplace
+
+```
+Jack Sparrow - Nhan 10x, [31 Oct 2022 at 15:29:40 (31 Oct 2022 at 15:51:16)]:
+1. API cũ nào mà có phân trang thì a thêm ?page=1&limit=1 vào sau a nhé (page: trang, limit: giới hạn mỗi trang)
+2. API Lấy danh sách nft trên marketplace: https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=1
+3. API chi tiết nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId
+Sample: https://wcfi.wii.camp/v1.0/nfts/32
+4. API lịch sử nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId/histories?page=1&limit=1
+Sample: https://wcfi.wii.camp/v1.0/nfts/32/histories?page=1&limit=1
+* Notes: type có 4 loại: TRANSFER, SEELING, CANCEL_SELLING, SOLD
+```
