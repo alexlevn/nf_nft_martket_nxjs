@@ -13,19 +13,14 @@ const HistoryCommissionTable: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (wallet?.address) {
-        const params = {
-          // address: wallet.address,
-          address: '0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA',
-        }
+        const params = { address: wallet.address }
         try {
           const res = await axios.get(
             'http://wcfi.wii.camp/v1.0/refs/commission-histories',
             { params },
           )
           const data = getResponseData(res)
-          console.log('history = ', data)
           setCommissionHistory(data)
-          // console.log('history = ', commissionHistory)
         } catch (err) {
           console.log('Error: ', err)
         }
