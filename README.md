@@ -109,3 +109,18 @@ Data mẫu:
   ]
 }
 ```
+
+## Marketplace
+
+```
+Jack Sparrow - Nhan 10x, [31 Oct 2022 at 15:29:40 (31 Oct 2022 at 15:51:16)]:
+1. API cũ nào mà có phân trang thì a thêm ?page=1&limit=1 vào sau a nhé (page: trang, limit: giới hạn mỗi trang)
+2. API Lấy danh sách nft trên marketplace: https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=1
+3. API chi tiết nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId
+Sample: https://wcfi.wii.camp/v1.0/nfts/32
+4. API lịch sử nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId/histories?page=1&limit=1
+Sample: https://wcfi.wii.camp/v1.0/nfts/32/histories?page=1&limit=1
+* Notes: type có 4 loại: TRANSFER, SEELING, CANCEL_SELLING, SOLD
+```

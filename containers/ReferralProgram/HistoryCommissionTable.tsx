@@ -1,18 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 import axios from 'axios'
 import useWeb3 from 'common/hooks/useWeb3'
 import { getResponseData } from 'common/util'
+import dayjs from 'dayjs'
 import { FC, useEffect, useState } from 'react'
+import { ICommission } from './interface'
 
-/* eslint-disable @next/next/no-img-element */
 const HistoryCommissionTable: FC = () => {
   const { wallet } = useWeb3()
-  const [commissionHistory, setCommissionHistory] = useState<any[]>([])
+  const [commissionHistory, setCommissionHistory] = useState<ICommission[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       if (wallet?.address) {
         const params = {
-          address: wallet.address,
+          // address: wallet.address,
+          address: '0xEAd9F306BC8705FD8d77F6B9E3B4aFf466280BDA',
         }
         try {
           const res = await axios.get(
@@ -20,7 +23,9 @@ const HistoryCommissionTable: FC = () => {
             { params },
           )
           const data = getResponseData(res)
+          console.log('history = ', data)
           setCommissionHistory(data)
+          // console.log('history = ', commissionHistory)
         } catch (err) {
           console.log('Error: ', err)
         }
@@ -44,31 +49,28 @@ const HistoryCommissionTable: FC = () => {
             <img src="/images/no_data.svg" alt="" className="w-20 h-20" />
           </div>
         ) : (
-          commissionHistory.map((item) => (
-            <div key={item} className="flex flex-wrap justify-between">
-              <div className="referral-cell">{item.date}</div>
+          commissionHistory.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-wrap justify-between text-xs lg:text-sm"
+            >
+              <div className="referral-cell">
+                {item.createdAt
+                  ? dayjs(item.createdAt).format('MM/DD/YYYY')
+                  : 'null'}
+              </div>
               <div className="referral-cell hidden lg:block">
-                {item.address.slice(0, 6) + '...' + item.address.slice(-3)}
+                {item && item.downLine
+                  ? item.downLine.slice(0, 6) + '...' + item.downLine.slice(-3)
+                  : '-'}
               </div>
               <div className="referral-cell flex gap-2">
                 <img src="/images/busd.svg" alt="" className="w-5 h-5" />
-                {item.earned}
+                {item.commission}
               </div>
             </div>
           ))
         )}
-
-        {/* DETAIL */}
-        {/* {[1, 2, 3, 4, 5, 6].map((item) => (
-          <div key={item} className="flex flex-wrap justify-between">
-            <div className="referral-cell">09/20/22</div>
-            <div className="referral-cell hidden lg:block">0x51x...ae69</div>
-            <div className="referral-cell flex gap-2">
-              <img src="/images/busd.svg" alt="" className="w-5 h-5" />
-              25
-            </div>
-          </div>
-        ))} */}
 
         {/* FOOTER */}
         {/* <div className="flex shadow-border pb-5 text-xs lg:text-base justify-end text-white gap-2 items-center">

@@ -6,6 +6,6 @@ export interface IRefferal {
 
 export interface ICommission {
   createdAt: string
-  downline: string
+  downLine: string
   commission: number
 }
