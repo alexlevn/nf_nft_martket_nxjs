@@ -4,6 +4,7 @@ import useWeb3 from 'common/hooks/useWeb3'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
+import CardsListWithSellModal from 'components/CartListWithSellModal'
 
 const Assets = () => {
   const { wallet } = useWeb3()
@@ -37,7 +38,7 @@ const Assets = () => {
     }
     fetchData()
     fetListingData()
-    
+
     if (wallet?.address) {
       fetchData()
     }

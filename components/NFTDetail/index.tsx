@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { InputNumber } from 'antd'
-import { getFontColorClassname, getTeam } from 'common/util'
+import { formatNumber, getFontColorClassname, getTeam } from 'common/util'
 import { ButtonGradient } from 'components/ButtonGradient'
 import { INft } from 'components/Card/interface'
 import ModalTrigger from 'components/ModalTrigger'
 import { FC, useEffect, useState } from 'react'
+import Web3 from 'web3'
 
 interface IProps {
   item: INft
@@ -61,7 +62,7 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
           <span className="text-scgray">Price</span>
           <span className="text-white font-medium flex gap-2">
             <img src="/images/busd.svg" alt="" className="w-6 h-6" />
-            {item.price || 'null'}
+            {item.price ? formatNumber(Web3.utils.fromWei(item.price)) : '0.00'}
           </span>
         </div>
         <div>{renderAction ? renderAction(item) : null}</div>
@@ -71,4 +72,3 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
 }
 
 export default NFTDetail
-
