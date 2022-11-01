@@ -44,3 +44,11 @@ export const getBorderClassname = (tier: number) => {
   ]
   return arrayBorders[tier - 1]
 }
+
+const expo = (x: string, f: number) => {
+  return Number.parseFloat(x).toExponential(f)
+}
+
+export const formatNumber = (num: string | null) => {
+  return num ? (parseFloat(num) > 999999 ? expo(num, 2) : num) : '0.00'
+}

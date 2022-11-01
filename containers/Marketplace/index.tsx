@@ -1,10 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 import { Dropdown, Menu } from 'antd'
+import axios from 'axios'
+import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import { INft } from 'components/Card/interface'
 import CardsList, { CardsListMookup } from 'components/CardsList'
+import { useEffect, useState } from 'react'
 
 const Marketplace = () => {
+  const [listNFT, setListNFT] = useState<INft[]>([])
   const total = 6969
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [sort, setSort] = useState('newest')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('https://wcfi.wii.camp/v1.0/nfts/market')
+        const data = getResponseData(res as any)
+        setListNFT(data)
+      } catch (e) {
+        console.log('Catch Error: ', e)
+      }
+    }
+    fetchData()
+  }, [])
 
   const menu = (
     <Menu
@@ -37,7 +58,9 @@ const Marketplace = () => {
 
       {/* Filter Form */}
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
-        <span className="font-semibold">Items (Total {total})</span>
+        <span className="font-semibold">
+          Items (Total {listNFT ? listNFT.length : 0})
+        </span>
 
         <div className="flex gap-5 flex-col lg:flex-row">
           <Dropdown overlay={menu}>
@@ -56,8 +79,8 @@ const Marketplace = () => {
 
       {/* Table */}
 
-      {/* <CardsList data={Array.from(Array(20).keys())} /> */}
-      <CardsListMookup data={Array.from(Array(20).keys())} />
+      <CardsList data={listNFT} />
+      {/* <CardsListMookup data={Array.from(Array(20).keys())} /> */}
 
       {/* Load More */}
       <div className="flex-center mt-10">

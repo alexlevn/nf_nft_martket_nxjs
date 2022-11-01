@@ -180,3 +180,20 @@ https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdb
   ]
 }
 ```
+
+```ts
+interface NFT {
+  id: string
+  tokenId: string
+  tokenAddress: string
+  tokenType: string
+  image: string
+  owner: string
+  isOnSale: boolean
+  seller: string
+  listingId: string
+  price: string
+  creator: string
+  createdAt: string
+}
+```
