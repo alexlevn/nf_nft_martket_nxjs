@@ -10,12 +10,14 @@ import { AbiItem } from 'web3-utils'
 
 import {
   SC_ADDRESS,
-  SC_MINT_ADDRESS,
+  WC_NFT_ADDRESS,
   SPENDER_ADDRESS,
   TOTAL_REWARD_ADDRESS,
+  MARKET_ADDRESS,
 } from 'constants/index'
 import ABI from 'constants/ABI.json'
-import ABI_MINT from 'constants/ABI-Mint.json'
+import WC_NFT_ABI from 'constants/wc-nft-abi.json'
+import MARTKET_ABI from 'constants/market-abi.json'
 
 export interface IWallet {
   address: string
@@ -30,8 +32,11 @@ interface IWeb3Ctx {
   allowance: boolean
   connect: () => Promise<void>
   approve: (callback: any) => Promise<void>
-  mint: (callback: any) => Promise<void>
+  mint: (callback: any, ref: string) => Promise<void>
   getTotalReward: () => Promise<void>
+  checkApproved: (tokenId: string, callback: any) => Promise<void>
+  approveToken: (tokenId: string, callback: any) => Promise<void>
+  sellToken: (tokenId: string, tokenAddress: string, price: number, callback: any) => Promise<void>
   logout: () => void
   connected: () => boolean
 }
@@ -46,6 +51,9 @@ const Web3Context = createContext<IWeb3Ctx>({
   approve: async () => {},
   mint: async () => {},
   getTotalReward: async () => {},
+  checkApproved: async () => {},
+  approveToken: async () => {},
+  sellToken: async () => {},
   logout: async () => {},
   connected: () => false,
 })
@@ -164,19 +172,31 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     callback()
   }
 
-  const mint = async (callback: any) => {
+  const mint = async (callback: any, ref: string) => {
     let provider = window.ethereum
     const web3 = new Web3(provider)
     const nftContract = new web3.eth.Contract(
-      ABI_MINT as AbiItem[],
-      SC_MINT_ADDRESS,
+      WC_NFT_ABI as AbiItem[],
+      WC_NFT_ADDRESS,
     )
 
-    const res = await nftContract.methods
-      .mintToken()
-      .send({ from: wallet?.address })
-
-    callback()
+    try {
+      if (ref && ref !== wallet?.address) {
+        const res = await nftContract.methods
+        .mintTokenWithRef(ref)
+        .send({ from: wallet?.address })
+        
+        callback(res.events.itemGenerated.returnValues)
+      } else {
+        const res = await nftContract.methods
+        .mintToken()
+        .send({ from: wallet?.address })
+  
+        callback(res.events.itemGenerated.returnValues)
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   const getTotalReward = async () => {
@@ -185,6 +205,67 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     const balanceRes = await web3.eth.getBalance(TOTAL_REWARD_ADDRESS)
 
     setTotalReward(web3.utils.fromWei(balanceRes, 'ether'))
+  }
+
+  const checkApproved = async (tokenId: string, callback: any) => {
+    let provider = window.ethereum
+    const web3 = new Web3(provider)
+    const nftContract = new web3.eth.Contract(
+      WC_NFT_ABI as AbiItem[],
+      WC_NFT_ADDRESS,
+    )
+
+    try {
+      const res = await nftContract.methods
+        .getApproved(Number(tokenId))
+        .call()
+      
+      if (res === MARKET_ADDRESS) {
+        callback(true)
+      } else {
+        callback(false)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const approveToken = async (tokenId: string, callback: any) => {
+    let provider = window.ethereum
+    const web3 = new Web3(provider)
+    const nftContract = new web3.eth.Contract(
+      WC_NFT_ABI as AbiItem[],
+      WC_NFT_ADDRESS,
+    )
+
+    try {
+      await nftContract.methods
+        .approve(MARKET_ADDRESS, tokenId)
+        .send({ from: wallet?.address})
+
+      checkApproved(tokenId, callback)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const sellToken = async (tokenId: string, tokenAddress: string, price: number, callback: any) => {
+    let provider = window.ethereum
+    const web3 = new Web3(provider)
+    const nftContract = new web3.eth.Contract(
+      MARTKET_ABI as AbiItem[],
+      MARKET_ADDRESS,
+    )
+
+    try {
+      await nftContract.methods
+        .listToken(tokenAddress, Number(tokenId), price)
+        .send({ from: wallet?.address})
+        
+      callback()
+    } catch (error) {
+      throw error
+    }
   }
 
   const connected = () => (wallet?.address ? true : false)
@@ -197,8 +278,11 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
         allowance,
         connect,
         getTotalReward,
+        checkApproved,
         approve,
         mint,
+        approveToken,
+        sellToken,
         logout,
         connected,
       }}
