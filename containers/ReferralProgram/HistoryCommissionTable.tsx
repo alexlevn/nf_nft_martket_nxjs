@@ -51,7 +51,9 @@ const HistoryCommissionTable: FC = () => {
             >
               <div className="referral-cell">
                 {item.createdAt
-                  ? dayjs(item.createdAt).format('MM/DD/YYYY')
+                  ? dayjs(parseFloat(item.createdAt) * 1000).format(
+                      'MM/DD/YYYY',
+                    )
                   : 'null'}
               </div>
               <div className="referral-cell hidden lg:block">
