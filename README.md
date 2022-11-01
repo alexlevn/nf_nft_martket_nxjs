@@ -124,3 +124,76 @@ https://wcfi.wii.camp/v1.0/nfts/:tokenId/histories?page=1&limit=1
 Sample: https://wcfi.wii.camp/v1.0/nfts/32/histories?page=1&limit=1
 * Notes: type có 4 loại: TRANSFER, SEELING, CANCEL_SELLING, SOLD
 ```
+
+```
+Jack Sparrow - Nhan 10x, [31 Oct 2022 at 15:29:40 (31 Oct 2022 at 17:18:11)]:
+1. API cũ nào mà có phân trang thì a thêm ?page=1&limit=1 vào sau a nhé (page: trang, limit: giới hạn mỗi trang)
+2. API Lấy thông tin reward với participant ở home page: https://wcfi.wii.camp/v1.0/summary
+3. API Lấy danh sách nft trên marketplace: https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=1
+4. API chi tiết nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId
+Sample: https://wcfi.wii.camp/v1.0/nfts/32
+5. API lịch sử nft:
+https://wcfi.wii.camp/v1.0/nfts/:tokenId/histories?page=1&limit=1
+Sample: https://wcfi.wii.camp/v1.0/nfts/32/histories?page=1&limit=1
+* Notes: type có 4 loại: TRANSFER, SEELING, CANCEL_SELLING, SOLD
+```
+
+2. Summary
+
+```json
+{
+  "code": 200,
+  "payload": {
+    "totalReward": 2760,
+    "participants": 6
+  }
+}
+```
+
+3. Marketplace
+
+link
+https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=1
+
+```json
+// 20221101090135
+// https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=1
+
+{
+  "code": 200,
+  "payload": [
+    {
+      "id": "0x9661c17e619698eb92fdede81b4c19e7a2066090-32",
+      "tokenId": "32",
+      "tokenAddress": "0x9661c17e619698eb92fdede81b4c19e7a2066090",
+      "tokenType": "2",
+      "image": "https://wcfi.wii.camp/public/images/teams/2.png",
+      "owner": "0x4b4f716c79aa0c262f0290a776f4248a2b6fb0fc",
+      "isOnSale": true,
+      "seller": "0x44c42e632d4d95050e709358ca7c2bdbafc5da82",
+      "listingId": "3",
+      "price": "20000000000000000",
+      "creator": "0x44c42e632d4d95050e709358ca7c2bdbafc5da82",
+      "createdAt": "1667138281"
+    }
+  ]
+}
+```
+
+```ts
+interface NFT {
+  id: string
+  tokenId: string
+  tokenAddress: string
+  tokenType: string
+  image: string
+  owner: string
+  isOnSale: boolean
+  seller: string
+  listingId: string
+  price: string
+  creator: string
+  createdAt: string
+}
+```

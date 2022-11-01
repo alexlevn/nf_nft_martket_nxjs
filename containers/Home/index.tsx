@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
-import { FC, useEffect } from 'react'
-import useWeb3 from 'common/hooks/useWeb3'
+import { FC, useEffect, useState } from 'react'
 import MintNFT from 'components/MintNFT'
 import TiersList from 'components/TiersList'
 import Sidebar from 'components/Layout/Sidebar'
 import { Layout } from 'antd'
+import axios, { AxiosResponse } from 'axios'
+import { getResponseData } from 'common/util'
 
 const Home: FC = () => {
   return (
@@ -19,20 +20,41 @@ const Home: FC = () => {
   )
 }
 
+interface ISummary {
+  totalReward: number
+  participants: number
+}
+
 const MiddleComponent: FC = () => {
-  const { totalReward, getTotalReward } = useWeb3()
+  const [summary, setSummary] = useState<ISummary | null>(null)
 
   useEffect(() => {
-    getTotalReward()
-  },[getTotalReward])
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('https://wcfi.wii.camp/v1.0/summary')
+        const data = getResponseData(res as any)
+
+        setSummary(data)
+      } catch (e) {
+        console.log('Catch Error: ', e)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="text-xl font-light bg-dark p-0 flex flex-col gap-5">
       {/* REWARD */}
+
       <div className="bg-pcgray rounded-xl flex flex-col lg:flex-row justify-around p-10 lg:gap-40 gap-2 ">
         <div className="flex flex-col gap-1 justify-center items-start text-left">
           <div className="text-content">Total Reward</div>
-          <div className="text-xl lg:text-3xl font-semibold">{`$${Math.floor(Number(totalReward) * 100) / 100}`}</div>
+          <div className="text-xl lg:text-3xl font-semibold">
+            $
+            {summary
+              ? Math.floor(Number(summary.totalReward) * 100) / 100
+              : '0.00'}
+          </div>
           <Image
             src="/images/btn_view_contract.svg"
             alt=""
@@ -43,7 +65,9 @@ const MiddleComponent: FC = () => {
         </div>
         <div className="flex flex-col  gap-1">
           <div className="text-content">Participant</div>
-          <div className="text-xl lg:text-3xl font-semibold">40.320</div>
+          <div className="text-xl lg:text-3xl font-semibold">
+            {summary ? summary.participants : '0'}
+          </div>
         </div>
       </div>
 
