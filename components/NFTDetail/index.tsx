@@ -26,16 +26,20 @@ const NFTDetail: FC<{ item: INft }> = ({ item }) => {
       </div>
 
       {/* INFO */}
+
       <div className="w-full lg:w-1/2  flex flex-col gap-3 justify-center text-base  font-light p-8">
-        <div
-          className={
-            'font-semibold text-lg' +
-            ' ' +
-            getFontColorClassname(team.tier || 4)
-          }
-        >
-          Tier {team.tier}
+        <div>
+          <span
+            className={
+              'font-semibold text-lg' +
+              ' ' +
+              getFontColorClassname(team.tier || 4)
+            }
+          >
+            Tier {team.tier}
+          </span>
         </div>
+
         <div className="flex justify-between">
           <span className="text-scgray">Team</span>
           <span className="text-white font-medium">{team.name}</span>
