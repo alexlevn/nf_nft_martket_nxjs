@@ -7,17 +7,35 @@ import { getResponseData } from 'common/util'
 
 const Assets = () => {
   const { wallet } = useWeb3()
-  const [data, setData] = useState([])
+  const [arrNfts, setArrNfts] = useState([])
+  const [listingData, setListingData] = useState([])
+  const [isShowListing, setIsShowListing] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiUrl = `https://wcfi.wii.camp/v1.0/nfts?owner=${wallet?.address}`
+      const apiUrl = `https://wcfi.wii.camp/v1.0/nfts`
       const params = {
+        owner: wallet?.address,
         // tokenTypes: [1, 2],
       }
       const res = await axios.get(apiUrl, { params })
-      setData(getResponseData(res))
+
+      setArrNfts(getResponseData(res))
     }
+
+    const fetListingData = async () => {
+      try {
+        const params = { address: wallet?.address }
+        const res = await axios.get('https://wcfi.wii.camp/v1.0/nfts/market', {
+          params,
+        })
+
+        setListingData(getResponseData(res))
+      } catch (e) {
+        console.log('Catch Error: ', e)
+      }
+    }
+    fetchData()
     if (wallet?.address) {
       fetchData()
     }
@@ -30,10 +48,26 @@ const Assets = () => {
       {/* Filter Form */}
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <div className="flex gap-5">
-          <span className="text-white block pb-1 border-b-2 border-white cursor-pointer">
-            My assets ({data.length})
+          <span
+            className={
+              'block cursor-pointer pb-1 border-b-2 ' +
+              (!isShowListing ? '' : ' border-transparent text-scgray')
+            }
+            onClick={() => setIsShowListing(false)}
+          >
+            My assets ({arrNfts.length})
           </span>
-          <span className="text-scgray cursor-pointer">Listing (0)</span>
+          <span
+            className={
+              'block cursor-pointer pb-1 border-b-2  ' +
+              (isShowListing
+                ? 'border-white text-white'
+                : ' border-transparent text-scgray')
+            }
+            onClick={() => setIsShowListing(true)}
+          >
+            Listing ({listingData.length})
+          </span>
         </div>
 
         <div className="flex gap-5 flex-col lg:flex-row">
@@ -44,7 +78,11 @@ const Assets = () => {
         </div>
       </div>
 
-      <CardsListWithSellModal data={data} />
+      {!isShowListing ? (
+        <CardsListWithSellModal data={arrNfts} />
+      ) : (
+        <CardsListWithSellModal data={listingData} />
+      )}
     </div>
   )
 }
