@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import useWeb3 from 'common/hooks/useWeb3'
-import { CardsListWithSellModal } from 'components/CardsList'
+
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
@@ -36,6 +36,8 @@ const Assets = () => {
       }
     }
     fetchData()
+    fetListingData()
+    
     if (wallet?.address) {
       fetchData()
     }
