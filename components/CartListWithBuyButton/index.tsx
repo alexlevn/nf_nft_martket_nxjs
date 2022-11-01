@@ -21,7 +21,7 @@ const CardsListWithBuyButton: FC<{ data: INft[] }> = ({ data }) => {
         borderRadius: '12px',
         color: 'yello',
       },
-      duration: 2,
+      duration: 6,
     })
 
     setStep(2)
