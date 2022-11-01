@@ -4,7 +4,7 @@ import axios from 'axios'
 import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { INft } from 'components/Card/interface'
-import CardsList, { CardsListMookup } from 'components/CardsList'
+import CardsList from 'components/CardsList'
 import { useEffect, useState } from 'react'
 
 const Marketplace = () => {
@@ -80,7 +80,6 @@ const Marketplace = () => {
       {/* Table */}
 
       <CardsList data={listNFT} />
-      {/* <CardsListMookup data={Array.from(Array(20).keys())} /> */}
 
       {/* Load More */}
       <div className="flex-center mt-10">

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, InputNumber } from 'antd'
+import { InputNumber } from 'antd'
 import { getFontColorClassname, getTeam } from 'common/util'
 import { ButtonGradient } from 'components/ButtonGradient'
 import { INft } from 'components/Card/interface'
