@@ -45,7 +45,7 @@ const ModalWalletDetail = () => {
       )}
       renderChildren={(closeModal) => {
         return (
-          <div className="rounded-lg text-white font-semibold flex flex-col gap-5 lg:gap-8 justify-center py-3 lg:py-5 panchang text-xs ">
+          <div className="rounded-lg text-white font-semibold flex flex-col gap-5 lg:gap-8 justify-center py-3 lg:py-5 panchang text-xs px-5">
             <div className="text-pcgreen text-base">Connected</div>
             <div className="text-white text-lg font-bold">
               {wallet?.address}
