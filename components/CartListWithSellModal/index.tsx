@@ -27,7 +27,7 @@ const CardsListWithSellModal: FC<{ data: INft[] }> = ({ data }) => {
                 <CardNft key={index} item={item} />
               </div>
             )}
-            renderChildren={(closeModal) => (
+            renderChildren={(_) => (
               <NFTDetail
                 item={item}
                 renderAction={() => (
@@ -51,7 +51,13 @@ const CardsListWithSellModal: FC<{ data: INft[] }> = ({ data }) => {
                         Sell
                       </ButtonGradient>
                     )}
-                    renderChildren={(closeModal) => <SellNft nft={item} />}
+                    renderChildren={(closeModal) => (
+                      <SellNft
+                        tokenId={item.tokenId}
+                        tokenAddress={item.tokenAddress}
+                        callbackCloseModalNFTDetail={closeModal}
+                      />
+                    )}
                   />
                 )}
               />

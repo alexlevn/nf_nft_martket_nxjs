@@ -1,11 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
+import { notification } from 'antd'
 import useWeb3 from 'common/hooks/useWeb3'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import ModalTrigger from 'components/ModalTrigger'
+import { LINK_HREF } from 'constants/index'
+import Link from 'next/link'
 import { useEffect } from 'react'
 
 const ModalWalletDetail = () => {
   const { wallet } = useWeb3()
+
+  const notificationCopy = () => {
+    if (wallet?.address) {
+      navigator.clipboard.writeText(wallet?.address)
+      notification.success({
+        message: 'Link Copied!',
+        style: {
+          background: '#191D24',
+          borderRadius: '12px',
+        },
+        duration: 0.8,
+      })
+    }
+  }
 
   useEffect(() => {
     // ...
@@ -51,14 +68,19 @@ const ModalWalletDetail = () => {
               {wallet?.address}
             </div>
             <div className="flex flex-col lg:flex-row flex-wrap gap-2 lg:gap-10 justify-start items-start">
-              <div className="text-gradient flex gap-2 items-center cursor-pointer">
+              <div
+                className="text-gradient flex gap-2 items-center cursor-pointer"
+                onClick={notificationCopy}
+              >
                 <span>Copy Address</span>
                 <img src="/images/square.svg" alt="" className="w-6 h-6" />
               </div>
-              <div className="text-gradient flex gap-2 items-center cursor-pointer">
-                <span>View on BscScan</span>
-                <img src="/images/up_arrow.svg" alt="" className="w-6 h-6" />
-              </div>
+              <Link href={`${LINK_HREF}${wallet?.address}`} passHref>
+                <a className="text-gradient flex gap-2 items-center cursor-pointer" target="_blank">
+                  <span>View on BscScan</span>
+                  <img src="/images/up_arrow.svg" alt="" className="w-6 h-6" />
+                </a>
+              </Link>
             </div>
             <ButtonBorderGradient
               className="px-5 py-3 text-center text-base"

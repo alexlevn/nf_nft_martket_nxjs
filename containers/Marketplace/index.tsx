@@ -4,7 +4,6 @@ import axios from 'axios'
 import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { INft } from 'components/Card/interface'
-import CardsList from 'components/CardsList'
 import CardsListWithBuyButton from 'components/CartListWithBuyButton'
 import { useEffect, useState } from 'react'
 

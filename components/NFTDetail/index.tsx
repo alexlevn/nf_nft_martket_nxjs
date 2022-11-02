@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import { InputNumber } from 'antd'
 import { formatNumber, getFontColorClassname, getTeam } from 'common/util'
-import { ButtonGradient } from 'components/ButtonGradient'
 import { INft } from 'components/Card/interface'
-import ModalTrigger from 'components/ModalTrigger'
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import Web3 from 'web3'
 
 interface IProps {

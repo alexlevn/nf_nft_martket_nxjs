@@ -5,6 +5,8 @@ import MintNFT from 'components/MintNFT'
 import TiersList from 'components/TiersList'
 import Sidebar from 'components/Layout/Sidebar'
 import { Layout } from 'antd'
+import Link from 'next/link'
+import { LINK_HREF, WC_NFT_ADDRESS } from 'constants/index'
 import axios, { AxiosResponse } from 'axios'
 import { getResponseData } from 'common/util'
 
@@ -55,13 +57,17 @@ const MiddleComponent: FC = () => {
               ? Math.floor(Number(summary.totalReward) * 100) / 100
               : '0.00'}
           </div>
-          <Image
-            src="/images/btn_view_contract.svg"
-            alt=""
-            height={20}
-            width={120}
-            className="cursor-pointer mx-auto 100 "
-          />
+          <Link href={`${LINK_HREF}${WC_NFT_ADDRESS}`} passHref>
+            <a target="_blank">
+              <Image
+                src="/images/btn_view_contract.svg"
+                alt=""
+                height={20}
+                width={120}
+                className="cursor-pointer mx-auto 100 "
+              />
+            </a>
+          </Link>
         </div>
         <div className="flex flex-col  gap-1">
           <div className="text-content">Participant</div>

@@ -1,16 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import useWeb3 from 'common/hooks/useWeb3'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { ButtonGradient } from 'components/ButtonGradient'
 import { Modal, notification } from 'antd'
+import { SESSION_STORAGE, TEAMS_DATA } from 'constants/index'
 
 const MintNFT = () => {
+  const { query } = useRouter()
   const { connected, connect, allowance, approve, mint } = useWeb3()
-  
+
   const [loadingApprove, setLoadingApprove] = useState(false)
   const [loadingMint, setLoadingMint] = useState(false)
   const [isShowModalShoeNFT, setIsShowModalShoeNFT] = useState(false)
+  const [team, setTeam] = useState<any>(TEAMS_DATA[0])
 
   const callbackApprove = useCallback(() => {
     setLoadingApprove(false)
@@ -39,15 +43,23 @@ const MintNFT = () => {
     }
   }, [approve, callbackApprove])
 
-  const callbackMint = useCallback(() => {
+  const callbackMint = useCallback((data: any) => {
+    const newTeam = TEAMS_DATA.filter((team: any) => team.id === data.itemType)
+
+    sessionStorage.clear()
+
+    setTeam(newTeam[0])
+
     setLoadingMint(false)
     setIsShowModalShoeNFT(true)
   }, [])
 
   const onClickMint = useCallback(async () => {
     setLoadingMint(true)
+    const ref = sessionStorage.getItem(SESSION_STORAGE.REFERRAL_ADDRESS) || ''
+
     try {
-      await mint(callbackMint)
+      await mint(callbackMint, ref)
     } catch (err) {
       setLoadingMint(false)
       notification.warning({
@@ -69,7 +81,12 @@ const MintNFT = () => {
 
   const renderBtn = useCallback(() => {
     const renderSpinner = () => (
-      <Modal width={300} footer={null} closeIcon={null} open={loadingApprove || loadingMint}>
+      <Modal
+        width={300}
+        footer={null}
+        closeIcon={null}
+        open={loadingApprove || loadingMint}
+      >
         <div className="h-64 text-white flex-center">
           <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
         </div>
@@ -89,27 +106,34 @@ const MintNFT = () => {
       >
         <div className="text-white flex-center flex flex-col">
           <ButtonBorderGradient className="cursor-auto">
-            <div className="flex-center">
+            <div className="flex-center h-80">
               <img
-                src="/images/shoes/shoe_brazil.png"
+                // src={`/images/teams/${team.name}.png`}
+                src={
+                  '/images/teams/' +
+                  team.name.replaceAll(' ', '_').toLowerCase() +
+                  '.png'
+                }
                 alt=""
-                className="h-60 w-60 lg:w-96 lg:h-96"
+                className="h-60 w-60"
               />
             </div>
             <div className="flex flex-wrap w-full text-base font-light">
               <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
                 <span className="text-scgray">Team</span>
-                <span className="text-white">Brazil</span>
+                <span className="text-white">{team.name}</span>
               </div>
               <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
                 <span className="text-scgray">Rarity</span>
-                <span className="text-white">0,08%</span>
+                <span className="text-white">{`${team.rarity}%`}</span>
               </div>
               <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
                 <span className="text-scgray">Estimate</span>
               </div>
               <div className="flex flex-col w-1/2 px-10 py-3 gap-1">
-                <span className="text-white">≈ $68,000</span>
+                <span className="text-white">{`≈ $${Number(
+                  team.estimate,
+                ).toLocaleString('de-DE')}`}</span>
               </div>
             </div>
           </ButtonBorderGradient>
@@ -173,7 +197,17 @@ const MintNFT = () => {
     loadingApprove,
     loadingMint,
     isShowModalShoeNFT,
+    team,
   ])
+
+  useEffect(() => {
+    if (query.ref) {
+      sessionStorage.setItem(
+        SESSION_STORAGE.REFERRAL_ADDRESS,
+        query.ref.toString(),
+      )
+    }
+  }, [query])
 
   return (
     <div className="w-full lg:w-5/12 flex flex-col gap-5 px-5 py-3  justify-between">
