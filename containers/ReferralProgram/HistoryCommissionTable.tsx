@@ -15,10 +15,7 @@ const HistoryCommissionTable: FC = () => {
       if (wallet?.address) {
         const params = { address: wallet.address }
         try {
-          const res = await axios.get(
-            'https://wcfi.wii.camp/v1.0/refs/commission-histories',
-            { params },
-          )
+          const res = await axios.get('/refs/commission-histories', { params })
           const data = getResponseData(res)
           setCommissionHistory(data)
         } catch (err) {

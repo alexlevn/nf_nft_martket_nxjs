@@ -9,7 +9,7 @@ const TiersList = () => {
   const [arrTeams, setArrTeams] = useState<ITeamInfo[]>([])
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get('https://wcfi.wii.camp/v1.0/teams')
+      const res = await axios.get('/teams')
       const data: ITeamInfo[] = getResponseData(res)
 
       setArrTeams(data)
