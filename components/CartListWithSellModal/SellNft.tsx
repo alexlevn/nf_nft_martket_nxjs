@@ -132,7 +132,6 @@ const SellNft: FC<{
           value={price}
           className="w-full bg-pcdark rounded-lg text-white"
         />
-        >>>>>>> 7f0d15d69075bbf452a5de247c4dc472dc9bb360
         <div className="mt-5 flex justify-between">
           <span>Est</span>
           <span className="text-white">$96.000</span>
