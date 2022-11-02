@@ -62,7 +62,6 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
             {item.price ? formatNumber(Web3.utils.fromWei(item.price)) : '0.00'}
           </span>
         </div>
-
         <div>{renderAction ? renderAction(item) : null}</div>
       </div>
     </div>
