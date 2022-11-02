@@ -15,12 +15,9 @@ const MyReferralSidebar: FC<{ address?: string }> = ({ address }) => {
     const fetchData = async () => {
       if (wallet?.address) {
         const params = { address: wallet.address }
-        
+
         try {
-          const res = await axios.get(
-            'https://wcfi.wii.camp/v1.0/refs/commission',
-            { params },
-          )
+          const res = await axios.get('/refs/commission', { params })
           setData(getResponseData(res))
         } catch (err) {
           console.log('Error: ', err)

@@ -7,7 +7,7 @@ import Sidebar from 'components/Layout/Sidebar'
 import { Layout } from 'antd'
 import Link from 'next/link'
 import { LINK_HREF, WC_NFT_ADDRESS } from 'constants/index'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { getResponseData } from 'common/util'
 
 const Home: FC = () => {
@@ -33,7 +33,7 @@ const MiddleComponent: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('https://wcfi.wii.camp/v1.0/summary')
+        const res = await axios.get('/summary')
         const data = getResponseData(res as any)
 
         setSummary(data)

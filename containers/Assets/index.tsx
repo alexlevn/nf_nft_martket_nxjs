@@ -14,7 +14,7 @@ const Assets = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiUrl = `https://wcfi.wii.camp/v1.0/nfts`
+      const apiUrl = '/nfts'
       const params = {
         owner: wallet?.address,
         // tokenTypes: [1, 2],
@@ -27,7 +27,7 @@ const Assets = () => {
     const fetListingData = async () => {
       try {
         const params = { address: wallet?.address }
-        const res = await axios.get('https://wcfi.wii.camp/v1.0/nfts/market', {
+        const res = await axios.get('/nfts/market', {
           params,
         })
 

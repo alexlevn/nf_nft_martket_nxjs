@@ -17,7 +17,7 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('https://wcfi.wii.camp/v1.0/nfts/market')
+        const res = await axios.get('/nfts/market')
         const data = getResponseData(res as any)
         setListNFT(data)
       } catch (e) {
