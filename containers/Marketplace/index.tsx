@@ -9,22 +9,35 @@ import { useEffect, useState } from 'react'
 
 const Marketplace = () => {
   const [listNFT, setListNFT] = useState<INft[]>([])
-  const total = 6969
-  const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [sort, setSort] = useState('newest')
+  const [disableButton, setDisableButton] = useState(false)
+  const limit = 6
+  const [page, setPage] = useState(1)
+
+  const loadMore = async () => {
+    try {
+      setLoading(true)
+      const params = {
+        page: page,
+        limit,
+      }
+      const res = await axios.get('/nfts/market', { params })
+      const data = getResponseData(res as any)
+      setListNFT([...listNFT, ...data])
+      setPage(page + 1)
+
+      if (data.length < limit) {
+        setDisableButton(true)
+      }
+    } catch (e) {
+      console.log('Catch Error: ', e)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('/nfts/market')
-        const data = getResponseData(res as any)
-        setListNFT(data)
-      } catch (e) {
-        console.log('Catch Error: ', e)
-      }
-    }
-    fetchData()
+    loadMore()
   }, [])
 
   const menu = (
@@ -79,12 +92,26 @@ const Marketplace = () => {
 
       <CardsListWithBuyButton data={listNFT} />
 
-      {/* Load More */}
-      <div className="flex-center mt-10">
-        <ButtonBorderGradient className="px-10 py-3">
-          Load more
-        </ButtonBorderGradient>
-      </div>
+      {loading ? (
+        <div className="flex-center mt-10">
+          <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
+        </div>
+      ) : disableButton ? (
+        <div className="flex-center mt-10 ">
+          <div
+            className="px-10 py-3  border border-gray-800 rounded-lg text-gray-800 "
+            onClick={() => {}}
+          >
+            Load More
+          </div>
+        </div>
+      ) : (
+        <div className="flex-center mt-10">
+          <ButtonBorderGradient className="px-10 py-3" onClick={loadMore}>
+            Load More
+          </ButtonBorderGradient>
+        </div>
+      )}
     </div>
   )
 }
