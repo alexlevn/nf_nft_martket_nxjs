@@ -1,47 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import useWeb3 from 'common/hooks/useWeb3'
-
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { getResponseData } from 'common/util'
-import CardsListWithSellModal from 'components/CartListWithSellModal'
+import { useState } from 'react'
+import MyAssets from './MyAssets'
+import MyListing from './MyListing'
 
 const Assets = () => {
-  const { wallet } = useWeb3()
-  const [arrNfts, setArrNfts] = useState([])
-  const [listingData, setListingData] = useState([])
   const [isShowListing, setIsShowListing] = useState(false)
+  const [totalAssets, setTotalAssets] = useState(0)
+  const [totalListed, setTotalListed] = useState(0)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const apiUrl = '/nfts'
-      const params = {
-        owner: wallet?.address,
-        // tokenTypes: [1, 2],
-      }
-      const res = await axios.get(apiUrl, { params })
+  const onChangeAssets = (value: number) => {
+    setTotalAssets(value)
+  }
 
-      setArrNfts(getResponseData(res))
-    }
-
-    const fetListingData = async () => {
-      try {
-        const params = { seller: wallet?.address }
-        const res = await axios.get('/nfts/market', {
-          params,
-        })
-
-        setListingData(getResponseData(res))
-      } catch (e) {
-        console.log('Catch Error: ', e)
-      }
-    }
-    
-    if (wallet?.address) {
-      fetchData()
-      fetListingData()
-    }
-  }, [wallet?.address])
+  const onChangeListed = (value: number) => {
+    setTotalListed(value)
+  }
 
   return (
     <div className="">
@@ -57,7 +30,7 @@ const Assets = () => {
             }
             onClick={() => setIsShowListing(false)}
           >
-            My assets ({arrNfts.length})
+            My assets ({totalAssets})
           </span>
           <span
             className={
@@ -68,7 +41,7 @@ const Assets = () => {
             }
             onClick={() => setIsShowListing(true)}
           >
-            Listing ({listingData.length})
+            Listing ({totalListed})
           </span>
         </div>
 
@@ -81,9 +54,9 @@ const Assets = () => {
       </div>
 
       {!isShowListing ? (
-        <CardsListWithSellModal data={arrNfts} />
+        <MyAssets onChange={onChangeAssets} />
       ) : (
-        <CardsListWithSellModal data={listingData} />
+        <MyListing onChange={onChangeListed} />
       )}
     </div>
   )
