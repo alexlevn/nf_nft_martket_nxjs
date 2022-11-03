@@ -50,5 +50,5 @@ const expo = (x: string, f: number) => {
 }
 
 export const formatNumber = (num: string | null) => {
-  return num ? (parseFloat(num) > 999999 ? expo(num, 2) : num) : '0.00'
+  return num ? expo(num, 2) : '0.00'
 }

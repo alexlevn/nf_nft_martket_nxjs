@@ -11,7 +11,6 @@ import { AbiItem } from 'web3-utils'
 import {
   SC_ADDRESS,
   WC_NFT_ADDRESS,
-  SPENDER_ADDRESS,
   TOTAL_REWARD_ADDRESS,
   MARKET_ADDRESS,
 } from 'constants/index'
@@ -29,14 +28,17 @@ export interface IWallet {
 interface IWeb3Ctx {
   wallet: IWallet | null
   totalReward: string
-  allowance: boolean
+  allowanceWC: boolean
+  allowanceMK: boolean
   connect: () => Promise<void>
-  approve: (callback: any) => Promise<void>
+  approve: (spender: string, callback: any) => Promise<void>
   mint: (callback: any, ref: string) => Promise<void>
   getTotalReward: () => Promise<void>
   checkApproved: (tokenId: string, callback: any) => Promise<void>
   approveToken: (tokenId: string, callback: any) => Promise<void>
   sellToken: (tokenId: string, tokenAddress: string, price: number, callback: any) => Promise<void>
+  cancelSellToken: (listingId: string, callback: any) => Promise<void>
+  buyToken: (listingId: string, callback: any) => Promise<void>
   logout: () => void
   connected: () => boolean
 }
@@ -46,7 +48,8 @@ let isInitialied = false
 const Web3Context = createContext<IWeb3Ctx>({
   wallet: null,
   totalReward: '',
-  allowance: false,
+  allowanceWC: false,
+  allowanceMK: false,
   connect: async () => {},
   approve: async () => {},
   mint: async () => {},
@@ -54,6 +57,8 @@ const Web3Context = createContext<IWeb3Ctx>({
   checkApproved: async () => {},
   approveToken: async () => {},
   sellToken: async () => {},
+  cancelSellToken: async () => {},
+  buyToken: async () => {},
   logout: async () => {},
   connected: () => false,
 })
@@ -63,7 +68,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 }) => {
   const [wallet, setWallet] = useState<IWallet | null>(null)
   const [totalReward, setTotalReward] = useState<string>('0')
-  const [allowance, setAllowance] = useState<boolean>(false)
+  const [allowanceWC, setAllowanceWC] = useState<boolean>(false)
+  const [allowanceMK, setAllowanceMK] = useState<boolean>(false)
 
   useEffect(() => {
     /*CONNECT AT START UP*/
@@ -108,13 +114,23 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
           setWallet({ address: accounts[0] })
 
           const res = await nftContract.methods
-            .allowance(accounts[0], SPENDER_ADDRESS)
+            .allowance(accounts[0], WC_NFT_ADDRESS)
             .call()
 
           if (Number(res) > 10000) {
-            setAllowance(true)
+            setAllowanceWC(true)
           } else {
-            setAllowance(false)
+            setAllowanceWC(false)
+          }
+
+          const resMK = await nftContract.methods
+          .allowance(accounts[0], MARKET_ADDRESS)
+          .call()
+
+          if (Number(resMK) > 10000) {
+            setAllowanceMK(true)
+          } else {
+            setAllowanceMK(false)
           }
         })
         .catch((err: any) => {
@@ -125,13 +141,23 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
         setWallet({ address: accounts[0] })
 
         const res = await nftContract.methods
-          .allowance(accounts[0], SPENDER_ADDRESS)
+          .allowance(accounts[0], WC_NFT_ADDRESS)
           .call()
 
         if (Number(res) > 10000) {
-          setAllowance(true)
+          setAllowanceWC(true)
         } else {
-          setAllowance(false)
+          setAllowanceWC(false)
+        }
+
+        const resMK = await nftContract.methods
+          .allowance(accounts[0], MARKET_ADDRESS)
+          .call()
+
+        if (Number(resMK) > 10000) {
+          setAllowanceMK(true)
+        } else {
+          setAllowanceMK(false)
         }
       })
     }
@@ -146,24 +172,32 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     // USER LOGOUT BY Metamask.
   }
 
-  const approve = async (callback: any) => {
+  const approve = async (spender: string, callback: any) => {
     let provider = window.ethereum
     const web3 = new Web3(provider)
     const nftContract = new web3.eth.Contract(ABI as AbiItem[], SC_ADDRESS)
 
     try {
-      const resApprove = await nftContract.methods
-        .approve(SPENDER_ADDRESS, 10000000000)
+      await nftContract.methods
+        .approve(spender, 10000000000)
         .send({ from: wallet?.address })
 
       const resAllowance = await nftContract.methods
-        .allowance(wallet?.address, SPENDER_ADDRESS)
+        .allowance(wallet?.address, spender)
         .call()
 
-      if (Number(resAllowance) > 10000) {
-        setAllowance(true)
+      if (spender === WC_NFT_ADDRESS) {
+        if (Number(resAllowance) > 10000) {
+          setAllowanceWC(true)
+        } else {
+          setAllowanceWC(false)
+        }
       } else {
-        setAllowance(false)
+        if (Number(resAllowance) > 10000) {
+          setAllowanceMK(true)
+        } else {
+          setAllowanceMK(false)
+        }
       }
     } catch (err) {
       throw err
@@ -268,6 +302,44 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     }
   }
 
+  const cancelSellToken = async (listingId: string, callback: any) => {
+    let provider = window.ethereum
+    const web3 = new Web3(provider)
+    const nftContract = new web3.eth.Contract(
+      MARTKET_ABI as AbiItem[],
+      MARKET_ADDRESS,
+    )
+
+    try {
+      await nftContract.methods
+        .cancel(listingId)
+        .send({ from: wallet?.address})
+        
+      callback()
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const buyToken = async (listingId: string, callback: any) => {
+    let provider = window.ethereum
+    const web3 = new Web3(provider)
+    const nftContract = new web3.eth.Contract(
+      MARTKET_ABI as AbiItem[],
+      MARKET_ADDRESS,
+    )
+
+    try {
+      await nftContract.methods
+        .buyToken(listingId)
+        .send({ from: wallet?.address})
+        
+      callback()
+    } catch (error) {
+      throw error
+    }
+  }
+
   const connected = () => (wallet?.address ? true : false)
 
   return (
@@ -275,7 +347,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
       value={{
         wallet,
         totalReward,
-        allowance,
+        allowanceWC,
+        allowanceMK,
         connect,
         getTotalReward,
         checkApproved,
@@ -283,6 +356,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
         mint,
         approveToken,
         sellToken,
+        cancelSellToken,
+        buyToken,
         logout,
         connected,
       }}

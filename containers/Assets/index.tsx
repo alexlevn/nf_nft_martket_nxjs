@@ -26,7 +26,7 @@ const Assets = () => {
 
     const fetListingData = async () => {
       try {
-        const params = { address: wallet?.address }
+        const params = { seller: wallet?.address }
         const res = await axios.get('/nfts/market', {
           params,
         })
@@ -36,11 +36,10 @@ const Assets = () => {
         console.log('Catch Error: ', e)
       }
     }
-    fetchData()
-    fetListingData()
-
+    
     if (wallet?.address) {
       fetchData()
+      fetListingData()
     }
   }, [wallet?.address])
 

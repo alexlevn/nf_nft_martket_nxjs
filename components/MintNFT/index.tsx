@@ -5,11 +5,11 @@ import useWeb3 from 'common/hooks/useWeb3'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { ButtonGradient } from 'components/ButtonGradient'
 import { Modal, notification } from 'antd'
-import { SESSION_STORAGE, TEAMS_DATA } from 'constants/index'
+import { SESSION_STORAGE, TEAMS_DATA, WC_NFT_ADDRESS } from 'constants/index'
 
 const MintNFT = () => {
   const { query } = useRouter()
-  const { connected, connect, allowance, approve, mint } = useWeb3()
+  const { connected, connect, allowanceWC, approve, mint } = useWeb3()
 
   const [loadingApprove, setLoadingApprove] = useState(false)
   const [loadingMint, setLoadingMint] = useState(false)
@@ -23,7 +23,7 @@ const MintNFT = () => {
   const onClickApprove = useCallback(async () => {
     setLoadingApprove(true)
     try {
-      await approve(callbackApprove)
+      await approve(WC_NFT_ADDRESS, callbackApprove)
     } catch (err) {
       setLoadingApprove(false)
       notification.warning({
@@ -158,7 +158,7 @@ const MintNFT = () => {
     )
 
     if (connected()) {
-      if (allowance) {
+      if (allowanceWC) {
         return (
           <>
             <ButtonGradient onClick={onClickMint} className="py-2 text-base">
@@ -189,7 +189,7 @@ const MintNFT = () => {
       )
     }
   }, [
-    allowance,
+    allowanceWC,
     connect,
     connected,
     onClickApprove,
