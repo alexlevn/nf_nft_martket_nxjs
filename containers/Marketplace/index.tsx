@@ -7,11 +7,15 @@ import { INft } from 'components/Card/interface'
 import CardsListWithBuyButton from 'components/CartListWithBuyButton'
 import { useEffect, useState } from 'react'
 
+const LIMIT = 20
+
 const Marketplace = () => {
   const [listNFT, setListNFT] = useState<INft[]>([])
+
   const [loading, setLoading] = useState(false)
   const [disableButton, setDisableButton] = useState(false)
-  const limit = 6
+
+  const limit = LIMIT
   const [page, setPage] = useState(1)
 
   const loadMore = async () => {
