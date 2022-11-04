@@ -30,7 +30,7 @@ const MyListing: FC<{
         page: page,
         limit,
       }
-      const res = await axios.get('/nfts', { params })
+      const res = await axios.get('/nfts/market', { params })
       const data = getResponseData(res as any)
       setListingData([...listingData, ...data])
       setPage(page + 1)
