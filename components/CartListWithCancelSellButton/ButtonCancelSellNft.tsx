@@ -134,7 +134,7 @@ const ButtonUnListNft: FC<{
     <>
       <div className="py-2 text-base text-center">
         <span
-          className=" text-gradient cursor-pointer"
+          className="text-gradient cursor-pointer"
           onClick={() => handleCancelSell(listingId)}
         >
           Cancel Listing
