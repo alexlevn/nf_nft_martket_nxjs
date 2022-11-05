@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { ButtonGradient } from 'components/ButtonGradient'
 import CardNft from 'components/Card'
 import { INft } from 'components/Card/interface'
 import ModalTrigger from 'components/ModalTrigger'
