@@ -1,20 +1,114 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { INft } from 'components/Card/interface'
+import useWeb3 from 'common/hooks/useWeb3'
+import axios from 'axios'
+import { getResponseData } from 'common/util'
 import MyAssets from './MyAssets'
 import MyListing from './MyListing'
+import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+
+const LIMIT = 20
 
 const Assets = () => {
+  const { wallet } = useWeb3()
+
   const [isShowListing, setIsShowListing] = useState(false)
-  const [totalAssets, setTotalAssets] = useState(0)
-  const [totalListed, setTotalListed] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [disableMyAssetsButton, setDisableMyAssetsButton] = useState(false)
+  const [disableMyListingButton, setDisableMyListingButton] = useState(false)
+  
+  const [arrNfts, setArrNfts] = useState<INft[]>([])
+  const [listingData, setListingData] = useState<INft[]>([])
+  
 
-  const onChangeAssets = (value: number) => {
-    setTotalAssets(value)
+  const limit = LIMIT
+  const [pageMyAssets, setPageMyAssets] = useState(1)
+  const [pageMyListing, setPageMyListing] = useState(1)
+
+  const callbackListingNftSuccess = (tokenId: string) => {
+    setArrNfts(arrNfts.filter((item) => item.tokenId !== tokenId))
+    
+    const newItemListing = arrNfts.filter((item) => item.tokenId === tokenId)
+    setListingData((preState) => ([
+      ...newItemListing,
+      ...preState
+    ]))
   }
 
-  const onChangeListed = (value: number) => {
-    setTotalListed(value)
+  const callbackCancelListingNftSuccess = (listingId: string) => {
+    setListingData(listingData.filter((item) => item.listingId !== listingId))
+    
+    const newItemMyAsset = listingData.filter((item) => item.listingId === listingId)
+    setArrNfts((preState) => ([
+      ...newItemMyAsset,
+      ...preState
+    ]))
   }
+  
+  
+  const getMyAssets = async () => {
+    try {
+      setLoading(true)
+      const params = {
+        owner: wallet?.address,
+        // tokenTypes: [1, 2],
+        page: pageMyAssets,
+        limit,
+      }
+      const res = await axios.get('/nfts', { params })
+      const data = getResponseData(res as any)
+      setArrNfts([...arrNfts, ...data])
+      setPageMyAssets(pageMyAssets + 1)
+
+      if (data.length < limit) {
+        setDisableMyAssetsButton(true)
+      }
+    } catch (e) {
+      console.log('Catch Error: ', e)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const getMyListing = async () => {
+    try {
+      setLoading(true)
+      const params = {
+        seller: wallet?.address,
+        // tokenTypes: [1, 2],
+        page: pageMyListing,
+        limit,
+      }
+      const res = await axios.get('/nfts/market', { params })
+      const data = getResponseData(res as any)
+      setListingData([...listingData, ...data])
+      setPageMyListing(pageMyListing + 1)
+
+      if (data.length < limit) {
+        setDisableMyListingButton(true)
+      }
+    } catch (e) {
+      console.log('Catch Error: ', e)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const loadMore = () => {
+    if (isShowListing) {
+      getMyListing()
+    } else {
+      getMyAssets()
+    }
+  }
+
+  useEffect(() => {
+    if (wallet?.address) {
+      getMyAssets();
+      getMyListing();
+    }
+  }, [wallet?.address])
 
   return (
     <div className="">
@@ -30,7 +124,7 @@ const Assets = () => {
             }
             onClick={() => setIsShowListing(false)}
           >
-            My assets ({totalAssets})
+            My assets ({arrNfts.length})
           </span>
           <span
             className={
@@ -41,7 +135,7 @@ const Assets = () => {
             }
             onClick={() => setIsShowListing(true)}
           >
-            Listing ({totalListed})
+            Listing ({listingData.length})
           </span>
         </div>
 
@@ -54,9 +148,57 @@ const Assets = () => {
       </div>
 
       {!isShowListing ? (
-        <MyAssets onChange={onChangeAssets} />
+        <>
+          <MyAssets myAssets={arrNfts} callbackListingNftSuccess={callbackListingNftSuccess} />
+
+          {loading ? (
+            <div className="flex-center mt-10">
+              <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
+            </div>
+          ) : disableMyAssetsButton ? (
+            <div className="flex-center mt-10 ">
+              <div
+                className="px-10 py-3  border border-gray-800 rounded-lg text-gray-800 "
+                onClick={() => null}
+              >
+                Load More
+              </div>
+            </div>
+          ) : (
+            <div className="flex-center mt-10">
+              <ButtonBorderGradient className="px-10 py-3" onClick={loadMore}>
+                Load More
+              </ButtonBorderGradient>
+            </div>
+          )}
+        </>
       ) : (
-        <MyListing onChange={onChangeListed} />
+        <>
+          <MyListing listingData={listingData}
+            callbackCancelListingNftSuccess={callbackCancelListingNftSuccess}
+          />
+
+          {loading ? (
+            <div className="flex-center mt-10">
+              <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
+            </div>
+          ) : disableMyListingButton ? (
+            <div className="flex-center mt-10 ">
+              <div
+                className="px-10 py-3  border border-gray-800 rounded-lg text-gray-800 "
+                onClick={() => null}
+              >
+                Load More
+              </div>
+            </div>
+          ) : (
+            <div className="flex-center mt-10">
+              <ButtonBorderGradient className="px-10 py-3" onClick={loadMore}>
+                Load More
+              </ButtonBorderGradient>
+            </div>
+          )}
+        </>
       )}
     </div>
   )

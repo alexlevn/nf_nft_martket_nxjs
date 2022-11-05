@@ -9,7 +9,8 @@ import { FC, useCallback, useState } from 'react'
 const ButtonUnListNft: FC<{
   listingId: string
   callbackCloseModal?: () => void
-}> = ({ listingId, callbackCloseModal }) => {
+  callbackCancelListingNftSuccess: (listingId: string) => void
+}> = ({ listingId, callbackCloseModal, callbackCancelListingNftSuccess }) => {
   const {
     connected,
     connect,
@@ -65,6 +66,8 @@ const ButtonUnListNft: FC<{
   const callbackCancelSell = useCallback(() => {
     setLoadingCancelSell(false)
 
+    callbackCancelListingNftSuccess(listingId)
+
     notification.success({
       message: (
         <div className="flex flex-col flex-wrap items-start gap-2">
@@ -80,12 +83,12 @@ const ButtonUnListNft: FC<{
       },
       duration: 2,
     })
+    
     callbackCloseModal && callbackCloseModal()
-  }, [callbackCloseModal])
+  }, [callbackCloseModal, callbackCancelListingNftSuccess])
 
   const handleCancelSell: (listingId: string | null) => any = useCallback(
     async (listingId) => {
-      console.log(listingId)
 
       setLoadingCancelSell(true)
 
@@ -116,6 +119,7 @@ const ButtonUnListNft: FC<{
 
   return connected() === false ? (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonBorderGradient
         className="px-5 py-2 text-center"
         onClick={() => connect()}
@@ -125,6 +129,7 @@ const ButtonUnListNft: FC<{
     </>
   ) : allowanceMK === false ? (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonGradient className="py-2 text-base" onClick={handleApprove}>
         Approve
       </ButtonGradient>
@@ -132,6 +137,8 @@ const ButtonUnListNft: FC<{
     </>
   ) : (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
+      <div className="text-white">listingId : {listingId} </div>
       <div className="py-2 text-base text-center">
         <span
           className=" text-gradient cursor-pointer"
