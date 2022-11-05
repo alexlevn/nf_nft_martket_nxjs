@@ -17,9 +17,6 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
   const image =
     '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
 
-  const isYourListAsset =
-    wallet?.address.toLowerCase() === item.seller?.toLowerCase()
-
   return (
     <div className="flex flex-col lg:flex-row py-5">
       {/* IMAGE */}
@@ -67,9 +64,7 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
           </span>
         </div>
 
-        <div className="text-white">
-          {renderAction && !isYourListAsset ? renderAction(item) : 'Your NFT!'}
-        </div>
+        <div>{renderAction ? renderAction(item) : null}</div>
       </div>
     </div>
   )

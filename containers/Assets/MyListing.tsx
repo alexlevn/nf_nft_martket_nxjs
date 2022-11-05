@@ -3,9 +3,9 @@ import useWeb3 from 'common/hooks/useWeb3'
 import { FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
-import CardsListWithSellModal from 'components/CartListWithSellModal'
 import { INft } from 'components/Card/interface'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import CardsListWithUnListButton from 'components/CartListWithCancelSellButton'
 
 const LIMIT = 20
 
@@ -57,7 +57,7 @@ const MyListing: FC<{
 
   return (
     <>
-      <CardsListWithSellModal data={listingData} />
+      <CardsListWithUnListButton data={listingData} />
       {loading ? (
         <div className="flex-center mt-10">
           <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />

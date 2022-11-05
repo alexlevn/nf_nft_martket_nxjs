@@ -6,14 +6,20 @@ import { ButtonGradient } from 'components/ButtonGradient'
 import { MARKET_ADDRESS } from 'constants/index'
 import { FC, useCallback, useState } from 'react'
 
-const ButtonBuyNft: FC<{
+const ButtonUnListNft: FC<{
   listingId: string
   callbackCloseModal?: () => void
 }> = ({ listingId, callbackCloseModal }) => {
-  const { connected, connect, allowanceMK, approve, buyToken } = useWeb3()
+  const {
+    connected,
+    connect,
+    allowanceMK,
+    approve,
+    cancelSellToken,
+  } = useWeb3()
 
   const [loadingApprove, setLoadingApprove] = useState(false)
-  const [loadingBuy, setLoadingBuy] = useState(false)
+  const [loadingCancelSell, setLoadingCancelSell] = useState(false)
 
   const callbackApprove = useCallback(() => {
     setLoadingApprove(false)
@@ -24,7 +30,7 @@ const ButtonBuyNft: FC<{
       width={300}
       footer={null}
       closeIcon={null}
-      open={loadingApprove || loadingBuy}
+      open={loadingApprove || loadingCancelSell}
     >
       <div className="h-64 text-white flex-center">
         <img src="/images/loading.svg" alt="" className="w-20 h-20 spin" />
@@ -56,8 +62,8 @@ const ButtonBuyNft: FC<{
     }
   }, [approve, callbackApprove])
 
-  const callbackBuy = useCallback(() => {
-    setLoadingBuy(false)
+  const callbackCancelSell = useCallback(() => {
+    setLoadingCancelSell(false)
 
     notification.success({
       message: (
@@ -77,18 +83,18 @@ const ButtonBuyNft: FC<{
     callbackCloseModal && callbackCloseModal()
   }, [callbackCloseModal])
 
-  const handleBuy: (listingId: string | null) => any = useCallback(
+  const handleCancelSell: (listingId: string | null) => any = useCallback(
     async (listingId) => {
       console.log(listingId)
 
-      setLoadingBuy(true)
+      setLoadingCancelSell(true)
 
       try {
         if (listingId) {
-          await buyToken(listingId, callbackBuy)
+          await cancelSellToken(listingId, callbackCancelSell)
         }
       } catch (error) {
-        setLoadingBuy(false)
+        setLoadingCancelSell(false)
         notification.warning({
           message: (
             <div className="text-yellow-200">
@@ -105,7 +111,7 @@ const ButtonBuyNft: FC<{
         })
       }
     },
-    [buyToken, callbackBuy],
+    [cancelSellToken, callbackCancelSell],
   )
 
   return connected() === false ? (
@@ -128,15 +134,19 @@ const ButtonBuyNft: FC<{
     </>
   ) : (
     <>
-      <ButtonGradient
-        className="py-2 text-base"
-        onClick={() => handleBuy(listingId)}
-      >
-        Buy
-      </ButtonGradient>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
+      <div className="text-white">listingId : {listingId} </div>
+      <div className="py-2 text-base text-center">
+        <span
+          className=" text-gradient cursor-pointer"
+          onClick={() => handleCancelSell(listingId)}
+        >
+          Cancel Listing
+        </span>
+      </div>
       {renderSpinner()}
     </>
   )
 }
 
-export default ButtonBuyNft
+export default ButtonUnListNft
