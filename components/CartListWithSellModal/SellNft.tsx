@@ -41,7 +41,7 @@ const SellNft: FC<{
           borderRadius: '12px',
           color: 'yello',
         },
-        duration: 6,
+        duration: 2,
         placement: 'top',
       })
     }
@@ -66,7 +66,7 @@ const SellNft: FC<{
         borderRadius: '12px',
         color: 'yello',
       },
-      duration: 6,
+      duration: 2,
       placement: 'top',
     })
   }
@@ -92,7 +92,7 @@ const SellNft: FC<{
           borderRadius: '12px',
           color: 'yello',
         },
-        duration: 6,
+        duration: 2,
         placement: 'top',
       })
     }
