@@ -221,3 +221,7 @@ Sample: https://wcfi.wii.camp/v1.0/nfts/32
   }
 }
 ```
+
+1. Marketplace: https://wcfi.wii.camp/v1.0/nfts/market?page=1&limit=20
+2. All assets: https://wcfi.wii.camp/v1.0/nfts/?owner=0x4b4f716c79aa0c262f0290a776f4248a2b6fb0fc&page=1&limit=20
+3. Listing: https://wcfi.wii.camp/v1.0/nfts/market?seller=0x44c42e632d4d95050e709358ca7c2bdbafc5da82&page=1&limit=20

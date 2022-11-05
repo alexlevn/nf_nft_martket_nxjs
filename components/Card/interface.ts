@@ -6,6 +6,7 @@ export interface INft {
   image: string
   owner: string
   isOnSale: false
+  seller: string
   listingId: null
   price: null
   creator: string

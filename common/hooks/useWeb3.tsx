@@ -36,7 +36,12 @@ interface IWeb3Ctx {
   getTotalReward: () => Promise<void>
   checkApproved: (tokenId: string, callback: any) => Promise<void>
   approveToken: (tokenId: string, callback: any) => Promise<void>
-  sellToken: (tokenId: string, tokenAddress: string, price: number, callback: any) => Promise<void>
+  sellToken: (
+    tokenId: string,
+    tokenAddress: string,
+    price: number,
+    callback: any,
+  ) => Promise<void>
   cancelSellToken: (listingId: string, callback: any) => Promise<void>
   buyToken: (listingId: string, callback: any) => Promise<void>
   logout: () => void
@@ -124,8 +129,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
           }
 
           const resMK = await nftContract.methods
-          .allowance(accounts[0], MARKET_ADDRESS)
-          .call()
+            .allowance(accounts[0], MARKET_ADDRESS)
+            .call()
 
           if (Number(resMK) > 10000) {
             setAllowanceMK(true)
@@ -217,15 +222,15 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     try {
       if (ref && ref !== wallet?.address) {
         const res = await nftContract.methods
-        .mintTokenWithRef(ref)
-        .send({ from: wallet?.address })
-        
+          .mintTokenWithRef(ref)
+          .send({ from: wallet?.address })
+
         callback(res.events.itemGenerated.returnValues)
       } else {
         const res = await nftContract.methods
-        .mintToken()
-        .send({ from: wallet?.address })
-  
+          .mintToken()
+          .send({ from: wallet?.address })
+
         callback(res.events.itemGenerated.returnValues)
       }
     } catch (error) {
@@ -250,10 +255,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     )
 
     try {
-      const res = await nftContract.methods
-        .getApproved(Number(tokenId))
-        .call()
-      
+      const res = await nftContract.methods.getApproved(Number(tokenId)).call()
+
       if (res === MARKET_ADDRESS) {
         callback(true)
       } else {
@@ -275,7 +278,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     try {
       await nftContract.methods
         .approve(MARKET_ADDRESS, tokenId)
-        .send({ from: wallet?.address})
+        .send({ from: wallet?.address })
 
       checkApproved(tokenId, callback)
     } catch (error) {
@@ -283,7 +286,12 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     }
   }
 
-  const sellToken = async (tokenId: string, tokenAddress: string, price: number, callback: any) => {
+  const sellToken = async (
+    tokenId: string,
+    tokenAddress: string,
+    price: number,
+    callback: any,
+  ) => {
     let provider = window.ethereum
     const web3 = new Web3(provider)
     const nftContract = new web3.eth.Contract(
@@ -294,8 +302,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     try {
       await nftContract.methods
         .listToken(tokenAddress, Number(tokenId), price)
-        .send({ from: wallet?.address})
-        
+        .send({ from: wallet?.address })
+
       callback()
     } catch (error) {
       throw error
@@ -313,8 +321,8 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     try {
       await nftContract.methods
         .cancel(listingId)
-        .send({ from: wallet?.address})
-        
+        .send({ from: wallet?.address })
+
       callback()
     } catch (error) {
       throw error
@@ -329,11 +337,12 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
       MARKET_ADDRESS,
     )
 
+    console.log(listingId);
     try {
       await nftContract.methods
-        .buyToken(listingId)
-        .send({ from: wallet?.address})
-        
+        .buyToken(Number(listingId))
+        .send({ from: wallet?.address })
+
       callback()
     } catch (error) {
       throw error
