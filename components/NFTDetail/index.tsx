@@ -17,8 +17,8 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
   const image =
     '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
 
-  const isNotYourOwn =
-    wallet?.address.toLowerCase() !== item.seller.toLowerCase()
+  const isYourListAsset =
+    wallet?.address.toLowerCase() === item.seller?.toLowerCase()
 
   return (
     <div className="flex flex-col lg:flex-row py-5">
@@ -34,7 +34,6 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
       </div>
 
       {/* INFO */}
-
       <div className="w-full lg:w-1/2  flex flex-col gap-3 justify-center text-base  font-light p-8">
         <div>
           <span
@@ -68,7 +67,9 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
           </span>
         </div>
 
-        <div>{renderAction && isNotYourOwn ? renderAction(item) : null}</div>
+        <div className="text-white">
+          {renderAction && !isYourListAsset ? renderAction(item) : 'Your NFT!'}
+        </div>
       </div>
     </div>
   )
