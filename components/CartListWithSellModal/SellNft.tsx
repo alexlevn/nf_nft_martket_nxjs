@@ -7,8 +7,16 @@ import { FC, useEffect, useState } from 'react'
 const SellNft: FC<{
   tokenId: string
   tokenAddress: string
-  callbackCloseModalNFTDetail: any
-}> = ({ tokenId, tokenAddress, callbackCloseModalNFTDetail }) => {
+  callbackCloseModalNFTDetail: () => void
+  callbackCloseModalSellNFT: () => void
+  callbackListingNftSuccess: (tokenId: string) => void
+}> = ({
+  tokenId,
+  tokenAddress,
+  callbackCloseModalNFTDetail,
+  callbackCloseModalSellNFT,
+  callbackListingNftSuccess
+}) => {
   const { checkApproved, approveToken, sellToken } = useWeb3()
 
   const [isApproved, setIsApproved] = useState(false)
@@ -57,7 +65,10 @@ const SellNft: FC<{
   const callbackSellToken = () => {
     setLoadingSell(false)
 
+    callbackListingNftSuccess(tokenId)
+
     callbackCloseModalNFTDetail()
+    callbackCloseModalSellNFT()
 
     notification.success({
       message: <div className="text-white">Transaction Completed</div>,

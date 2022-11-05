@@ -7,7 +7,10 @@ import NFTDetail from 'components/NFTDetail'
 import { FC } from 'react'
 import SellNft from './SellNft'
 
-const CardsListWithSellModal: FC<{ data: INft[] }> = ({ data }) => {
+const CardsListWithSellModal: FC<{
+  data: INft[]
+  callbackListingNftSuccess: (tokenId: string) => void
+}> = ({ data, callbackListingNftSuccess }) => {
   return (
     <div className="flex flex-col lg:flex-row items-center flex-wrap gap-5 mt-10 ">
       {data.length > 0 ? (
@@ -27,7 +30,7 @@ const CardsListWithSellModal: FC<{ data: INft[] }> = ({ data }) => {
                 <CardNft key={index} item={item} />
               </div>
             )}
-            renderChildren={(_) => (
+            renderChildren={(closeModalNFT) => (
               <NFTDetail
                 item={item}
                 renderAction={() => (
@@ -56,6 +59,8 @@ const CardsListWithSellModal: FC<{ data: INft[] }> = ({ data }) => {
                         tokenId={item.tokenId}
                         tokenAddress={item.tokenAddress}
                         callbackCloseModalNFTDetail={closeModal}
+                        callbackCloseModalSellNFT={closeModalNFT}
+                        callbackListingNftSuccess={callbackListingNftSuccess}
                       />
                     )}
                   />

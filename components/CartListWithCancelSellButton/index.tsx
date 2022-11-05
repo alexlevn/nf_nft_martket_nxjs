@@ -6,7 +6,10 @@ import NFTDetail from 'components/NFTDetail'
 import { FC } from 'react'
 import ButtonUnListNft from './ButtonCancelSellNft'
 
-const CardsListWithUnListButton: FC<{ data: INft[] }> = ({ data }) => {
+const CardsListWithUnListButton: FC<{
+  data: INft[]
+  callbackCancelListingNftSuccess: (listingId: string) => void
+}> = ({ data, callbackCancelListingNftSuccess }) => {
   return (
     <div className="flex flex-col lg:flex-row items-center flex-wrap gap-5 mt-10 ">
       {data.length > 0 ? (
@@ -34,6 +37,7 @@ const CardsListWithUnListButton: FC<{ data: INft[] }> = ({ data }) => {
                     <ButtonUnListNft
                       listingId={item.listingId}
                       callbackCloseModal={closeModal}
+                      callbackCancelListingNftSuccess={callbackCancelListingNftSuccess}
                     />
                   ) : null
                 }
