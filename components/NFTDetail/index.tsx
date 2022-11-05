@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import useWeb3 from 'common/hooks/useWeb3'
 import { formatNumber, getFontColorClassname, getTeam } from 'common/util'
 import { INft } from 'components/Card/interface'
 import { FC } from 'react'
@@ -10,10 +11,14 @@ interface IProps {
 }
 
 const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
+  const { wallet } = useWeb3()
   const team = getTeam(item)
   // const image = item.image.replaceAll('https://wcfi.wii.camp/public', '')
   const image =
     '/images/teams/' + team.name.replaceAll(' ', '_').toLowerCase() + '.png'
+
+  const isNotYourOwn =
+    wallet?.address.toLowerCase() !== item.seller.toLowerCase()
 
   return (
     <div className="flex flex-col lg:flex-row py-5">
@@ -63,7 +68,7 @@ const NFTDetail: FC<IProps> = ({ item, renderAction }) => {
           </span>
         </div>
 
-        <div>{renderAction ? renderAction(item) : null}</div>
+        <div>{renderAction && isNotYourOwn ? renderAction(item) : null}</div>
       </div>
     </div>
   )
