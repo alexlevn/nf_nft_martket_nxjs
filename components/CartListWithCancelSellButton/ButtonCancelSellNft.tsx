@@ -116,7 +116,6 @@ const ButtonUnListNft: FC<{
 
   return connected() === false ? (
     <>
-      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonBorderGradient
         className="px-5 py-2 text-center"
         onClick={() => connect()}
@@ -126,7 +125,6 @@ const ButtonUnListNft: FC<{
     </>
   ) : allowanceMK === false ? (
     <>
-      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonGradient className="py-2 text-base" onClick={handleApprove}>
         Approve
       </ButtonGradient>
@@ -134,8 +132,6 @@ const ButtonUnListNft: FC<{
     </>
   ) : (
     <>
-      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
-      <div className="text-white">listingId : {listingId} </div>
       <div className="py-2 text-base text-center">
         <span
           className=" text-gradient cursor-pointer"
