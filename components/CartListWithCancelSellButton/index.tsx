@@ -30,7 +30,6 @@ const CardsListWithUnListButton: FC<{ data: INft[] }> = ({ data }) => {
             renderChildren={(closeModal) => (
               <NFTDetail
                 item={item}
-                // renderAction={() => <div className="text-white">hello</div>}
                 renderAction={() =>
                   item.listingId ? (
                     <ButtonUnListNft
