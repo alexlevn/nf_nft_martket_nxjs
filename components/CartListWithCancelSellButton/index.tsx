@@ -37,7 +37,9 @@ const CardsListWithUnListButton: FC<{
                     <ButtonUnListNft
                       listingId={item.listingId}
                       callbackCloseModal={closeModal}
-                      callbackCancelListingNftSuccess={callbackCancelListingNftSuccess}
+                      callbackCancelListingNftSuccess={
+                        callbackCancelListingNftSuccess
+                      }
                     />
                   ) : null
                 }

@@ -44,7 +44,7 @@ const MintNFT = () => {
   }, [approve, callbackApprove])
 
   const callbackMint = useCallback((data: any) => {
-    const newTeam = TEAMS_DATA.filter((team: any) => team.id === data.itemType)
+    const newTeam = TEAMS_DATA.filter((team: any) => team.id === data.exp)
 
     sessionStorage.clear()
 

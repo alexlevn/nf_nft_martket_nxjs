@@ -1,6 +1,6 @@
-export const SC_ADDRESS = '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867';
+export const SC_ADDRESS = '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee';
 
-export const WC_NFT_ADDRESS = '0x9661c17e619698Eb92fDede81b4C19e7A2066090';
+export const WC_NFT_ADDRESS = '0xcb78553d4d4c5FeB43912fE77B5719e6Fc77886C';
 
 export const TOTAL_REWARD_ADDRESS = '0x511906EfA0F6A0E1Ae6D1c996f51db0276D7Cf6f';
 
@@ -15,7 +15,7 @@ export const LINK_HREF = 'https://testnet.bscscan.com/address/'
 export const TEAMS_DATA = [
     {
         id: '1',
-        name: 'Brazil',
+        name: 'Brazil', 
         estimate: '450',
         rarity: '0,08',
     },
