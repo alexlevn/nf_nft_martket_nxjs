@@ -230,7 +230,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
         const res = await nftContract.methods
           .mintToken()
           .send({ from: wallet?.address })
-
+          
         callback(res.events.itemGenerated.returnValues)
       }
     } catch (error) {
@@ -255,13 +255,9 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
     )
 
     try {
-      const res = await nftContract.methods.getApproved(Number(tokenId)).call()
+      const res = await nftContract.methods.isApprovedForAll(wallet?.address, MARKET_ADDRESS).call()
 
-      if (res === MARKET_ADDRESS) {
-        callback(true)
-      } else {
-        callback(false)
-      }
+      callback(res)
     } catch (error) {
       throw error
     }
@@ -277,7 +273,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
     try {
       await nftContract.methods
-        .approve(MARKET_ADDRESS, tokenId)
+        .setApprovalForAll(MARKET_ADDRESS, true)
         .send({ from: wallet?.address })
 
       checkApproved(tokenId, callback)

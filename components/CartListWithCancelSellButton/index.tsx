@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { ButtonGradient } from 'components/ButtonGradient'
 import CardNft from 'components/Card'
 import { INft } from 'components/Card/interface'
 import ModalTrigger from 'components/ModalTrigger'
@@ -33,13 +32,14 @@ const CardsListWithUnListButton: FC<{
             renderChildren={(closeModal) => (
               <NFTDetail
                 item={item}
-                // renderAction={() => <div className="text-white">hello</div>}
                 renderAction={() =>
                   item.listingId ? (
                     <ButtonUnListNft
                       listingId={item.listingId}
                       callbackCloseModal={closeModal}
-                      callbackCancelListingNftSuccess={callbackCancelListingNftSuccess}
+                      callbackCancelListingNftSuccess={
+                        callbackCancelListingNftSuccess
+                      }
                     />
                   ) : null
                 }
