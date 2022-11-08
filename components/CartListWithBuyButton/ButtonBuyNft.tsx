@@ -110,7 +110,6 @@ const ButtonBuyNft: FC<{
 
   return connected() === false ? (
     <>
-      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonBorderGradient
         className="px-5 py-2 text-center"
         onClick={() => connect()}
