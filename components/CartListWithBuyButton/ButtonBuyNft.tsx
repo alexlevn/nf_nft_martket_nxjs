@@ -120,7 +120,6 @@ const ButtonBuyNft: FC<{
     </>
   ) : allowanceMK === false ? (
     <>
-      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonGradient className="py-2 text-base" onClick={handleApprove}>
         Approve
       </ButtonGradient>
