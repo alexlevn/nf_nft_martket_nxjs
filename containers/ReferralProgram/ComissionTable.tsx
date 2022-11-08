@@ -14,19 +14,19 @@ const CommissionTable: FC = () => {
 
         <div className="flex flex-wrap">
           <div className="commission-cell">1</div>
-          <div className="commission-cell">5%</div>
+          <div className="commission-cell">10%</div>
         </div>
         <div className="flex flex-wrap">
           <div className="commission-cell">2</div>
-          <div className="commission-cell">5%</div>
+          <div className="commission-cell">10%</div>
         </div>
         <div className="flex flex-wrap">
           <div className="commission-cell">3</div>
-          <div className="commission-cell">5%</div>
+          <div className="commission-cell">10%</div>
         </div>
         <div className="flex flex-wrap">
           <div className="commission-cell">4</div>
-          <div className="commission-cell">25%</div>
+          <div className="commission-cell">30%</div>
         </div>
       </div>
     </div>

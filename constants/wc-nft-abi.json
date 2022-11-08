@@ -137,7 +137,7 @@
 		{
 		  "indexed": false,
 		  "internalType": "uint256",
-		  "name": "exp",
+		  "name": "itemType",
 		  "type": "uint256"
 		},
 		{
@@ -145,6 +145,12 @@
 		  "internalType": "address",
 		  "name": "ref",
 		  "type": "address"
+		},
+		{
+		  "indexed": false,
+		  "internalType": "uint256",
+		  "name": "mintedType",
+		  "type": "uint256"
 		}
 	  ],
 	  "name": "itemGenerated",

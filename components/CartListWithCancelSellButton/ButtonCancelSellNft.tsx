@@ -83,12 +83,13 @@ const ButtonUnListNft: FC<{
       },
       duration: 2,
     })
-
+    
     callbackCloseModal && callbackCloseModal()
   }, [callbackCloseModal, callbackCancelListingNftSuccess])
 
   const handleCancelSell: (listingId: string | null) => any = useCallback(
     async (listingId) => {
+
       setLoadingCancelSell(true)
 
       try {
@@ -118,6 +119,7 @@ const ButtonUnListNft: FC<{
 
   return connected() === false ? (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonBorderGradient
         className="px-5 py-2 text-center"
         onClick={() => connect()}
@@ -127,6 +129,7 @@ const ButtonUnListNft: FC<{
     </>
   ) : allowanceMK === false ? (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
       <ButtonGradient className="py-2 text-base" onClick={handleApprove}>
         Approve
       </ButtonGradient>
@@ -134,9 +137,11 @@ const ButtonUnListNft: FC<{
     </>
   ) : (
     <>
+      <div className="text-white">AllowanceMk : {allowanceMK.toString()} </div>
+      <div className="text-white">listingId : {listingId} </div>
       <div className="py-2 text-base text-center">
         <span
-          className="text-gradient cursor-pointer"
+          className=" text-gradient cursor-pointer"
           onClick={() => handleCancelSell(listingId)}
         >
           Cancel Listing
