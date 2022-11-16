@@ -13,7 +13,7 @@ const Referral: FC = () => {
         <p className="font-bold text-lg leading-10">Referral Program</p>
         <p className="font-normal text-sm text-scgray leading-6	 ">
           Invite friends with referral link and get up to{' '}
-          <span className="text-pcgreen">25%</span> commission every time your
+          <span className="text-pcgreen">50%</span> commission every time your
           friends mint NFT.
         </p>
 

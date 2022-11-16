@@ -10,6 +10,7 @@ import { IRefferal } from './interface'
 const MyReferralSidebar: FC<{ address?: string }> = ({ address }) => {
   const { wallet } = useWeb3()
   const [data, setData] = useState<IRefferal | null>(null)
+  const enableWithdraw = false
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,9 +84,15 @@ const MyReferralSidebar: FC<{ address?: string }> = ({ address }) => {
             </div>
           </div>
 
-          <ButtonGradient className="w-full py-2 text-lg">
-            Withdraw
-          </ButtonGradient>
+          {enableWithdraw ? (
+            <ButtonGradient className="w-full py-2 text-lg">
+              Withdraw
+            </ButtonGradient>
+          ) : (
+            <div className="w-full py-3 text-lg flex-center bg-pcmodal rounded-lg text-scgray_3">
+              Withdraw
+            </div>
+          )}
         </div>
       </div>
     </div>
