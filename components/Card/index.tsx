@@ -44,7 +44,7 @@ const CardNft: FC<{ item: INft }> = ({ item }) => {
             <span className="text-white font-bold flex gap-1 items-center">
               <img src="/images/busd.svg" alt="" className="w-6 h-6" />
               {item.price
-                ? formatNumber(Web3.utils.fromWei(item.price))
+                ? item.price
                 : '0.00'}
             </span>
           </div>

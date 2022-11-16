@@ -302,6 +302,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
       callback()
     } catch (error) {
+      console.log(error);
       throw error
     }
   }
