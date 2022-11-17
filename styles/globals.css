@@ -207,7 +207,7 @@
   @apply flex-center bg-pcmodal py-2 rounded-lg text-white hover:bg-opacity-80 font-semibold;
 }
 
-.btn-dropdown {
+.btn-filter, .btn-dropdown {
   @apply flex justify-between items-center gap-10 cursor-pointer font-normal px-5 py-2 border rounded-md border-scgray_4 text-sm opacity-60 hover:opacity-100;
 }
 
@@ -300,4 +300,10 @@
 
 .ant-dropdown-menu-title-content {
   @apply text-white text-sm panchang flex flex-wrap gap-5 justify-between font-normal items-center;
+}
+
+/* INPUT */
+
+input.ant-input-number-input::placeholder {
+  @apply text-scgray_3;
 }
