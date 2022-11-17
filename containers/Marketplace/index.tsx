@@ -183,7 +183,7 @@ const FilterForm = () => {
           </div>
 
           {/* Teams */}
-          <div className="flex flex-col gap-3 flex-wrap w-full lg:w-1/3 text-white  ">
+          <div className="flex flex-col gap-3 flex-wrap w-full lg:w-2/3 text-white  px-0 lg:pl-10">
             {/* arrTeams with tier 1 */}
             {arrTeams
               .filter((item) => item.tier === 1)

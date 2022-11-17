@@ -207,7 +207,8 @@
   @apply flex-center bg-pcmodal py-2 rounded-lg text-white hover:bg-opacity-80 font-semibold;
 }
 
-.btn-filter, .btn-dropdown {
+.btn-filter,
+.btn-dropdown {
   @apply flex justify-between items-center gap-10 cursor-pointer font-normal px-5 py-2 border rounded-md border-scgray_4 text-sm opacity-60 hover:opacity-100;
 }
 
@@ -306,4 +307,17 @@
 
 input.ant-input-number-input::placeholder {
   @apply text-scgray_3;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background: linear-gradient(
+    102.88deg,
+    #80e8dd 10.19%,
+    #7cc2f6 43.04%,
+    #af81e4 72%,
+    #d855a6 93.18%
+  );
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  @apply border border-scgray_3;
 }
