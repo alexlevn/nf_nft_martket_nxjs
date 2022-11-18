@@ -140,7 +140,7 @@ const MintNFT = () => {
         </div>
         <div className="mt-5">
           <ButtonGradient
-            onClick={() => {}}
+            onClick={() => setIsShowModalShoeNFT(false)}
             className="py-3 text-lg cursor-pointer"
           >
             Collect

@@ -1,16 +1,16 @@
-export const SC_ADDRESS = '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee';
+export const SC_ADDRESS = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56';
 
-export const WC_NFT_ADDRESS = '0xC6A9CdBBE2b9b513A0F70feCb02F8d5aFe459950';
+export const WC_NFT_ADDRESS = '0x8c3eFBe5bd735495a103678bf2a892408eF10F98';
 
-export const TOTAL_REWARD_ADDRESS = '0x511906EfA0F6A0E1Ae6D1c996f51db0276D7Cf6f';
+export const TOTAL_REWARD_ADDRESS = '0xc944075e861c4796Ed8b38cb3f68301F3a5a2036';
 
-export const MARKET_ADDRESS = '0x3cf4631845309e2e0ebc9b1f08e7b8c77284028d'
+export const MARKET_ADDRESS = '0x0e164ce0E837D2515492F2BE7373fAaE411c78E3'
 
 export const SESSION_STORAGE = {
     REFERRAL_ADDRESS: 'REFERRAL_ADDRESS',
 }
 
-export const LINK_HREF = 'https://testnet.bscscan.com/address/'
+export const LINK_HREF = 'https://bscscan.com/address/'
 
 export const TEAMS_DATA = [
     {
@@ -69,7 +69,7 @@ export const TEAMS_DATA = [
     },
     {
         id: '10',
-        name: 'Denmask',
+        name: 'Denmark',
         estimate: '2800',
         rarity: '0,52',
     },

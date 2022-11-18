@@ -184,7 +184,7 @@ export const Web3Provider: FunctionComponent<{ children: any }> = ({
 
     try {
       await nftContract.methods
-        .approve(spender, 10000000000)
+        .approve(spender, 115792089237316195423570985008687907853269984665640564039457584007913129639920)
         .send({ from: wallet?.address })
 
       const resAllowance = await nftContract.methods
