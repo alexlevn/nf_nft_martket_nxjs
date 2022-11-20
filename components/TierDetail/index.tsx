@@ -2,7 +2,7 @@
 import { getFontColorClassname } from 'common/util'
 import { ITeamInfo } from './interface'
 
-const getFlagImageUrl = (teamName: string) => {
+export const getFlagImageUrl = (teamName: string) => {
   return '/images/flags/' + teamName.replaceAll(' ', '_').toLowerCase() + '.png'
 }
 

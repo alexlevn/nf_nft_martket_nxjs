@@ -5,9 +5,17 @@ import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { INft } from 'components/Card/interface'
 import CardsListWithBuyButton from 'components/CartListWithBuyButton'
+import ModalTrigger from 'components/ModalTrigger'
 import { useEffect, useState } from 'react'
+import FilterForm from './filterForm'
 
 const LIMIT = 20
+
+const SORT_BY = {
+  NEWEST: '1',
+  PRICE_TO_HIGH: '2',
+  PRICE_TO_LOW: '3',
+}
 
 const Marketplace = () => {
   const [listNFT, setListNFT] = useState<INft[]>([])
@@ -17,6 +25,23 @@ const Marketplace = () => {
 
   const limit = LIMIT
   const [page, setPage] = useState(1)
+
+  const [sortBy, setSortBy] = useState(SORT_BY.NEWEST)
+
+  const arrSortBy = [
+    {
+      id: SORT_BY.NEWEST,
+      name: 'Newest',
+    },
+    {
+      id: SORT_BY.PRICE_TO_HIGH,
+      name: 'Price: low to high',
+    },
+    {
+      id: SORT_BY.PRICE_TO_LOW,
+      name: 'Price: high to low',
+    },
+  ]
 
   const loadMore = async () => {
     try {
@@ -44,53 +69,66 @@ const Marketplace = () => {
     loadMore()
   }, [])
 
-  const menu = (
+  const sortByMenu = (
     <Menu
-      items={[
-        {
-          key: '1',
-          label: (
-            <>
-              <a target="_blank">Newest</a>
+      items={arrSortBy.map((item) => ({
+        key: item.id,
+        label: (
+          <>
+            <a target="_blank">{item.name}</a>
+            {item.id === sortBy && (
               <img src="/images/check.svg" alt="" className="h-5 w-5" />
-            </>
-          ),
-        },
-
-        {
-          key: '2',
-          label: <a target="_blank">Price: high to low</a>,
-        },
-        {
-          key: '3',
-          label: <a target="_blank">Price: low to high</a>,
-        },
-      ]}
+            )}
+          </>
+        ),
+      }))}
+      selectedKeys={[sortBy]}
+      onClick={(menuItem) => {
+        setSortBy(menuItem.key)
+      }}
     />
   )
 
   return (
     <div className="">
       {/* Total Volume */}
-
-      {/* Filter Form */}
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <span className="font-semibold">
           Items (Total {listNFT ? listNFT.length : 0})
         </span>
 
         <div className="flex gap-5 flex-col lg:flex-row">
-          <Dropdown overlay={menu}>
+          {/* Sort By */}
+          <Dropdown overlay={sortByMenu}>
             <div className="btn-dropdown">
               Newest
               <img src="/images/arrow_down.svg" alt="" className="h-3 w-3" />
             </div>
           </Dropdown>
 
-          <div className="btn-dropdown">
-            Filter
-            <img src="/images/filter.svg" alt="" className="h-3 w-3" />
-          </div>
+          {/* Filter Form */}
+          <ModalTrigger
+            title={<div className="text-white panchang text-sm">Filter</div>}
+            footer={null}
+            closeIcon={
+              <div className="text-white font-sans text-xl font-thin">x</div>
+            }
+            onCancel={() => {}}
+            renderTrigger={(openModal) => (
+              <div className="btn-filter" onClick={openModal}>
+                Filter
+                <img src="/images/filter.svg" alt="" className="h-3 w-3" />
+              </div>
+            )}
+            renderChildren={(closeModal) => (
+              <FilterForm
+                onSubmit={(values) => {
+                  console.log('filter by Teams Id: ', values.toString())
+                  closeModal()
+                }}
+              />
+            )}
+          />
         </div>
       </div>
 

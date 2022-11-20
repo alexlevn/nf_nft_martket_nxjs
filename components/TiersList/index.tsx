@@ -17,6 +17,9 @@ const TiersList = () => {
 
     fetchData()
   }, [])
+
+  console.log('arrTeams: ', arrTeams);
+  
   return (
     <>
       <div className="block lg:hidden">
