@@ -1,14 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { Checkbox, Dropdown, Input, InputNumber, Menu } from 'antd'
+import { Dropdown, Menu } from 'antd'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
-import { ButtonGradient } from 'components/ButtonGradient'
 import { INft } from 'components/Card/interface'
 import CardsListWithBuyButton from 'components/CartListWithBuyButton'
 import ModalTrigger from 'components/ModalTrigger'
-import { getFlagImageUrl } from 'components/TierDetail'
-import { ITeamInfo } from 'components/TierDetail/interface'
 import { useEffect, useState } from 'react'
 import FilterForm from './filterForm'
 
@@ -19,25 +16,6 @@ const SORT_BY = {
   PRICE_TO_HIGH: '2',
   PRICE_TO_LOW: '3',
 }
-
-const TIERS = [
-  {
-    id: 1,
-    name: 'Tier 1',
-  },
-  {
-    id: 2,
-    name: 'Tier 2',
-  },
-  {
-    id: 3,
-    name: 'Tier 3',
-  },
-  {
-    id: 4,
-    name: 'Tier 4',
-  },
-]
 
 const Marketplace = () => {
   const [listNFT, setListNFT] = useState<INft[]>([])
@@ -91,7 +69,7 @@ const Marketplace = () => {
     loadMore()
   }, [])
 
-  const filterMenu = (
+  const sortByMenu = (
     <Menu
       items={arrSortBy.map((item) => ({
         key: item.id,
@@ -120,7 +98,8 @@ const Marketplace = () => {
         </span>
 
         <div className="flex gap-5 flex-col lg:flex-row">
-          <Dropdown overlay={filterMenu}>
+          {/* Sort By */}
+          <Dropdown overlay={sortByMenu}>
             <div className="btn-dropdown">
               Newest
               <img src="/images/arrow_down.svg" alt="" className="h-3 w-3" />
@@ -128,7 +107,6 @@ const Marketplace = () => {
           </Dropdown>
 
           {/* Filter Form */}
-
           <ModalTrigger
             title={<div className="text-white panchang text-sm">Filter</div>}
             footer={null}
@@ -145,8 +123,7 @@ const Marketplace = () => {
             renderChildren={(closeModal) => (
               <FilterForm
                 onSubmit={(values) => {
-                  // console.log('values: ', values)
-                  console.log('filter by values: ', values.toString())
+                  console.log('filter by Teams Id: ', values.toString())
                   closeModal()
                 }}
               />

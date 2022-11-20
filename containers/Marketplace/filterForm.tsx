@@ -1,23 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { Checkbox, Dropdown, Input, InputNumber, Menu } from 'antd'
-import axios from 'axios'
-import { getResponseData } from 'common/util'
+import { Checkbox, InputNumber } from 'antd'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
 import { ButtonGradient } from 'components/ButtonGradient'
-import { INft } from 'components/Card/interface'
-import CardsListWithBuyButton from 'components/CartListWithBuyButton'
-import ModalTrigger from 'components/ModalTrigger'
 import { getFlagImageUrl } from 'components/TierDetail'
 import { ITeamInfo } from 'components/TierDetail/interface'
-import { useEffect, useState } from 'react'
-
-const LIMIT = 20
-
-const SORT_BY = {
-  NEWEST: '1',
-  PRICE_TO_HIGH: '2',
-  PRICE_TO_LOW: '3',
-}
+import { useState } from 'react'
 
 const TIERS = [
   {
@@ -42,9 +29,9 @@ const FilterForm: React.FC<{
   onSubmit?: (values: number[]) => void
 }> = ({ onSubmit }) => {
   const [selectedTeams, setSelectedTeams] = useState<number[]>([])
-  // console.log('selectedTeams: ', selectedTeams)
-
   const [selectedTier, setSelectedTier] = useState(1)
+
+  // console.log('selectedTeams: ', selectedTeams)
 
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
@@ -102,28 +89,11 @@ const FilterForm: React.FC<{
                 </span>
               </div>
             ))}
-
-            {/* <div className="w-1/2 lg:w-full flex justify-between pr-3">
-              <span className="text-gradient">Tier 1</span>
-              <span className="text-gradient">(1)</span>
-            </div>
-            <div className="w-1/2 lg:w-full flex justify-between pr-3">
-              <span className="text-pcgray_2">Tier 2</span>
-              <span className="text-pcgray_2">(1)</span>
-            </div>
-            <div className="w-1/2 lg:w-full flex justify-between pr-3">
-              <span className="text-pcgray_2">Tier 3</span>
-              <span className="text-pcgray_2">(1)</span>
-            </div>
-            <div className="w-1/2 lg:w-full flex justify-between pr-3">
-              <span className="text-pcgray_2">Tier 4</span>
-              <span className="text-pcgray_2">(1)</span>
-            </div> */}
           </div>
 
           {/* Teams */}
           <div className="flex flex-col gap-3 flex-wrap w-full lg:w-2/3 text-white  px-0 lg:pl-10">
-            {/* arrTeams with tier 1 */}
+            {/* arrTeams with selected tier  */}
             {arrTeams
               .filter((item) => item.tier === selectedTier)
               .map((team, index) => (
@@ -134,7 +104,6 @@ const FilterForm: React.FC<{
                   onChange={(target) => {
                     // console.log('target = ', target)
                     if (target.isChecked) {
-                      // setSelectedTeams(selectedTeams.concat(team.id as number))
                       // setSelectedTeams and unique
                       setSelectedTeams(
                         Array.from(
@@ -168,10 +137,7 @@ const FilterForm: React.FC<{
         <div className="w-2/3">
           <ButtonGradient
             className="w-full py-2"
-            onClick={() => {
-              // console.log(selectedTeams)
-              onSubmit && onSubmit(selectedTeams)
-            }}
+            onClick={() => onSubmit && onSubmit(selectedTeams)}
           >
             Apply
           </ButtonGradient>
@@ -203,12 +169,10 @@ const SelectTeam: React.FC<{
     {/* INFO */}
     <div className="text-xs text-right">
       <Checkbox
-        // value={info.id}
         checked={selected}
-        onChange={(e) => {
-          // console.log(e.target.checked)
+        onChange={(e) =>
           onChange && onChange({ id: info.id, isChecked: e.target.checked })
-        }}
+        }
       />
     </div>
   </div>
