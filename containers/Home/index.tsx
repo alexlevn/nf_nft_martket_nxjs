@@ -11,6 +11,7 @@ import axios from 'axios'
 import { getResponseData } from 'common/util'
 
 const Home: FC = () => {
+  console.log('---')
   return (
     <>
       <div className="w-1/12 p-5 hidden lg:block" />
