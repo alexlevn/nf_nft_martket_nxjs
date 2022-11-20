@@ -3,6 +3,7 @@ import { Checkbox, Dropdown, Input, InputNumber, Menu } from 'antd'
 import axios from 'axios'
 import { getResponseData } from 'common/util'
 import { ButtonBorderGradient } from 'components/ButtonBorderGradient'
+import { ButtonGradient } from 'components/ButtonGradient'
 import { INft } from 'components/Card/interface'
 import CardsListWithBuyButton from 'components/CartListWithBuyButton'
 import ModalTrigger from 'components/ModalTrigger'
@@ -12,6 +13,31 @@ import { useEffect, useState } from 'react'
 
 const LIMIT = 20
 
+const SORT_BY = {
+  NEWEST: '1',
+  PRICE_TO_HIGH: '2',
+  PRICE_TO_LOW: '3',
+}
+
+const TIERS = [
+  {
+    id: 1,
+    name: 'Tier 1',
+  },
+  {
+    id: 2,
+    name: 'Tier 2',
+  },
+  {
+    id: 3,
+    name: 'Tier 3',
+  },
+  {
+    id: 4,
+    name: 'Tier 4',
+  },
+]
+
 const Marketplace = () => {
   const [listNFT, setListNFT] = useState<INft[]>([])
 
@@ -20,6 +46,23 @@ const Marketplace = () => {
 
   const limit = LIMIT
   const [page, setPage] = useState(1)
+
+  const [sortBy, setSortBy] = useState(SORT_BY.NEWEST)
+
+  const arrSortBy = [
+    {
+      id: SORT_BY.NEWEST,
+      name: 'Newest',
+    },
+    {
+      id: SORT_BY.PRICE_TO_HIGH,
+      name: 'Price: low to high',
+    },
+    {
+      id: SORT_BY.PRICE_TO_LOW,
+      name: 'Price: high to low',
+    },
+  ]
 
   const loadMore = async () => {
     try {
@@ -47,42 +90,36 @@ const Marketplace = () => {
     loadMore()
   }, [])
 
-  const menu = (
+  const filterMenu = (
     <Menu
-      items={[
-        {
-          key: '1',
-          label: (
-            <>
-              <a target="_blank">Newest</a>
+      items={arrSortBy.map((item) => ({
+        key: item.id,
+        label: (
+          <>
+            <a target="_blank">{item.name}</a>
+            {item.id === sortBy && (
               <img src="/images/check.svg" alt="" className="h-5 w-5" />
-            </>
-          ),
-        },
-
-        {
-          key: '2',
-          label: <a target="_blank">Price: high to low</a>,
-        },
-        {
-          key: '3',
-          label: <a target="_blank">Price: low to high</a>,
-        },
-      ]}
+            )}
+          </>
+        ),
+      }))}
+      selectedKeys={[sortBy]}
+      onClick={(menuItem) => {
+        setSortBy(menuItem.key)
+      }}
     />
   )
 
   return (
     <div className="">
       {/* Total Volume */}
-
       <div className="flex flex-col lg:flex-row justify-between  items-start gap-5">
         <span className="font-semibold">
           Items (Total {listNFT ? listNFT.length : 0})
         </span>
 
         <div className="flex gap-5 flex-col lg:flex-row">
-          <Dropdown overlay={menu}>
+          <Dropdown overlay={filterMenu}>
             <div className="btn-dropdown">
               Newest
               <img src="/images/arrow_down.svg" alt="" className="h-3 w-3" />
@@ -104,7 +141,14 @@ const Marketplace = () => {
                 <img src="/images/filter.svg" alt="" className="h-3 w-3" />
               </div>
             )}
-            renderChildren={(_) => <FilterForm />}
+            renderChildren={(_) => (
+              <FilterForm
+                onSubmit={(values) => {
+                  // console.log('values: ', values)
+                  console.log('filter by values: ', values.toString())
+                }}
+              />
+            )}
           />
         </div>
       </div>
@@ -137,9 +181,17 @@ const Marketplace = () => {
 
 export default Marketplace
 
-const FilterForm = () => {
+const FilterForm: React.FC<{
+  onSubmit?: (values: number[]) => void
+}> = ({ onSubmit }) => {
+  const [selectedTeams, setSelectedTeams] = useState<number[]>([])
+  // console.log('selectedTeams: ', selectedTeams)
+
+  const [selectedTier, setSelectedTier] = useState(1)
+
   return (
     <div className="flex flex-col gap-5 px-5 py-5">
+      {/* Price */}
       <div className="flex flex-col gap-2">
         <span className="text-sm text-white">Price</span>
         <div className="flex gap-5 items-center">
@@ -159,12 +211,42 @@ const FilterForm = () => {
         </div>
       </div>
 
+      {/* SELECT TEAMS */}
       <div className="flex flex-col gap-2">
         <span className="text-sm text-white">National Team</span>
         <div className="flex flex-col lg:flex-row gap-5">
           {/* Tiers */}
-          <div className="flex flex-wrap w-full lg:w-1/3 gap-0 lg:gap-2">
-            <div className="w-1/2 lg:w-full flex justify-between pr-3">
+          <div className="flex flex-wrap w-full lg:w-1/3 gap-0 lg:gap-2 cursor-pointer">
+            {TIERS.map((tier) => (
+              <div
+                key={tier.id}
+                className="w-1/2 lg:w-full flex justify-between pr-3"
+                onClick={() => setSelectedTier(tier.id)}
+              >
+                <span
+                  className={
+                    selectedTier === tier.id ? 'text-gradient' : 'text-white'
+                  }
+                >
+                  {tier.name}
+                </span>
+                <span
+                  className={
+                    selectedTier === tier.id ? 'text-gradient' : 'text-white'
+                  }
+                >
+                  (
+                  {
+                    arrTeams
+                      .filter((item) => item.tier === tier.id)
+                      .filter((item) => selectedTeams.includes(item.id)).length
+                  }
+                  )
+                </span>
+              </div>
+            ))}
+
+            {/* <div className="w-1/2 lg:w-full flex justify-between pr-3">
               <span className="text-gradient">Tier 1</span>
               <span className="text-gradient">(1)</span>
             </div>
@@ -179,18 +261,63 @@ const FilterForm = () => {
             <div className="w-1/2 lg:w-full flex justify-between pr-3">
               <span className="text-pcgray_2">Tier 4</span>
               <span className="text-pcgray_2">(1)</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Teams */}
           <div className="flex flex-col gap-3 flex-wrap w-full lg:w-2/3 text-white  px-0 lg:pl-10">
             {/* arrTeams with tier 1 */}
             {arrTeams
-              .filter((item) => item.tier === 1)
+              .filter((item) => item.tier === selectedTier)
               .map((team, index) => (
-                <SelectTeam key={index} info={team as ITeamInfo} />
+                <SelectTeam
+                  key={index}
+                  info={team as ITeamInfo}
+                  selected={selectedTeams.includes(team.id)}
+                  onChange={(target) => {
+                    // console.log('target = ', target)
+                    if (target.isChecked) {
+                      // setSelectedTeams(selectedTeams.concat(team.id as number))
+                      // setSelectedTeams and unique
+                      setSelectedTeams(
+                        Array.from(
+                          new Set(selectedTeams.concat(team.id as number)),
+                        ),
+                      )
+                    } else {
+                      setSelectedTeams(
+                        selectedTeams.filter((item) => item !== team.id),
+                      )
+                    }
+                  }}
+                />
               ))}
           </div>
+        </div>
+      </div>
+
+      {/* BUTTONS */}
+      <div className="flex  gap-5">
+        <div className="w-1/3 pt-1">
+          <ButtonBorderGradient
+            className="w-full px-5 py-2 text-center"
+            onClick={() => {
+              setSelectedTeams([])
+            }}
+          >
+            Reset
+          </ButtonBorderGradient>
+        </div>
+        <div className="w-2/3">
+          <ButtonGradient
+            className="w-full py-2"
+            onClick={() => {
+              // console.log(selectedTeams)
+              onSubmit && onSubmit(selectedTeams)
+            }}
+          >
+            Apply
+          </ButtonGradient>
         </div>
       </div>
     </div>
@@ -199,7 +326,9 @@ const FilterForm = () => {
 
 const SelectTeam: React.FC<{
   info: ITeamInfo
-}> = ({ info }) => (
+  selected?: boolean
+  onChange?: (target: { id: number; isChecked: boolean }) => void
+}> = ({ info, selected, onChange }) => (
   <div className="w-full flex justify-between items-center ">
     {/* TEAM */}
     <div className="flex gap-3 items-center text-sm">
@@ -216,7 +345,14 @@ const SelectTeam: React.FC<{
 
     {/* INFO */}
     <div className="text-xs text-right">
-      <Checkbox />
+      <Checkbox
+        // value={info.id}
+        checked={selected}
+        onChange={(e) => {
+          // console.log(e.target.checked)
+          onChange && onChange({ id: info.id, isChecked: e.target.checked })
+        }}
+      />
     </div>
   </div>
 )

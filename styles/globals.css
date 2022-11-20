@@ -283,6 +283,10 @@
 
 /* DROPDOWN */
 
+.ant-dropdown-menu-item-selected {
+  @apply bg-pcmodal;
+}
+
 .ant-dropdown-menu {
   @apply bg-pcmodal rounded-xl;
 }
